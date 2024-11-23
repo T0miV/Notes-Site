@@ -1,17 +1,10 @@
 import { Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
 import bcrypt from 'bcryptjs';
-
-// Define the User type
-type User = {
-  id: number;
-  username: string;
-  password: string;
-  role: number;
-};
+import { User } from '../models/user'; // Import User type
 
 // Initialize SQLite database for users
-const usersDb = new sqlite3.Database('./users.db', (err) => {
+const usersDb = new sqlite3.Database('./src/db/users.db', (err) => {
   if (err) {
     console.error('Could not open users database', err);
   } else {
@@ -19,19 +12,9 @@ const usersDb = new sqlite3.Database('./users.db', (err) => {
   }
 });
 
-// Ensure the 'users' table exists
-usersDb.run(
-  `CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    role INTEGER DEFAULT 1
-  );`
-);
-
 // Register a new user
 export const registerUser = (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body as Omit<User, 'id' | 'role'>;
 
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required' });
@@ -62,7 +45,7 @@ export const loginUser = (req: Request, res: Response) => {
   }
 
   const query = 'SELECT * FROM users WHERE username = ?';
-  usersDb.get(query, [username], (err, user: User | undefined) => {
+  usersDb.get(query, [username], (err, user: User | undefined) => { // Use User type
     if (err) {
       return res.status(500).json({ error: 'Database error' });
     }
@@ -89,7 +72,7 @@ export const loginUser = (req: Request, res: Response) => {
 export const getAllUsers = (req: Request, res: Response) => {
   const query = 'SELECT id, username, role FROM users'; // Exclude password for security
 
-  usersDb.all(query, (err, rows) => {
+  usersDb.all(query, (err, rows: Omit<User, 'password'>[]) => { // Use User type without password
     if (err) {
       return res.status(500).json({ error: 'Database error' });
     }

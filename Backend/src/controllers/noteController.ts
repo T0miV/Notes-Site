@@ -1,14 +1,20 @@
 import { Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
+import { Note } from '../models/note'; // Import Note type
 
 // Initialize the notes database
-const notesDb = new sqlite3.Database('./notes.db', (err) => {
-  if (err) console.error('Could not open notes database', err);
+const notesDb = new sqlite3.Database('./src/db/notes.db', (err) => {
+  if (err) {
+    console.error('Could not open notes database', err);
+  } else {
+    console.log('Notes database connected');
+  }
 });
+
 
 // Get all notes
 export const getNotes = (req: Request, res: Response) => {
-  notesDb.all('SELECT * FROM notes', (err, rows) => {
+  notesDb.all('SELECT * FROM notes', (err, rows: Note[]) => { // Use Note[] type
     if (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -18,7 +24,7 @@ export const getNotes = (req: Request, res: Response) => {
 
 // Add a new note
 export const addNote = (req: Request, res: Response) => {
-  const { title, text, color = '#ffeb3b' } = req.body;
+  const { title, text, color = '#ffeb3b' } = req.body as Omit<Note, 'id' | 'timestamp'>;
   const timestamp = new Date().toISOString();
   const query = 'INSERT INTO notes (title, text, timestamp, color) VALUES (?, ?, ?, ?)';
 
@@ -32,7 +38,7 @@ export const addNote = (req: Request, res: Response) => {
 
 // Update a note
 export const updateNote = (req: Request, res: Response) => {
-  const { title, text, color } = req.body;
+  const { title, text, color } = req.body as Omit<Note, 'id' | 'timestamp'>;
   const query = 'UPDATE notes SET title = ?, text = ?, color = ? WHERE id = ?';
 
   notesDb.run(query, [title, text, color, req.params.id], function (err) {
