@@ -1,0 +1,57 @@
+/* Header general layout styles */
+.header-container {
+    padding: 10px 20px;
+  }
+  
+  .header-title {
+    cursor: pointer;
+    color: #00A86B;
+    font-size: 36px;
+  }
+  
+  .header-title:hover {
+    color: #fff;
+  }
+  
+  .header-date {
+    color: white;
+    font-size: 16px;
+  }
+  
+  .header-user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logged-in-text {
+    color: #fff;
+    margin-right: 15px;
+  }
+  
+  .login-button,
+  .logout-button {
+    font-size: 14px;
+  }
+  
+  .logout-button {
+    background-color: #00A86B;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .login-button {
+    border: 1px solid white;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .logout-button:hover,
+  .login-button:hover {
+    background-color: #555;
+    color: white;
+  }
+  

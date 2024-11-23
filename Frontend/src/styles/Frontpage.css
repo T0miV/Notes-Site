@@ -1,0 +1,204 @@
+/* General container for the page */
+.frontpage-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+/* Page title styles */
+.frontpage-title {
+  outline: 2px solid #00A86B;
+  color: #333;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+/* Note input section */
+.note-input-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Note input container: Use flexbox to align buttons and input */
+.note-input-container {
+  margin-left: 220px;
+  width: 50%;
+  height: 350px;
+  border: 2px solid black;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+/* Note description */
+.note-input {
+  margin-top: 16px;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: 2px solid black;
+  width: 94%;
+}
+
+/* Note text area */
+.note-textarea {
+  margin-top: 24px;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: 2px solid black;
+  width: 94%;
+  height: 150px;
+  resize: none; /* Prevent resizing */
+}
+
+/* Toolbar buttons */
+.text-toolbar {
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  gap: 5px;
+}
+
+.toolbar-button {
+  outline: 2px solid black;
+  padding: 8px;
+  font-size: 1.2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Search box section */
+.search-box-container {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+/* Search box reset button */
+.reset-button {
+  margin-left: 10px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Notes grid */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Individual note styles */
+.note-card {
+  outline: 5px solid black;
+  background-color: var(--note-color, #fff);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 286px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 60px; /* Ensure space at the bottom for the buttons */
+}
+
+/* Container for color picker and save button */
+.note-actions {
+  position: absolute;
+  bottom: 10px;  /* Position at the bottom of the card */
+  left: 10px;    /* Align to the left */
+  display: flex;
+  gap: 10px;     /* Space between the buttons */
+  align-items: center;  /* Vertically center the buttons */
+}
+
+/* Color picker button */
+.color-picker {
+  width: 60px;
+  height: 50px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Save button */
+.save-button {
+  height: 40px;
+  width: 80px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #00a86b;
+  color: white;
+  cursor: pointer;
+}
+
+/* Note date (top-left corner) */
+.note-timestamp {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+/* Note title */
+.note-title {
+  margin-top: 30px;
+  font-size: 1.1rem;
+}
+
+/* Note text */
+.note-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Note action buttons */
+.note-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.edit-button,
+.delete-button {
+  outline: 2px solid black;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}

@@ -1,0 +1,65 @@
+/* Main container for login screen */
+.login-container {
+  
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 0 20px;
+  }
+  
+  /* Title of the login screen */
+  .login-title {
+    margin-left: 50px;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form container */
+  .login-form {
+    margin-left: 324px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 70px; /* Add margin to push the form down */
+  }
+  
+  /* TextField styles */
+  .login-form .MuiTextField-root {
+    margin-bottom: 15px;
+    
+  }
+  
+  /* Button styling */
+  .login-button {
+    margin-top: 20px;
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  /* Link to create an account */
+  .create-account-link {
+    margin-top: 15px;
+    text-decoration: none;
+    color: #3f51b5;
+    text-align: center;
+  }
+  
+  /* Create account button */
+  .create-account-button {
+    
+    width: 350px;
+    margin-top: 15px;
+    border: 2px solid #3f51b5;
+    color: #3f51b5;
+  }
+  
