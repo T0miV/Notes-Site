@@ -9,6 +9,23 @@ const usersDb = new sqlite3.Database('./src/db/users.db', (err) => {
     console.error('Could not open users database', err);
   } else {
     console.log('Users database connected');
+
+    // Create users table if it does not exist
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        role TEXT DEFAULT 'user'
+      )
+    `;
+    usersDb.run(createTableQuery, (err) => {
+      if (err) {
+        console.error('Error creating users table', err);
+      } else {
+        console.log('Users table created or already exists');
+      }
+    });
   }
 });
 
@@ -45,7 +62,7 @@ export const loginUser = (req: Request, res: Response) => {
   }
 
   const query = 'SELECT * FROM users WHERE username = ?';
-  usersDb.get(query, [username], (err, user: User | undefined) => { // Use User type
+  usersDb.get(query, [username], (err, user: User | undefined) => {
     if (err) {
       return res.status(500).json({ error: 'Database error' });
     }

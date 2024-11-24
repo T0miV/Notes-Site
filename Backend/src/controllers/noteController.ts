@@ -8,9 +8,26 @@ const notesDb = new sqlite3.Database('./src/db/notes.db', (err) => {
     console.error('Could not open notes database', err);
   } else {
     console.log('Notes database connected');
+
+    // Create notes table if it does not exist
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        text TEXT NOT NULL,
+        timestamp TEXT NOT NULL,
+        color TEXT DEFAULT '#ffeb3b'
+      )
+    `;
+    notesDb.run(createTableQuery, (err) => {
+      if (err) {
+        console.error('Error creating notes table', err);
+      } else {
+        console.log('Notes table created or already exists');
+      }
+    });
   }
 });
-
 
 // Get all notes
 export const getNotes = (req: Request, res: Response) => {
