@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import '../styles/Profile.css'; // Assuming you will add the styles in Profile.css
 
 interface ProfileProps {
   currentUser: { username: string; role: number } | null;
@@ -19,23 +20,25 @@ const Profile: FC<ProfileProps> = ({ currentUser, handleLogout }) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      {currentUser ? (
-        <>
-          <h1>Welcome, {currentUser.username}!</h1>
-          <p>Role: {currentUser.role === 1 ? "Admin" : "User"}</p>
-          <button onClick={logout} style={{ marginTop: "20px", padding: "10px 20px" }}>
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <h1>You are not logged in.</h1>
-          <button onClick={handleLoginRedirect} style={{ marginTop: "20px", padding: "10px 20px" }}>
-            Login
-          </button>
-        </>
-      )}
+    <div className="profile-container">
+      <div className="profile-form">
+        {currentUser ? (
+          <>
+            <h1 className="profile-title">Welcome, {currentUser.username}!</h1>
+            <p className="profile-role">Role: {currentUser.role === 1 ? "Admin" : "User"}</p>
+            <button onClick={logout} className="logout-button">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <h1 className="profile-title">You are not logged in.</h1>
+            <button onClick={handleLoginRedirect} className="login-button">
+              Login
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,62 @@
+/* Profile container similar to login container */
+.profile-container {
+    
+    height: 80vh;
+    background-color: #f4f4f4;
+  
+  }
+  
+  /* Form container with style similar to login form */
+  .profile-form {
+    margin-bottom: 500px;
+    align-items: center;
+   
+    max-width: 400px;
+    border: 2px solid #ccc;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+
+  }
+  
+  /* Profile title style */
+  .profile-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Role text styling */
+  .profile-role {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Button styling */
+  .logout-button, .login-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover, .login-button:hover {
+    background-color: #303f9f;
+  }
+  
+  /* Style for creating account link or login redirect button */
+  .login-button {
+    background-color: #4caf50;
+  }
+  
+  .login-button:hover {
+    background-color: #45a049;
+  }
+  
