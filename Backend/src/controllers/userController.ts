@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
 import bcrypt from 'bcryptjs';
 import { User } from '../models/user'; // Import User type
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Initialize SQLite database for users
 const usersDb = new sqlite3.Database('./src/db/users.db', (err) => {
@@ -80,7 +85,15 @@ export const loginUser = (req: Request, res: Response) => {
         return res.status(400).json({ error: 'Invalid credentials' });
       }
 
-      res.status(200).json({ username: user.username, role: user.role, userId: user.id });
+      // Generate JWT token with the user's ID and role
+      const token = jwt.sign(
+        { id: user.id, username: user.username, role: user.role }, 
+        process.env.JWT_SECRET as string,  // Use JWT_SECRET from .env file
+        { expiresIn: '1h' }  // Token will expire in 1 hour
+      );
+
+      // Return the token along with user info
+      res.status(200).json({ token, username: user.username, role: user.role, userId: user.id });
     });
   });
 };

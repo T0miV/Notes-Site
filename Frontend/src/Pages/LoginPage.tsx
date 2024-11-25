@@ -1,12 +1,13 @@
 import React, { FC, useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "../components/LoginPageComponents/LoginForm"; // Import the LoginForm component
-import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLink"; // Import CreateAccountLink component
-import "../styles/Loginpage.css"; // Import the new CSS file
+import LoginForm from "../components/LoginPageComponents/LoginForm";
+import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLink";
+import "../styles/Loginpage.css";
+import axios from "axios";
 
 interface LoginScreenProps {
-  setUser: (username: string, role: number) => void;
+  setUser: (username: string, role: number, token: string) => void;
 }
 
 const LoginPage: FC<LoginScreenProps> = ({ setUser }) => {
@@ -17,24 +18,21 @@ const LoginPage: FC<LoginScreenProps> = ({ setUser }) => {
   const handleLogin = async () => {
     try {
       if (!username || !password) {
-        throw new Error('Username and password cannot be empty');
+        throw new Error("Username and password cannot be empty");
       }
-  
-      const response = await fetch('http://localhost:5000/users/login', { // Updated route
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+
+      const response = await axios.post("http://localhost:5000/users/login", {
+        username,
+        password,
       });
-  
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.username, data.role);
-        navigate('/profile');
-      } else {
-        throw new Error('Invalid credentials');
+
+      if (response.status === 200) {
+        const { username, role, token } = response.data;
+        setUser(username, role, token);
+        navigate("/profile");
       }
     } catch (error: any) {
-      alert(error.message);
+      alert(error.response?.data?.error || "Invalid credentials");
     }
   };
 

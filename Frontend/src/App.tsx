@@ -10,39 +10,56 @@ import LoginScreen from "./Pages/LoginPage";
 import Navigointi from "./Pages/Navigate";
 import CreateAccountScreen from "./Pages/CreateAccount";
 import Profile from "./Pages/Profile";
+import axios from "axios"; // Axios for API requests
 
 const App: FC = () => {
   const [currentUser, setCurrentUser] = useState<{ username: string; role: number } | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(null); // Auth token for API requests
 
-  // Load user from localStorage on app load
+  // Load user and token from localStorage on app load
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
+    const storedToken = localStorage.getItem("authToken");
+
+    if (storedUser && storedToken) {
       setCurrentUser(JSON.parse(storedUser));
+      setAuthToken(storedToken);
+
+      // Set the default Authorization header for Axios
+      axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
     }
   }, []);
 
-  // Save user to localStorage when it changes
+  // Save user and token to localStorage when it changes
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && authToken) {
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      localStorage.setItem("authToken", authToken);
     } else {
       localStorage.removeItem("currentUser");
+      localStorage.removeItem("authToken");
     }
-  }, [currentUser]);
+  }, [currentUser, authToken]);
 
-  const setUser = (username: string, role: number) => {
+  const setUser = (username: string, role: number, token: string) => {
     setCurrentUser({ username, role });
+    setAuthToken(token);
+
+    // Set the Authorization header for Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
+    setAuthToken(null);
+
+    // Remove the Authorization header
+    delete axios.defaults.headers.common["Authorization"];
   };
 
   return (
     <div>
       <BrowserRouter>
-        {/* Pass props to Header */}
         <Header currentUser={currentUser} handleLogout={handleLogout} />
         <Navigointi />
 

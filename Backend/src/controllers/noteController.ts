@@ -12,12 +12,14 @@ const notesDb = new sqlite3.Database('./src/db/notes.db', (err) => {
     // Create notes table if it does not exist
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS notes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        text TEXT NOT NULL,
-        timestamp TEXT NOT NULL,
-        color TEXT DEFAULT '#ffeb3b'
-      )
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      text TEXT NOT NULL,
+      timestamp TEXT NOT NULL,
+      color TEXT DEFAULT '#ffeb3b',
+      user_id INTEGER NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users (id)
+)
     `;
     notesDb.run(createTableQuery, (err) => {
       if (err) {
@@ -31,7 +33,10 @@ const notesDb = new sqlite3.Database('./src/db/notes.db', (err) => {
 
 // Get all notes
 export const getNotes = (req: Request, res: Response) => {
-  notesDb.all('SELECT * FROM notes', (err, rows: Note[]) => { // Use Note[] type
+  const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT-tokenista
+  const query = 'SELECT * FROM notes WHERE user_id = ?';
+
+  notesDb.all(query, [userId], (err, rows: Note[]) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -41,17 +46,18 @@ export const getNotes = (req: Request, res: Response) => {
 
 // Add a new note
 export const addNote = (req: Request, res: Response) => {
+  const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT-tokenista
   const { title, text, color = '#ffeb3b' } = req.body as Omit<Note, 'id' | 'timestamp'>;
   const timestamp = new Date().toISOString();
-  const query = 'INSERT INTO notes (title, text, timestamp, color) VALUES (?, ?, ?, ?)';
+  const query = 'INSERT INTO notes (title, text, timestamp, color, user_id) VALUES (?, ?, ?, ?, ?)';
 
-  notesDb.run(query, [title, text, timestamp, color], function (err) {
+  notesDb.run(query, [title, text, timestamp, color, userId], function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
     res.status(201).json({ id: this.lastID, title, text, timestamp, color });
   });
-};
+};;
 
 // Update a note
 export const updateNote = (req: Request, res: Response) => {
