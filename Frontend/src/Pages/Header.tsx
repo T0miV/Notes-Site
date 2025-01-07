@@ -23,7 +23,7 @@ const Header: FC<HeaderProps> = ({ currentUser, handleLogout }) => {
           className="header-title"
           onClick={() => navigate("/")} // Navigate to the homepage when clicked
         >
-          NOTES APP
+          NOTES SITE
         </Typography>
 
         {/* Display the current date using DateDisplay component */}
