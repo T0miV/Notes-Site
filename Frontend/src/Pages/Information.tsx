@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { AppBar, Box, Stack, Typography, Button, Paper } from "@mui/material";
+import { AppBar, Box, Stack, Typography, Button, Paper, FormControl, Select, MenuItem } from "@mui/material";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 import axios from "axios";
 
@@ -12,9 +12,11 @@ const Information: FC = () => {
     colorStats: [],
   });
 
+  const [selectedStat, setSelectedStat] = useState<string>("totalNotes");
+
   const fetchStats = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/notes");
+      const response = await axios.get("http://localhost:5000/stats"); // Assuming your backend has an endpoint for stats
       setStats(response.data);
     } catch (error) {
       console.error("Error fetching stats:", error);
@@ -29,40 +31,61 @@ const Information: FC = () => {
 
   return (
     <Box sx={{ padding: 4, backgroundColor: "#f5f5f5", minHeight: "100vh" }}>
-      <AppBar position="static" sx={{ marginBottom: 4, backgroundColor: "#4caf50" }}>
-        <Typography variant="h4" sx={{ fontWeight: "bold", color: "#333" }}>
+      <AppBar position="static" sx={{ marginBottom: 4, backgroundColor: "#4caf50", padding: 2 }}>
+        <Typography variant="h4" align="center" sx={{ fontWeight: "bold", color: "#fff" }}>
           Notes Statistics
         </Typography>
       </AppBar>
 
-      <Paper elevation={3} sx={{ padding: 3, maxWidth: 1200, margin: "0 auto", backgroundColor: "#ffffff" }}>
+      <Paper elevation={3} sx={{ padding: 3, maxWidth: 800, margin: "0 auto", backgroundColor: "#ffffff" }}>
         <Stack spacing={4} alignItems="center">
-          <Typography variant="h6" sx={{ color: "#555" }}>
-            Total Notes: {stats.totalNotes}
-          </Typography>
-          {stats.colorStats && stats.colorStats.length > 0 ? (
-            <PieChart width={500} height={300}>
-              <Pie
-                data={stats.colorStats}
-                dataKey="colorCount"
-                cx="50%"
-                cy="50%"
-                outerRadius={120}
-                fill="#8884d8"
-                label={(entry) => `${entry.colorCount}`}
-              >
-                {stats.colorStats.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          ) : (
-            <Typography variant="body1" sx={{ color: "#888" }}>
-              No data available for chart.
+          {/* Dropdown to Select Statistics */}
+          <FormControl fullWidth>
+            <Select
+              value={selectedStat}
+              onChange={(e) => setSelectedStat(e.target.value)}
+              sx={{ minWidth: 200 }}
+            >
+              <MenuItem value="totalNotes">Total Notes</MenuItem>
+              <MenuItem value="colorStats">Color Distribution</MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* Display Total Notes */}
+          {selectedStat === "totalNotes" && (
+            <Typography variant="h6" sx={{ color: "#555" }}>
+              Total Notes: <strong>{stats.totalNotes}</strong>
             </Typography>
           )}
+
+          {/* Display Color Statistics */}
+          {selectedStat === "colorStats" && (
+            stats.colorStats && stats.colorStats.length > 0 ? (
+              <PieChart width={500} height={300}>
+                <Pie
+                  data={stats.colorStats}
+                  dataKey="colorCount"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={120}
+                  fill="#8884d8"
+                  label={(entry) => `${entry.color}: ${entry.colorCount}`}
+                >
+                  {stats.colorStats.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            ) : (
+              <Typography variant="body1" sx={{ color: "#888" }}>
+                No data available for color distribution.
+              </Typography>
+            )
+          )}
+
+          {/* Refresh Button */}
           <Button
             variant="contained"
             sx={{ backgroundColor: "#4caf50", ":hover": { backgroundColor: "#388e3c" } }}

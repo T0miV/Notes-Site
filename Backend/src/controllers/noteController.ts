@@ -83,3 +83,4 @@ export const deleteNote = (req: Request, res: Response) => {
     res.status(204).send();
   });
 };
+
