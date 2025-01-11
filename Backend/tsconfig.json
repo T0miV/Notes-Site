@@ -11,7 +11,7 @@
   },
   "include": [
     "src/**/*.ts"  // Lisää kaikki TypeScript-tiedostot, jotka haluat kääntää
-, "src/app.ts"  ],
+, "src/app.ts", "api/vercel.ts"  ],
   "exclude": [
     "node_modules"
   ]
