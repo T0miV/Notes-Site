@@ -15,15 +15,21 @@ const port = process.env.PORT || 5000; // Portti voidaan asettaa ympäristömuut
 app.use(cors());
 app.use(express.json());
 
+// Juuripolun reitti
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome to Notes App Backend</h1><p>The backend is up and running!</p><p>Available routes:</p><ul><li><a href="/users">/users</a></li><li><a href="/notes">/notes</a></li></ul>');
+});
+
 // Reitit
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
-// Käynnistä palvelin riippumatta ympäristöstä
-app.listen(port, () => {
-  console.log(`✅ Backend is running and available at http://localhost:${port} (or your deployment URL in production).`);
-  console.log('✅ Backend is successfully connected and operational!');
-});
+if (process.env.NODE_ENV !== 'production') {
+  // Paikallinen kehitysympäristö: käynnistä palvelin
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
 
-// Exportoi Express-sovellus testejä tai muita käyttötapauksia varten
+// Exportoi oletuksena Express-sovellus
 export default app;
