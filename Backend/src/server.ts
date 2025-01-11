@@ -19,12 +19,10 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
-if (process.env.NODE_ENV !== 'production') {
-  // Paikallinen kehitysympäristö: käynnistä palvelin
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-}
+// Käynnistä palvelin riippumatta ympäristöstä
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
-// Exportoi oletuksena Express-sovellus
+// Exportoi Express-sovellus testejä tai muita käyttötapauksia varten
 export default app;
