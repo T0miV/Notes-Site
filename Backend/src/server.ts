@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
-// Perusreitti
+//Perusreitti
 app.get('/', (req, res) => {
   res.send('Backend toimii!');
 });
