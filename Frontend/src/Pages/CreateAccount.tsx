@@ -3,7 +3,6 @@ import { Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ProfileForm from '../components/CreateAccountComponents/AccountForm';
 import '../styles/CreateAccountPage.css';
-import axios from 'axios';
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
@@ -18,13 +17,16 @@ const Profile: React.FC = () => {
       } else if (password !== repassword) {
         throw new Error('Passwords do not match');
       }
-
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, {
-        username,
-        password,
+  
+      const response = await fetch('http://localhost:5000/users/register', { // Updated route
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
-
-      if (response.status === 200) {
+  
+      if (response.ok) {
         alert('User registered successfully');
         navigate('/profile');
       } else {

@@ -21,7 +21,7 @@ const Frontpage: React.FC = () => {
   // Fetch notes from the backend
   const fetchNotes = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
+      const response = await axios.get("http://localhost:5000/notes");
       setNotes(response.data.reverse());
     } catch (error) {
       console.error("Error fetching notes", error);
@@ -35,7 +35,7 @@ const Frontpage: React.FC = () => {
       const newNote = { title, text, timestamp, color };
 
       try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/notes`, newNote);
+        await axios.post("http://localhost:5000/notes", newNote);
         fetchNotes(); // Re-fetch notes after adding a new one
       } catch (error) {
         console.error("Error adding note", error);
@@ -46,7 +46,7 @@ const Frontpage: React.FC = () => {
   // Update an existing note
   const handleUpdateNote = async (id: number, updatedNote: Partial<Note>) => {
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/notes/${id}`, updatedNote);
+      await axios.put(`http://localhost:5000/notes/${id}`, updatedNote);
       fetchNotes(); // Re-fetch notes after updating
     } catch (error) {
       console.error("Error updating note", error);
@@ -56,7 +56,7 @@ const Frontpage: React.FC = () => {
   // Delete a note
   const handleDeleteNote = async (id: number) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/notes/${id}`);
+      await axios.delete(`http://localhost:5000/notes/${id}`);
       fetchNotes(); // Re-fetch notes after deleting
     } catch (error) {
       console.error("Error deleting note", error);
