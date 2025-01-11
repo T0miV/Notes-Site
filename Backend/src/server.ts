@@ -21,7 +21,8 @@ app.use('/notes', noteRoutes);
 
 // Käynnistä palvelin riippumatta ympäristöstä
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`✅ Backend is running and available at http://localhost:${port} (or your deployment URL in production).`);
+  console.log('✅ Backend is successfully connected and operational!');
 });
 
 // Exportoi Express-sovellus testejä tai muita käyttötapauksia varten
