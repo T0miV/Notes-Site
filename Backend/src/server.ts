@@ -19,6 +19,11 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
+// Pääsivu ("/") näyttää "Backend is running" -viestin
+app.get('/', (req, res) => {
+  res.send('<h1>Backend is running</h1>');  // HTML-elementti näyttää tekstin
+});
+
 if (process.env.NODE_ENV !== 'production') {
   // Paikallinen kehitysympäristö: käynnistä palvelin
   app.listen(port, () => {
