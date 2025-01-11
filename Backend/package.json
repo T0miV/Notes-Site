@@ -8,6 +8,7 @@
     "dev": "ts-node src/server.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.12",
     "@vercel/node": "^5.0.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
