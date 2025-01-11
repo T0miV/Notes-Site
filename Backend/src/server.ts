@@ -18,6 +18,11 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
+// Perusreitti
+app.get('/', (req, res) => {
+  res.send('Backend toimii!');
+});
+
 // Aja serveri vain paikallisessa ympäristössä
 if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 5000;
