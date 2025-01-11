@@ -45,6 +45,7 @@ export const addNote = async (req: Request, res: Response) => {
   res.status(201).json(data[0]);
 };
 
+
 // Update a note (Supabase version)
 export const updateNote = async (req: Request, res: Response) => {
   const { title, text, color } = req.body;
