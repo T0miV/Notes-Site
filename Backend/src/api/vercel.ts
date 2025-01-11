@@ -5,3 +5,4 @@ import app from '../server'; // Importoi Express-sovellus server.ts:stä
 export default (req: VercelRequest, res: VercelResponse) => {
   app(req as any, res as any); // Vercelin pyynnöt ja vastaukset kytketään Express-sovellukseen
 };
+
