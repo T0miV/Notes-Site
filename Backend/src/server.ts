@@ -9,7 +9,6 @@ dotenv.config();
 
 // Luo Express-sovellus
 const app = express();
-const port = process.env.PORT || 5000; // Portti voidaan asettaa ympäristömuuttujasta
 
 // Middlewaret
 app.use(cors());
@@ -19,12 +18,5 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
-if (process.env.NODE_ENV !== 'production') {
-  // Paikallinen kehitysympäristö: käynnistä palvelin
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-}
-
-// Exportoi oletuksena Express-sovellus
+// Exportoi Express-sovellus
 export default app;
