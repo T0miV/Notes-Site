@@ -6,12 +6,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",  // Tämä voi olla tyhjä, koska käytämme suoraan ts-nodea
-    "rootDir": "./src"   // Tämä määrittää, mistä TypeScript-tiedostot löytyvät
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "include": [
-    "src/**/*.ts"  // Lisää kaikki TypeScript-tiedostot, jotka haluat kääntää
-, "src/app.ts"  ],
+    "src/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
