@@ -1,3 +1,4 @@
+// Profile.tsx
 import React, { useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +19,7 @@ const Profile: React.FC = () => {
         throw new Error('Passwords do not match');
       }
   
-      const response = await fetch('http://localhost:5000/users/register', { // Updated route
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

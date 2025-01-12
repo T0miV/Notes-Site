@@ -18,57 +18,51 @@ const Frontpage: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch notes from the backend
   const fetchNotes = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/notes");
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
       setNotes(response.data.reverse());
     } catch (error) {
       console.error("Error fetching notes", error);
     }
   };
 
-  // Add a new note
   const handleAddNote = async (title: string, text: string, color: string) => {
     if (title.trim() && text.trim()) {
       const timestamp = new Date().toISOString();
       const newNote = { title, text, timestamp, color };
 
       try {
-        await axios.post("http://localhost:5000/notes", newNote);
-        fetchNotes(); // Re-fetch notes after adding a new one
+        await axios.post(`${process.env.REACT_APP_API_URL}/notes`, newNote);
+        fetchNotes();
       } catch (error) {
         console.error("Error adding note", error);
       }
     }
   };
 
-  // Update an existing note
   const handleUpdateNote = async (id: number, updatedNote: Partial<Note>) => {
     try {
-      await axios.put(`http://localhost:5000/notes/${id}`, updatedNote);
-      fetchNotes(); // Re-fetch notes after updating
+      await axios.put(`${process.env.REACT_APP_API_URL}/notes/${id}`, updatedNote);
+      fetchNotes();
     } catch (error) {
       console.error("Error updating note", error);
     }
   };
 
-  // Delete a note
   const handleDeleteNote = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/notes/${id}`);
-      fetchNotes(); // Re-fetch notes after deleting
+      await axios.delete(`${process.env.REACT_APP_API_URL}/notes/${id}`);
+      fetchNotes();
     } catch (error) {
       console.error("Error deleting note", error);
     }
   };
 
-  // Fetch notes when the component mounts
   useEffect(() => {
     fetchNotes();
   }, []);
 
-  // Filter notes based on the search query
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.text.toLowerCase().includes(searchQuery.toLowerCase())
   );

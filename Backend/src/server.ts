@@ -11,8 +11,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000; // Portti voidaan asettaa ympäristömuuttujasta
 
+// CORS-konfiguraatio
+const allowedOrigins = ['https://notes-site-app.vercel.app']; // Lisää sallitut alkuperät tähän
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Sallitut HTTP-metodit
+  credentials: true, // Salli evästeet ja todennustiedot
+}));
+
 // Middlewaret
-app.use(cors());
 app.use(express.json());
 
 // Juuripolun reitti
@@ -24,7 +31,7 @@ app.get('/', (req, res) => {
 app.use('/users', userRoutes);
 app.use('/notes', noteRoutes);
 
-// Käynnistä palvelin riippumatta ympäristöstä
+// Käynnistä palvelin
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

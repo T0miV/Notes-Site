@@ -21,7 +21,7 @@ const LoginPage: FC<LoginScreenProps> = ({ setUser }) => {
         throw new Error("Username and password cannot be empty");
       }
 
-      const response = await axios.post("http://localhost:5000/users/login", {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, {
         username,
         password,
       });
