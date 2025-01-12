@@ -15,6 +15,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, setSearchQuery }) =>
     setSearchQuery('');
   };
 
+  const handleSearchClick = () => {
+    // Voit lisätä hakutoiminnallisuuden tähän
+    console.log('Search initiated with query:', searchQuery);
+  };
+
   return (
     <div className="search-box-container">
       <TextField
@@ -25,6 +30,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, setSearchQuery }) =>
         fullWidth
         sx={{ maxWidth: 400 }}
       />
+      <Button variant="contained" onClick={handleSearchClick} className="search-button">
+        Search
+      </Button>
       <Button variant="contained" onClick={handleResetSearch} className="reset-button">
         Reset
       </Button>

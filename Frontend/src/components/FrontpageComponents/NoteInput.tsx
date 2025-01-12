@@ -40,9 +40,9 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
         }}
       />
       <div className="text-toolbar">
-        <button onClick={() => setIsBold(!isBold)} className="toolbar-button">B</button>
-        <button onClick={() => setIsItalic(!isItalic)} className="toolbar-button">I</button>
-        <button onClick={() => setIsUnderline(!isUnderline)} className="toolbar-button">U</button>
+      <button onClick={() => setIsUnderline(!isUnderline)} className="toolbar-button">U</button>
+      <button onClick={() => setIsItalic(!isItalic)} className="toolbar-button">I</button>
+      <button onClick={() => setIsBold(!isBold)} className="toolbar-button">B</button>
       </div>
       
       {/* Container for the color picker and save button */}

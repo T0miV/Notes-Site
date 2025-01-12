@@ -1,204 +1,214 @@
-/* General container for the page */
+/* General Layout */
 .frontpage-container {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  padding: 20px;
-}
-
-/* Page title styles */
-.frontpage-title {
-  outline: 2px solid #00A86B;
-  color: #333;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  background-color: white;
-}
-
-/* Note input section */
-.note-input-section {
   display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f7fafc;
+  font-family: 'Arial', sans-serif; /* Säilytetään aiempi fontti */
 }
 
-/* Note input container: Use flexbox to align buttons and input */
+.frontpage-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Note Input */
 .note-input-container {
-  margin-left: 220px;
-  width: 50%;
-  height: 350px;
-  border: 2px solid black;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  height: 400px;
+  margin-bottom: 20px;
+  background-color: beige;
+  outline: black solid 2px;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Note description */
 .note-input {
-  margin-top: 16px;
+  width: 880px;
+  padding: 10px;
   font-size: 1rem;
-  padding: 8px;
+  border: 1px solid black;
   border-radius: 4px;
-  border: 2px solid black;
-  width: 94%;
+  margin-bottom: 10px;
 }
 
-/* Note text area */
+.note-input-edit {
+  width: 270px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.note-textarea-edit {
+  width: 270px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  min-height: 150px;
+  resize: vertical;
+}
+
 .note-textarea {
-  margin-top: 24px;
+  padding: 10px;
   font-size: 1rem;
-  padding: 8px;
+  border: 1px solid black;
   border-radius: 4px;
-  border: 2px solid black;
-  width: 94%;
-  height: 150px;
-  resize: none; /* Prevent resizing */
+  margin-bottom: 10px;
+  min-height: 200px;
+  resize: vertical;
 }
 
-/* Toolbar buttons */
 .text-toolbar {
-  margin-top: 10px;
   display: flex;
-  justify-content: right;
-  gap: 5px;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .toolbar-button {
-  outline: 2px solid black;
-  padding: 8px;
-  font-size: 1.2rem;
-  background-color: #4caf50;
-  color: white;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toolbar-button:hover {
+  background-color: #cbd5e1;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.color-picker {
   border: none;
   cursor: pointer;
+  height: 30px;
+  width: 30px;
+  padding: 0;
 }
 
-/* Search box section */
-.search-box-container {
-  margin-top: 30px;
-  margin-bottom: 40px;
-}
-
-/* Search box reset button */
-.reset-button {
-  margin-left: 10px;
-  background-color: #f44336;
+.save-button {
+  outline: black solid 1px;
+  background-color: #16a34a;
   color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.reset-button:hover {
-  background-color: #d32f2f;
+.save-button:hover {
+  background-color: #15803d;
 }
 
-/* Notes grid */
+/* Notes Grid */
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 10px;
   width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
+  max-width: 1200px;
 }
 
-/* Individual note styles */
 .note-card {
-  outline: 5px solid black;
-  background-color: var(--note-color, #fff);
-  padding: 20px;
+  height: 240px;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  max-width: 286px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 60px; /* Ensure space at the bottom for the buttons */
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
-/* Container for color picker and save button */
-.note-actions {
-  position: absolute;
-  bottom: 10px;  /* Position at the bottom of the card */
-  left: 10px;    /* Align to the left */
-  display: flex;
-  gap: 10px;     /* Space between the buttons */
-  align-items: center;  /* Vertically center the buttons */
+.note-card:hover {
+  transform: scale(1.02);
 }
 
-/* Color picker button */
-.color-picker {
-  width: 60px;
-  height: 50px;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Save button */
-.save-button {
-  height: 40px;
-  width: 80px;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  border: none;
-  background-color: #00a86b;
-  color: white;
-  cursor: pointer;
-}
-
-/* Note date (top-left corner) */
 .note-timestamp {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 0.8rem;
-  color: #333;
+  font-size: 0.85rem;
+  color: gray;
+  margin-bottom: 10px;
 }
 
-/* Note title */
 .note-title {
-  margin-top: 30px;
-  font-size: 1.1rem;
+  margin-left: 30px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 10px 0;
 }
 
-/* Note text */
 .note-text {
   font-size: 1rem;
-  margin-bottom: 10px;
-  white-space: pre-wrap;
-  word-break: break-word;
+  color: black;
+  margin-bottom: 15px;
 }
 
-/* Note action buttons */
 .note-buttons {
+  margin-top: 100px;
   display: flex;
-  gap: 10px;
-  margin-top: auto;
+  justify-content: space-between;
 }
 
 .edit-button,
 .delete-button {
-  outline: 2px solid black;
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  border-radius: 4px;
+  padding: 8px 16px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .edit-button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #fbbf24;
+}
+
+.edit-button:hover {
+  background-color: #f59e0b;
 }
 
 .delete-button {
   background-color: #f44336;
   color: white;
+}
+
+.delete-button:hover {
+  background-color: #e11d48;
+}
+
+/* Search Bar */
+.search-box-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.reset-button {
+  background-color: #f44336; /* Punainen väri */
+  
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+  background-color: #cbd5e1;
 }

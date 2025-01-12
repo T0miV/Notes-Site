@@ -25,12 +25,12 @@ const NoteCard: React.FC<NoteCardProps> = ({ note, onDelete, onUpdate }) => {
             type="text"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            className="note-input"
+            className="note-input-edit"
           />
           <textarea
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
-            className="note-textarea"
+            className="note-textarea-edit"
           />
           <div className="note-buttons">
             <button onClick={handleSave} className="edit-button">
