@@ -5,12 +5,12 @@
   
   .header-title {
     cursor: pointer;
-    color: #00A86B;
+    color: beige;
     font-size: 36px;
   }
   
   .header-title:hover {
-    color: #fff;
+    color: gray;
   }
   
   .header-date {
