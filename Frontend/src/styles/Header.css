@@ -1,6 +1,9 @@
 /* Header general layout styles */
 .header-container {
+  margin-top: 5px;
+  outline: black solid 5px;
     padding: 10px 20px;
+    margin-bottom: 10px;
   }
   
   .header-title {

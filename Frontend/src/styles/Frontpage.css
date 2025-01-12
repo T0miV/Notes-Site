@@ -119,6 +119,7 @@
 
 /* Notes Grid */
 .notes-grid {
+  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
@@ -128,6 +129,7 @@
 }
 
 .note-card {
+  outline: black solid 2px;
   height: 240px;
   background-color: #fff;
   border-radius: 8px;

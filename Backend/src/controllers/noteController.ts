@@ -47,7 +47,7 @@ export const getNotes = (req: Request, res: Response) => {
 // Add a new note
 export const addNote = (req: Request, res: Response) => {
   const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT-tokenista
-  const { title, text, color = '#ffeb3b' } = req.body as Omit<Note, 'id' | 'timestamp'>;
+  const { title, text, color = '#1976d2' } = req.body as Omit<Note, 'id' | 'timestamp'>;
   const timestamp = new Date().toISOString();
   const query = 'INSERT INTO notes (title, text, timestamp, color, user_id) VALUES (?, ?, ?, ?, ?)';
 
