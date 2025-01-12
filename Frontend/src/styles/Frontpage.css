@@ -5,7 +5,7 @@
   align-items: center;
   padding: 20px;
   background-color: #f7fafc;
-  font-family: 'Arial', sans-serif; /* Säilytetään aiempi fontti */
+  font-family: 'Arial', sans-serif;
 }
 
 .frontpage-title {
@@ -13,6 +13,7 @@
   font-weight: 600;
   margin-bottom: 20px;
   color: #333;
+  text-align: center;
 }
 
 /* Note Input */
@@ -21,7 +22,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  min-height: 250px; /* Korjattu korkeus */
+  min-height: 250px;
   margin-bottom: 20px;
   background-color: beige;
   outline: black solid 2px;
@@ -30,47 +31,26 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.note-input {
-  width: calc(100% - 20px); /* Muutettu suhteelliseksi */
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-.note-input-edit
-{
-  width: 270px;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  min-height: 40px;
-  resize: vertical;
-
-}
+.note-input,
+.note-textarea,
+.note-input-edit,
 .note-textarea-edit {
-  width: 270px;
+  width: 100%; /* Muutettu suhteelliseksi */
   padding: 10px;
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 10px;
-  min-height: 150px;
-  resize: vertical;
 }
 
 .note-textarea {
-  width: calc(100% - 20px); /* Mukautettu leveys */
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin-bottom: 10px;
   min-height: 200px;
+}
+
+.note-input-edit,
+.note-textarea-edit {
   resize: vertical;
+  min-height: 40px;
 }
 
 .text-toolbar {
@@ -133,14 +113,14 @@
 
 .note-card {
   outline: black solid 2px;
-  min-height: 280px; /* Parannettu minimikorkeus */
+  min-height: 280px;
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Jakaa sisällön */
+  justify-content: space-between;
   transition: transform 0.3s;
 }
 
@@ -167,7 +147,7 @@
 }
 
 .note-buttons {
-  margin-top: auto; /* Painikkeet siirtyvät alaosaan */
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
 }
@@ -208,8 +188,8 @@
 }
 
 .reset-button {
-  background-color: #f44336; /* Punainen väri */
-  color: white; /* Korjattu kontrasti */
+  background-color: #f44336;
+  color: white;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -218,4 +198,61 @@
 
 .reset-button:hover {
   background-color: #e11d48;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .frontpage-title {
+    font-size: 1.5rem;
+  }
+
+  .note-input-container,
+  .notes-grid {
+    width: 90%;
+  }
+
+  .note-input,
+  .note-textarea,
+  .note-input-edit,
+  .note-textarea-edit {
+    font-size: 0.9rem;
+  }
+
+  .notes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .note-card {
+    min-height: 250px;
+  }
+
+  .search-box-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .frontpage-title {
+    font-size: 1.2rem;
+  }
+
+  .note-input-container {
+    padding: 15px;
+  }
+
+  .note-input,
+  .note-textarea,
+  .note-input-edit,
+  .note-textarea-edit {
+    font-size: 0.8rem;
+  }
+
+  .note-card {
+    min-height: 220px;
+  }
+
+  .search-box-container {
+    width: 100%;
+  }
 }
