@@ -7,7 +7,7 @@ interface NoteInputProps {
 const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [color, setColor] = useState('#ffeb3b');
+  const [color, setColor] = useState('#1976d2');
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
@@ -16,7 +16,7 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
     onAddNote(title, text, color);
     setTitle('');
     setText('');
-    setColor('#ffeb3b');
+    setColor('#1976d2');
   };
 
   return (
