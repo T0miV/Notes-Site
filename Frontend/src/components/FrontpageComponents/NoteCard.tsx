@@ -20,7 +20,7 @@ const NoteCard: React.FC<NoteCardProps> = ({ note, onDelete, onUpdate }) => {
   return (
     <div className="note-card" style={{ backgroundColor: note.color }}>
       {isEditing ? (
-        <div>
+        <div className="edit-mode">
           <input
             type="text"
             value={newTitle}

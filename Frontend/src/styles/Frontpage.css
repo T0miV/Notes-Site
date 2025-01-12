@@ -21,7 +21,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  height: 400px;
+  min-height: 250px; /* Korjattu korkeus */
   margin-bottom: 20px;
   background-color: beige;
   outline: black solid 2px;
@@ -31,7 +31,7 @@
 }
 
 .note-input {
-  width: 880px;
+  width: calc(100% - 20px); /* Muutettu suhteelliseksi */
   padding: 10px;
   font-size: 1rem;
   border: 1px solid black;
@@ -39,15 +39,18 @@
   margin-bottom: 10px;
 }
 
-.note-input-edit {
+.note-input-edit
+{
   width: 270px;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 10px;
-}
+  min-height: 40px;
+  resize: vertical;
 
+}
 .note-textarea-edit {
   width: 270px;
   padding: 10px;
@@ -60,6 +63,7 @@
 }
 
 .note-textarea {
+  width: calc(100% - 20px); /* Mukautettu leveys */
   padding: 10px;
   font-size: 1rem;
   border: 1px solid black;
@@ -119,7 +123,6 @@
 
 /* Notes Grid */
 .notes-grid {
-  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
@@ -130,11 +133,14 @@
 
 .note-card {
   outline: black solid 2px;
-  height: 240px;
+  min-height: 280px; /* Parannettu minimikorkeus */
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Jakaa sisällön */
   transition: transform 0.3s;
 }
 
@@ -149,7 +155,6 @@
 }
 
 .note-title {
-  margin-left: 30px;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 10px 0;
@@ -162,7 +167,7 @@
 }
 
 .note-buttons {
-  margin-top: 100px;
+  margin-top: auto; /* Painikkeet siirtyvät alaosaan */
   display: flex;
   justify-content: space-between;
 }
@@ -204,7 +209,7 @@
 
 .reset-button {
   background-color: #f44336; /* Punainen väri */
-  
+  color: white; /* Korjattu kontrasti */
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -212,5 +217,5 @@
 }
 
 .reset-button:hover {
-  background-color: #cbd5e1;
+  background-color: #e11d48;
 }
