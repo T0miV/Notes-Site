@@ -6,6 +6,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hello-pangea/dnd": "^17.0.0",
+    "@mui/icons-material": "^6.3.1",
     "@mui/material": "^6.1.6",
     "@supabase/supabase-js": "^2.47.12",
     "@testing-library/jest-dom": "^5.17.0",
