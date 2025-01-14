@@ -1,11 +1,12 @@
 body {
-  width: 100%; /* Käytä koko näyttöleveyttä */
-  max-width: 1080px; /* Varmistaa, että sivu ei ole leveämpi kuin 1080px */
+  opacity: 0.9;
+  width: 100%;
+  max-width: 1080px;
   margin: auto;
-  background: url("https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-80055.jpg");
-  background-repeat: no-repeat;
+  background: url("https://images.pexels.com/photos/129731/pexels-photo-129731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-repeat: repeat;
   background-position: center;
-  background-size: cover;
+  background-size: auto;
   background-attachment: fixed;
   scroll-behavior: smooth;
 }

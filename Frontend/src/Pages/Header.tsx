@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { AppBar, Stack, Typography } from "@mui/material";
+import { AppBar, Stack, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DateDisplay from '../components/HeaderComponents/DateDisplay'; 
 import UserInfo from '../components/HeaderComponents/UserInfo';        
@@ -15,8 +15,8 @@ const Header: FC<HeaderProps> = ({ currentUser, handleLogout }) => {
 
   return (
     <AppBar position="static" className="header-container">
-      
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack direction="row" justifyContent="space-between" alignItems="center" className="header-content">
+        
         {/* Main title of the app */}
         <Typography
           variant="h2"

@@ -1,49 +1,88 @@
-/* Dashboard container similar to profile container */
+/* Dashboard container styles */
 .dashboard-container {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-  }
-  
-  /* Form container with similar style */
+  height: 72vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+/* Form container with responsive design */
+.dashboard-form {
+  width: 100%;
+  max-width: 1000px; /* Limit max-width */
+  height: 650px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Dashboard title style */
+.dashboard-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Calendar section */
+.calendar-section {
+  margin-bottom: 20px;
+}
+
+/* Button styling */
+.logout-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #303f9f;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
   .dashboard-form {
-    width: 1000px;
-    height: 650px;
-    padding: 20px;
-    border: 2px solid #ccc;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
+    width: 90%; /* Make the form take 90% width on smaller screens */
+    max-width: 900px; /* Decrease max-width */
   }
-  
-  /* Dashboard title style */
+}
+
+@media (max-width: 768px) {
+  .dashboard-form {
+    width: 90%; /* Make the form take 90% width on tablets */
+    max-width: 700px;
+    height: auto; /* Allow height to adjust */
+  }
+
   .dashboard-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 1.5rem; /* Smaller title on smaller screens */
   }
-  
-  /* Calendar section */
-  .calendar-section {
-    margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .dashboard-form {
+    width: 100%; /* Full width on mobile */
+    max-width: none; /* Remove max-width limit */
+    height: auto; /* Allow height to adjust */
+    padding: 15px;
   }
-  
-  /* Button styling */
+
+  .dashboard-title {
+    font-size: 1.2rem; /* Smaller title on mobile */
+  }
+
   .logout-button {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    background-color: #3f51b5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 0.9rem; /* Smaller button text */
+    padding: 8px; /* Adjust padding */
   }
-  
-  .logout-button:hover {
-    background-color: #303f9f;
-  }
-  
+}

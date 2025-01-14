@@ -17,9 +17,10 @@ const UserInfo: React.FC<UserInfoProps> = ({ currentUser, handleLogout }) => {
         // If the user is logged in, display their username and logout button
         <>
           <Typography variant="h6" className="logged-in-text">
-            {/* Display the username of the logged-in user */}
-            Logged in as: {currentUser.username}
+          <span className="username-highlight">Logged in as: </span>
+          <span className="username">{currentUser.username}</span>
           </Typography>
+
           <Button
             variant="contained"
             color="secondary"

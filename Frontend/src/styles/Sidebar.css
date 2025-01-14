@@ -1,20 +1,46 @@
+/* Sidebar styles */
 .sidebar {
-    width: 240px;
-    height: 688px;
-    outline: 3px solid black;
-    position: absolute;
-    left: -242px; /* Hidden initially */
-    top: 0;
-    background-color: #fff;
-    transition: left 0.3s ease-in-out; /* Add transition effect */
-    z-index: 1200;
+  width: 240px;
+  height: 100vh;
+  outline: 3px solid black;
+  position: fixed;
+  left: -240px; /* Hidden initially */
+  top: 0;
+  background-color: #fff;
+  transition: left 0.3s ease-in-out;
+  z-index: 1200;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional box-shadow */
+}
+
+/* Sidebar open state */
+.sidebar.open {
+  left: 0; /* Move into view */
+}
+
+/* Sidebar closed state */
+.sidebar.closed {
+  left: -240px; /* Hidden */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px; /* Slightly smaller width on tablets */
   }
-  
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px; /* Further smaller on small tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 150px; /* Very small on mobile */
+  }
+
   .sidebar.open {
-    left: 0; /* When open, move it into view */
+    left: 0; /* Make sure it's visible */
   }
-  
-  .sidebar.closed {
-    left: -242px; /* When closed, hide it */
-  }
-  
+}
