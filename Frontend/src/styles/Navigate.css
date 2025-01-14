@@ -1,45 +1,83 @@
+/* General Navigation Container */
 .navigate-container {
-    outline: black solid 2px;
-    margin-top: 6px;
-    background-color: white;
-    padding: 10px 0;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 1080px;
-  }
-  
+  outline: black solid 2px;
+  margin-top: 6px;
+  background-color: white;
+  padding: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1080px;
+  width: 100%; /* Mukautuu pienempiin näyttöihin */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap; /* Mahdollistaa joustavan sijoittelun pienillä näytöillä */
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Navigation Buttons */
+.navigate-button {
+  width: 200px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: 0.3s;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Specific Navigation Styles */
+.navigate-frontpage {
+  border: 3px solid #00A86B;
+}
+
+.navigate-information {
+  border: 3px solid #00A86B;
+}
+
+.navigate-profile {
+  border: 3px solid #d32f2f; /* Tumma punainen virheille */
+}
+
+/* Hover Effects */
+.navigate-frontpage:hover {
+  background-color: #00A86B;
+  color: white;
+}
+
+.navigate-information:hover {
+  background-color: blue;
+  color: white;
+}
+
+.navigate-profile:hover {
+  background-color: #d32f2f; /* Tumma punainen hover-tilassa */
+  color: white;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   .navigate-button {
-    width: 200px;
-    border-radius: 20px;
-    font-weight: bold;
-    transition: 0.3s;
+    width: 150px; /* Pienempi nappien leveys */
+    font-size: 0.9rem; /* Pienempi fonttikoko */
   }
-  
-  .navigate-frontpage {
-    border: 3px solid #00A86B;
+
+  .navigate-container {
+    padding: 10px;
+    gap: 8px; /* Vähentää nappien välistä tilaa */
   }
-  
-  .navigate-information {
-    border: 3px solid #00A86B;
+}
+
+@media (max-width: 480px) {
+  .navigate-button {
+    width: 120px; /* Vielä pienempi leveys mobiililaitteille */
+    font-size: 0.8rem;
+    padding: 8px;
   }
-  
-  .navigate-profile {
-    border: 3px solid #d32f2f; /* Dark red for error color */
+
+  .navigate-container {
+    padding: 5px;
+    gap: 5px;
   }
-  
-  /* Hover effects */
-  .navigate-frontpage:hover {
-    background-color: #00A86B;
-    color: white;
-  }
-  
-  .navigate-information:hover {
-    background-color: blue;
-    color: white;
-  }
-  
-  .navigate-profile:hover {
-    background-color: #d32f2f; /* Dark red on hover */
-    color: white;
-  }
-  
+}
