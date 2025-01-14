@@ -1,24 +1,23 @@
-// Profile.tsx
 import React, { useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import ProfileForm from '../components/CreateAccountComponents/AccountForm';
+import CreateAccountForm from '../components/CreateAccountComponents/AccountForm';
 import '../styles/CreateAccountPage.css';
 
-const Profile: React.FC = () => {
+const CreateAccountPage: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [repassword, setRePassword] = useState<string>('');
 
-  const createProfile = async () => {
+  const createAccount = async () => {
     try {
       if (!username || !password || !repassword) {
         throw new Error('Username, password, and re-entered password cannot be empty');
       } else if (password !== repassword) {
         throw new Error('Passwords do not match');
       }
-  
+
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
         method: 'POST',
         headers: {
@@ -26,12 +25,12 @@ const Profile: React.FC = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-  
+
       if (response.ok) {
-        alert('User registered successfully');
-        navigate('/profile');
+        alert('Account created successfully');
+        navigate('/login');
       } else {
-        throw new Error('Failed to register');
+        throw new Error('Failed to create account');
       }
     } catch (error: any) {
       alert(error.message);
@@ -39,21 +38,23 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <Container className="profile-container">
-      <Typography variant="h4" className="profile-title" gutterBottom>
-        Create Profile
+    <Container className="create-account-container">
+      <Typography variant="h4" className="create-account-title" gutterBottom>
+        Create Account
       </Typography>
-      <ProfileForm
-        username={username}
-        password={password}
-        repassword={repassword}
-        setUsername={setUsername}
-        setPassword={setPassword}
-        setRePassword={setRePassword}
-        onSubmit={createProfile}
-      />
+      <div className="create-account-form">
+        <CreateAccountForm
+          username={username}
+          password={password}
+          repassword={repassword}
+          setUsername={setUsername}
+          setPassword={setPassword}
+          setRePassword={setRePassword}
+          onSubmit={createAccount}
+        />
+      </div>
     </Container>
   );
 };
 
-export default Profile;
+export default CreateAccountPage;

@@ -1,40 +1,111 @@
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+/* Main container for create account page */
+.create-account-container {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Title and form stacked vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  height: 50vh;
+  background-color: #f9f9f9;
+  padding: 40px 20px 20px;
+}
+
+/* Title of the create account screen */
+.create-account-title {
+  margin-top: 50px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+}
+
+/* Form container */
+.create-account-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+/* Profile box styling (adjusted height) */
+.profile-box {
+  height: auto; /* Let content define height */
+  max-height: 350px; /* Set max height for a more compact box */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+/* Button styling */
+.create-account-button {
+  margin-top: 20px;
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-account-button:hover {
+  background-color: #303f9f;
+}
+
+/* Input fields inside the form */
+.create-account-form .MuiTextField-root {
+  margin-bottom: 15px;
+  width: 100%; /* Full width input fields */
+}
+
+/* Link to login screen */
+.create-account-link {
+  margin-top: 15px;
+  text-decoration: none;
+  color: #3f51b5;
+  text-align: center;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .create-account-form {
+    max-width: 90%;
   }
-  
-  .profile-title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+
+  .create-account-title {
+    font-size: 1.8rem;
   }
-  
-  .profile-box {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .create-account-form {
+    max-width: 100%;
+    padding: 15px;
   }
-  
-  .profile-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+
+  .create-account-title {
+    font-size: 1.6rem;
   }
-  
-  .profile-input {
-    margin-bottom: 15px;
+
+  .create-account-button {
+    font-size: 0.9rem;
   }
-  
-  .profile-button {
-    margin-top: 20px;
-  }
-  
+}

@@ -1,65 +1,136 @@
 /* Main container for login screen */
 .login-container {
-  
-    justify-content: center;
-    align-items: flex-start; /* Align items to the top */
-    height: 100vh;
-    background-color: #f4f4f4;
-    padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Increased height to give more space for content */
+  background-color: #f4f4f4;
+  padding: 0 20px;
+}
+
+/* Title of the login screen */
+.login-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+}
+
+/* Form container */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Slightly larger max-width */
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Subtle box shadow */
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+/* TextField styles */
+.login-form .MuiTextField-root {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* Button styling */
+.login-button {
+  margin-top: 20px;
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #303f9f;
+}
+
+/* Link to create an account */
+.create-account-link {
+  margin-top: 15px;
+  text-decoration: none;
+  color: purple;
+  text-align: center;
+}
+
+/* Create account button */
+.create-account-button {
+  width: 100%;
+  margin-top: 15px;
+  border: 2px solid purple;
+  color: purple;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.create-account-button:hover {
+  background-color: purple;
+  color: white;
+}
+
+/* Profile page container */
+.profile-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100%;
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+/* Profile box */
+.profile-box {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 450px; /* Slightly larger max-width */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .login-form, .profile-box {
+    max-width: 90%;
+    padding: 15px;
   }
-  
-  /* Title of the login screen */
-  .login-title {
-    margin-left: 50px;
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
+
+  .login-title, .profile-title {
+    font-size: 1.8rem;
   }
-  
-  /* Form container */
-  .login-form {
-    margin-left: 324px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 350px;
-    padding: 20px;
-    border: 2px solid #ccc;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 70px; /* Add margin to push the form down */
+}
+
+@media (max-width: 480px) {
+  .login-form, .profile-box {
+    max-width: 100%;
   }
-  
-  /* TextField styles */
-  .login-form .MuiTextField-root {
-    margin-bottom: 15px;
-    
+
+  .login-title, .profile-title {
+    font-size: 1.6rem;
   }
-  
-  /* Button styling */
-  .login-button {
-    margin-top: 20px;
-    background-color: #3f51b5;
-    color: white;
+
+  .login-button, .create-account-button {
+    font-size: 0.9rem;
   }
-  
-  /* Link to create an account */
-  .create-account-link {
-    margin-top: 15px;
-    text-decoration: none;
-    color: #3f51b5;
-    text-align: center;
-  }
-  
-  /* Create account button */
-  .create-account-button {
-    
-    width: 350px;
-    margin-top: 15px;
-    border: 2px solid #3f51b5;
-    color: #3f51b5;
-  }
-  
+}

@@ -22,8 +22,8 @@ const ProfileForm: FC<ProfileFormProps> = ({
   onSubmit,
 }) => {
   return (
-    <Box className="profile-box">
-      <form className="profile-form">
+    <Box className="">
+      <form className="" onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
         <TextInput
           label="Username"
           value={username}
