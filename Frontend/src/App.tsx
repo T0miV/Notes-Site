@@ -12,6 +12,8 @@ import CreateAccountScreen from "./Pages/CreateAccount";
 import Profile from "./Pages/Profile";
 import Dashboard from "./Pages/DashBoard";
 import AllNotesPage from "./Pages/AllNotesPage";
+import CalendarPage from "./Pages/CalendarPage";
+import DeletedNotesPage from "./Pages/DeletedNotesPage";
 import axios from "axios"; // Axios for API requests
 
 const App: FC = () => {
@@ -72,6 +74,8 @@ const App: FC = () => {
           <Route path="/createprofile" element={<CreateAccountScreen />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/all-notes" element={<AllNotesPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/trash" element={<DeletedNotesPage />} />
           <Route
             path="/profile"
             element={
