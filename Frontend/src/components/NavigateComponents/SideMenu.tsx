@@ -34,7 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         elevation={3}
         sx={{
           width: 240,
-          height: 692,
+          height: 689,
           outline: "3px solid black",
           position: 'absolute',
           left: '-242px',

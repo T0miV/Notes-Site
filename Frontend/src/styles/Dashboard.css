@@ -1,0 +1,49 @@
+/* Dashboard container similar to profile container */
+.dashboard-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+  }
+  
+  /* Form container with similar style */
+  .dashboard-form {
+    width: 1000px;
+    height: 650px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Dashboard title style */
+  .dashboard-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Calendar section */
+  .calendar-section {
+    margin-bottom: 20px;
+  }
+  
+  /* Button styling */
+  .logout-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #303f9f;
+  }
+  

@@ -10,6 +10,8 @@ import LoginScreen from "./Pages/LoginPage";
 import Navigointi from "./Pages/Navigate";
 import CreateAccountScreen from "./Pages/CreateAccount";
 import Profile from "./Pages/Profile";
+import Dashboard from "./Pages/DashBoard";
+import AllNotesPage from "./Pages/AllNotesPage";
 import axios from "axios"; // Axios for API requests
 
 const App: FC = () => {
@@ -68,6 +70,8 @@ const App: FC = () => {
           <Route path="/login" element={<LoginScreen setUser={setUser} />} />
           <Route path="/information" element={<InformationScreen />} />
           <Route path="/createprofile" element={<CreateAccountScreen />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/all-notes" element={<AllNotesPage />} />
           <Route
             path="/profile"
             element={
