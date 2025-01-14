@@ -1,5 +1,5 @@
 import { Button, Stack, Box } from "@mui/material";
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/NavigateComponents/SideMenu";
 import "../styles/Navigate.css";
@@ -7,10 +7,9 @@ import "../styles/Navigate.css";
 const Navigate: FC = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Box ref={containerRef} sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative' }}>
       <Stack
         direction="row"
         justifyContent="space-evenly"
@@ -21,11 +20,11 @@ const Navigate: FC = () => {
           className="hamburgermenu-button navigate-sidebar"
           variant="outlined"
           color="success"
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)} // Toggle sidebar visibility
         >
           ☰
         </Button>
-        
+
         <Button
           className="navigate-button navigate-frontpage"
           variant="outlined"
@@ -52,7 +51,7 @@ const Navigate: FC = () => {
       </Stack>
       <Sidebar 
         isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
+        onClose={() => setIsSidebarOpen(false)} // Close sidebar when X is clicked
       />
     </Box>
   );

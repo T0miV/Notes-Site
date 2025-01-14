@@ -1,10 +1,11 @@
 import React from 'react';
-import { Paper, List, ListItemButton, ListItemIcon, ListItemText, ClickAwayListener } from '@mui/material';
+import { Paper, List, ListItemButton, ListItemIcon, ListItemText, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import NoteIcon from '@mui/icons-material/Note';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -23,47 +24,59 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    onClose();
+    onClose(); // Close the sidebar after navigating
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) return null; // If sidebar is not open, return null
 
   return (
-    <ClickAwayListener onClickAway={onClose}>
-      <Paper
-        elevation={3}
+    <Paper
+      elevation={3}
+      sx={{
+        width: 240,
+        height: 700,
+        outline: "3px solid black",
+        position: 'absolute',
+        left: '10px',
+        top: '10px',
+        backgroundColor: 'background.paper',
+        zIndex: 1200, // Ensures that the sidebar is on top of other elements
+      }}
+    >
+      <IconButton
+        onClick={onClose} // Close sidebar on click
         sx={{
-          width: 240,
-          height: 689,
-          outline: "3px solid black",
           position: 'absolute',
-          left: '-242px',
-          top: '0px',
-          backgroundColor: 'background.paper',
-          zIndex: 1200,
+          top: '10px',
+          right: '10px',
+          zIndex: 1300, // Higher z-index than the sidebar to ensure it is clickable
+          color: 'red',
+          
         }}
       >
-        <List>
-          {menuItems.map((item) => (
-            <ListItemButton
-              key={item.text}
-              onClick={() => handleNavigation(item.path)}
-              sx={{
-                padding: '8px 16px',
-                '&:hover': {
-                  backgroundColor: 'action.hover',
-                }
-              }}
-            >
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          ))}
-        </List>
-      </Paper>
-    </ClickAwayListener>
+        <CloseIcon />
+      </IconButton>
+      <List>
+        {menuItems.map((item) => (
+          <ListItemButton
+            key={item.text}
+            onClick={() => handleNavigation(item.path)}
+            sx={{
+              marginTop: '60px',
+              padding: '8px 16px',
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              }
+            }}
+          >
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        ))}
+      </List>
+    </Paper>
   );
 };
 
