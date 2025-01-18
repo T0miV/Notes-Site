@@ -1,107 +1,47 @@
-/* Profile container */
+/* Profile.css */
 .profile-container {
-  width: 1040px;
-  height: auto;
-  min-height: 30vh;
-  background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
 }
 
-/* Form container */
 .profile-form {
-  width: 50%;
   max-width: 400px;
-  padding: 20px;
-  background-color: white;
-  border: 2px solid #ccc;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-bottom: 20px;
+  margin: 0 auto;
 }
 
-/* Profile title */
-.profile-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
+.input-group {
+  margin-bottom: 15px;
 }
 
-/* Role text */
-.profile-role {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 20px;
-  text-align: center;
+.input-group label {
+  display: block;
+  font-weight: bold;
 }
 
-/* Button styling */
-.logout-button, .login-button {
+.input-group input {
   width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  font-size: 1rem;
-  background-color: #3f51b5;
-  color: white;
-  border: none;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.submit-button, .logout-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.logout-button:hover, .login-button:hover {
-  background-color: #303f9f;
-}
-
-/* Login button specific styling */
-.login-button {
-  background-color: #4caf50;
-}
-
-.login-button:hover {
+.submit-button:hover, .logout-button:hover {
   background-color: #45a049;
 }
 
-/* Responsive styles for tablet and mobile devices */
-@media (max-width: 768px) {
-  .profile-form {
-    width: 90%;
-    padding: 15px;
-  }
-
-  .profile-title {
-    font-size: 1.6rem;
-  }
-
-  .profile-role {
-    font-size: 1rem;
-  }
-
-  .logout-button, .login-button {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
+.success-message {
+  color: green;
 }
 
-@media (max-width: 480px) {
-  .profile-form {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .profile-title {
-    font-size: 1.4rem;
-  }
-
-  .profile-role {
-    font-size: 0.9rem;
-  }
-
-  .logout-button, .login-button {
-    font-size: 0.8rem;
-    padding: 8px;
-  }
+.error-message {
+  color: red;
 }

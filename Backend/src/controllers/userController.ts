@@ -21,8 +21,9 @@ const usersDb = new sqlite3.Database('./src/db/users.db', (err) => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-        role TEXT DEFAULT 'user'
-      )
+        role INTEGER DEFAULT 0
+)
+
     `;
     usersDb.run(createTableQuery, (err) => {
       if (err) {
@@ -47,14 +48,15 @@ export const registerUser = (req: Request, res: Response) => {
       return res.status(500).json({ error: 'Error hashing password' });
     }
 
-    const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
-    usersDb.run(query, [username, hashedPassword], function (err) {
-      if (err) {
-        return res.status(500).json({ error: 'Error saving user' });
-      }
+    const query = 'INSERT INTO users (username, password, role) VALUES (?, ?, ?)';
+usersDb.run(query, [username, hashedPassword, 0], function (err) { // role number 1 means admin account
+  if (err) {
+    return res.status(500).json({ error: 'Error saving user' });
+  }
 
-      res.status(201).json({ id: this.lastID, username });
-    });
+  res.status(201).json({ id: this.lastID, username });
+});
+
   });
 };
 
