@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
 import { Note } from '../models/note';
 
+// Initialize SQLite database for notes
 const notesDb = new sqlite3.Database('./src/db/notes.db', (err) => {
   if (err) {
     console.error('Could not open notes database', err);
@@ -29,7 +30,7 @@ const notesDb = new sqlite3.Database('./src/db/notes.db', (err) => {
   }
 });
 
-// Get all notes, excluding deleted ones
+// Get all notes from database, excluding deleted ones
 export const getNotes = (req: Request, res: Response) => {
   const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT-tokenista
   const query = 'SELECT * FROM notes WHERE user_id = ? AND isDeleted = FALSE';
@@ -42,7 +43,7 @@ export const getNotes = (req: Request, res: Response) => {
   });
 };
 
-// Get all deleted notes
+// Get all deleted notes from database
 export const getDeletedNotes = (req: Request, res: Response) => {
   const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT-tokenista
   const query = 'SELECT * FROM notes WHERE user_id = ? AND isDeleted = TRUE';
@@ -55,7 +56,7 @@ export const getDeletedNotes = (req: Request, res: Response) => {
   });
 };
 
-// Add a new note
+// Add a new note to database
 export const addNote = (req: Request, res: Response) => {
   const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT-tokenista
   const { title, text, color = '#1976d2' } = req.body as Omit<Note, 'id' | 'timestamp'>;
@@ -70,7 +71,7 @@ export const addNote = (req: Request, res: Response) => {
   });
 };
 
-// Update a note
+// Update a note in database
 export const updateNote = (req: Request, res: Response) => {
   const { title, text, color } = req.body as Omit<Note, 'id' | 'timestamp'>;
   const query = 'UPDATE notes SET title = ?, text = ?, color = ? WHERE id = ?';
@@ -83,7 +84,7 @@ export const updateNote = (req: Request, res: Response) => {
   });
 };
 
-// Mark a note as deleted
+// Mark a note as deleted, by changing isDeleted to true
 export const deleteNote = (req: Request, res: Response) => {
   const query = 'UPDATE notes SET isDeleted = TRUE WHERE id = ?';
 
@@ -95,7 +96,7 @@ export const deleteNote = (req: Request, res: Response) => {
   });
 };
 
-// Restore a deleted note
+// Restore a deleted note, by changing isDeleted to false
 export const restoreNote = (req: Request, res: Response) => {
   const query = 'UPDATE notes SET isDeleted = FALSE WHERE id = ?';
 
@@ -107,7 +108,7 @@ export const restoreNote = (req: Request, res: Response) => {
   });
 };
 
-// Permanently delete a note
+// Permanently delete a note from database
 export const permanentDeleteNote = (req: Request, res: Response) => {
   const query = 'DELETE FROM notes WHERE id = ?';
 

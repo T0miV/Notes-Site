@@ -13,12 +13,12 @@ import authenticate from '../middleware/authencticate';
 
 const router = Router();
 
-router.get('/', authenticate, getNotes);
-router.get('/deleted', authenticate, getDeletedNotes); // Hae poistetut muistiinpanot
-router.post('/', authenticate, addNote);
-router.put('/:id', authenticate, updateNote);
-router.put('/restore/:id', authenticate, restoreNote); // Palauta muistiinpano
-router.put('/delete/:id', authenticate, deleteNote); // Siirrä muistiinpano roskakoriin
-router.delete('/:id', authenticate, permanentDeleteNote); // Poista pysyvästi
+router.get('/', authenticate, getNotes); // Get all notes from database
+router.post('/', authenticate, addNote); // Add a new note to database
+router.put('/:id', authenticate, updateNote); // Update a note in database
+router.put('/delete/:id', authenticate, deleteNote); // Move note to trash
+router.get('/deleted', authenticate, getDeletedNotes); // Get deleted notes on "deleted notes page"
+router.put('/restore/:id', authenticate, restoreNote); // Restore a deleted note back to the main list
+router.delete('/:id', authenticate, permanentDeleteNote); // Permanently delete a note from database
 
 export default router;
