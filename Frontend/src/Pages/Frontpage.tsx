@@ -49,11 +49,10 @@ const Frontpage: React.FC = () => {
       console.error("Error updating note", error);
     }
   };
-
   const handleDeleteNote = async (id: number) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/notes/${id}`);
-      fetchNotes();
+      await axios.put(`${process.env.REACT_APP_API_URL}/notes/delete/${id}`);
+      fetchNotes(); // Päivitä etusivun muistiinpanot
     } catch (error) {
       console.error("Error deleting note", error);
     }

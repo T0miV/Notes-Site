@@ -1,0 +1,186 @@
+/* DeletedNotesPage - Yleinen asettelu */
+.deletednotes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9fb;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh; /* Varmistaa, että sivu täyttää koko näkymän korkeuden */
+    box-sizing: border-box;
+  }
+  
+  /* Otsikko */
+  .deletednotes-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Tumma sininen sävy */
+    text-align: center;
+  }
+  
+  /* Hakukentän tyyli */
+  .deleted-search-box-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  
+  .deleted-search-input {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+  }
+  
+  .deleted-search-input:focus {
+    border-color: #3498db;
+  }
+  
+  /* Muistiinpanojen grid-asettelu */
+  .deleted-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Muistiinpanokortti */
+  .deleted-note-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .deleted-note-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Kortin sisältö */
+  .deleted-note-timestamp {
+    font-size: 0.9rem;
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .deleted-note-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+  }
+  
+  .deleted-note-text {
+    font-size: 1rem;
+    color: black;
+    margin-bottom: 20px;
+  }
+  
+  /* Toimintopainikkeet */
+  .deleted-note-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .restore-button,
+  .permanently-delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .restore-button {
+    background-color: #27ae60; /* Vihreä */
+    color: white;
+  }
+  
+  .restore-button:hover {
+    background-color: #2ecc71;
+  }
+  
+  .permanently-delete-button {
+    background-color: #e74c3c; /* Punainen */
+    color: white;
+  }
+  
+  .permanently-delete-button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Responsiivisuus */
+  @media (max-width: 768px) {
+    .deletednotes-title {
+      font-size: 2rem; /* Pienempi otsikko pienemmillä näytöillä */
+    }
+  
+    .deleted-search-box-container {
+      width: 90%; /* Hakukenttä vie enemmän tilaa pienemmillä näytöillä */
+      max-width: none;
+    }
+  
+    .deleted-notes-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Pienempi grid-kolumni */
+    }
+  
+    .deleted-note-card {
+      padding: 15px; /* Vähemmän paddingia kortilla */
+    }
+  
+    .deleted-note-title {
+      font-size: 1.2rem; /* Pienempi otsikko pienemmillä näytöillä */
+    }
+  
+    .deleted-note-text {
+      font-size: 0.9rem; /* Pienempi teksti */
+    }
+  
+    .restore-button,
+    .permanently-delete-button {
+      font-size: 0.8rem; /* Pienemmät napit */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .deleted-notes-grid {
+      grid-template-columns: 1fr; /* Yksi kortti per rivi pienellä näytöllä */
+    }
+  
+    .deleted-note-card {
+      padding: 10px; /* Vähemmän paddingia kortilla */
+    }
+  
+    .deleted-note-title {
+      font-size: 1rem; /* Vielä pienempi otsikko */
+    }
+  
+    .deleted-note-text {
+      font-size: 0.8rem; /* Pienempi teksti */
+    }
+  
+    .restore-button,
+    .permanently-delete-button {
+      font-size: 0.8rem; /* Vielä pienemmät napit */
+    }
+  }
+  
