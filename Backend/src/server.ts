@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 5000; // Portti voidaan asettaa ympäristömuuttujasta
 
 // CORS-konfiguraatio
-const allowedOrigins = ['https://notes-site-app.vercel.app']; // Lisää sallitut alkuperät tähän
+const allowedOrigins = ['https://notes-site-app.vercel.app', 'http://localhost:3000']; // Separate the URLs into individual strings
 app.use(cors({
   origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Sallitut HTTP-metodit
