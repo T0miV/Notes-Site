@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import FrontPage from "./Pages/Frontpage";
@@ -14,7 +14,7 @@ import CalendarPage from "./Pages/CalendarPage";
 import DeletedNotesPage from "./Pages/DeletedNotesPage";
 import axios from "axios"; // Axios for API requests
 
-const App: FC = () => {
+const App = () => {
   const [currentUser, setCurrentUser] = useState<{ username: string; role: number } | null>(null);
   const [authToken, setAuthToken] = useState<string | null>(null); // Auth token for API requests
 

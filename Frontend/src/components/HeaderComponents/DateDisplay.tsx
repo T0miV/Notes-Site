@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 
 // DateDisplay component to display the current date
-const DateDisplay: React.FC = () => {
+const DateDisplay = () => {
   // State to keep track of the current date and update it every second
   const [date, setDate] = useState(new Date());
 

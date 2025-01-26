@@ -13,7 +13,7 @@ type Note = {
   isEditing: boolean;
 };
 
-const AllNotesPage: React.FC = () => {
+const AllNotesPage = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -67,4 +67,3 @@ const AllNotesPage: React.FC = () => {
 };
 
 export default AllNotesPage;
-

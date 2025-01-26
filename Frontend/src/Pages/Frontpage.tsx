@@ -14,7 +14,7 @@ type Note = {
   isEditing: boolean;
 };
 
-const Frontpage: React.FC = () => {
+const Frontpage = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -49,10 +49,11 @@ const Frontpage: React.FC = () => {
       console.error("Error updating note", error);
     }
   };
+
   const handleDeleteNote = async (id: number) => {
     try {
       await axios.put(`${process.env.REACT_APP_API_URL}/notes/delete/${id}`);
-      fetchNotes(); // Päivitä etusivun muistiinpanot
+      fetchNotes(); // Update the notes list
     } catch (error) {
       console.error("Error deleting note", error);
     }

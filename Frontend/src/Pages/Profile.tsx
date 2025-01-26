@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/Profile.css';
@@ -8,7 +8,7 @@ interface ProfileProps {
   handleLogout: () => void;
 }
 
-const Profile: FC<ProfileProps> = ({ currentUser, handleLogout }) => {
+const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

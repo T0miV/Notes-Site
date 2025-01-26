@@ -1,10 +1,9 @@
-// Dashboard.tsx
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar"; // Install with: npm install react-calendar
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Dashboard.css';
 
-const Dashboard: FC = () => {
+const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const handleDateChange = (date: Date) => {

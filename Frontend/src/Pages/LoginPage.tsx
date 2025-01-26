@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginPageComponents/LoginForm";
@@ -6,11 +6,7 @@ import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLi
 import "../styles/Loginpage.css";
 import axios from "axios";
 
-interface LoginScreenProps {
-  setUser: (username: string, role: number, token: string) => void;
-}
-
-const LoginPage: FC<LoginScreenProps> = ({ setUser }) => {
+const LoginPage = ({ setUser }: { setUser: (username: string, role: number, token: string) => void }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

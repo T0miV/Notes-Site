@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar, Box, Stack, Typography, Button, Paper, FormControl, Select, MenuItem } from "@mui/material";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 import axios from "axios";
 
-const Information: FC = () => {
+const Information = () => {
   const [stats, setStats] = useState<{
     totalNotes: number;
     colorStats: { color: string; colorCount: number }[];

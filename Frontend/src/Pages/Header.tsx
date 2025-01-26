@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { AppBar, Stack, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DateDisplay from '../components/HeaderComponents/DateDisplay'; 
@@ -10,7 +10,7 @@ interface HeaderProps {
   handleLogout: () => void; // Function to handle logout
 }
 
-const Header: FC<HeaderProps> = ({ currentUser, handleLogout }) => {
+const Header = ({ currentUser, handleLogout }: HeaderProps) => {
   const navigate = useNavigate(); // Hook to navigate to different routes
 
   return (

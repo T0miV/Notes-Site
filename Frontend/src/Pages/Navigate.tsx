@@ -1,10 +1,10 @@
 import { Button, Stack, Box } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/NavigateComponents/SideMenu";
 import "../styles/Navigate.css";
 
-const Navigate: FC = () => {
+const Navigate = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

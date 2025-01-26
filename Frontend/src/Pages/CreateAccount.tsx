@@ -4,18 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import CreateAccountForm from '../components/CreateAccountComponents/AccountForm';
 import '../styles/CreateAccountPage.css';
 
-const CreateAccountPage: React.FC = () => {
+const CreateAccountPage = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [repassword, setRePassword] = useState<string>('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [repassword, setRePassword] = useState('');
 
   const createAccount = async () => {
     try {
+      // Validointi
       if (!username || !password || !repassword) {
-        throw new Error('Username, password, and re-entered password cannot be empty');
-      } else if (password !== repassword) {
-        throw new Error('Passwords do not match');
+        alert('Username, password, and re-entered password cannot be empty');
+        return;
+      }
+      if (password !== repassword) {
+        alert('Passwords do not match');
+        return;
       }
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
@@ -30,10 +34,11 @@ const CreateAccountPage: React.FC = () => {
         alert('Account created successfully');
         navigate('/login');
       } else {
-        throw new Error('Failed to create account');
+        const errorMessage = (await response.json())?.message || 'Failed to create account';
+        throw new Error(errorMessage);
       }
     } catch (error: any) {
-      alert(error.message);
+      alert(error.message || 'An error occurred');
     }
   };
 

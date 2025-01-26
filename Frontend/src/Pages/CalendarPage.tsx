@@ -13,11 +13,11 @@ interface Note {
   isDeleted: number;
 }
 
-const CalendarPage: React.FC = () => {
+const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
-  const [noteText, setNoteText] = useState('');
 
+  // Hakee muistiinpanot backendistä
   const fetchNotes = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
@@ -28,10 +28,12 @@ const CalendarPage: React.FC = () => {
     }
   };
 
+  // Käynnistää muistiinpanojen haun komponentin mountissa
   useEffect(() => {
     fetchNotes();
   }, []);
 
+  // Päivämäärän käsittely
   const handleDateChange: CalendarProps['onChange'] = (value) => {
     if (value instanceof Date) {
       setSelectedDate(value);
@@ -40,18 +42,19 @@ const CalendarPage: React.FC = () => {
     } else {
       setSelectedDate(null);
     }
-    setNoteText('');
   };
 
+  // Muistiinpanot valitulle päivämäärälle
   const notesForSelectedDate = notes.filter(
     (note) =>
       selectedDate &&
       note.timestamp.split('T')[0] === selectedDate.toISOString().split('T')[0]
   );
 
+  // Tarkistaa, onko päivällä muistiinpanoja
   const hasNotes = (date: Date) => {
     const dateString = date.toISOString().split('T')[0];
-    return notes.some(note => note.timestamp.split('T')[0] === dateString);
+    return notes.some((note) => note.timestamp.split('T')[0] === dateString);
   };
 
   return (
@@ -60,14 +63,12 @@ const CalendarPage: React.FC = () => {
         <div className="calendar-header">
           <h1>Calendar</h1>
         </div>
-        
+
         <div className="calendar-section">
           <Calendar
             onChange={handleDateChange}
             value={selectedDate}
-            tileClassName={({ date }) => {
-              return hasNotes(date) ? 'tile-with-note' : '';
-            }}
+            tileClassName={({ date }) => (hasNotes(date) ? 'tile-with-note' : '')}
           />
         </div>
 
@@ -75,12 +76,15 @@ const CalendarPage: React.FC = () => {
           <div className="selected-date-section">
             <h2>Selected day: {selectedDate.toLocaleDateString()}</h2>
             <div className="notes-section">
-              <h3>Note:</h3>
+              <h3>Notes:</h3>
               <ul>
                 {notesForSelectedDate.length > 0 ? (
-                  notesForSelectedDate.map((note, index) => (
-                    <li key={index}>
-                      <div className="note-item" style={{ backgroundColor: note.color }}>
+                  notesForSelectedDate.map((note) => (
+                    <li key={note.id}>
+                      <div
+                        className="note-item"
+                        style={{ backgroundColor: note.color }}
+                      >
                         <strong>{note.title}</strong>
                         <p>{note.text}</p>
                       </div>

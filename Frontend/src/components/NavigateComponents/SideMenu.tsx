@@ -12,14 +12,14 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const navigate = useNavigate();
 
   const menuItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'All Notes', icon: <NoteIcon />, path: '/all-notes' },
     { text: 'Calendar', icon: <CalendarTodayIcon />, path: '/calendar' },
-    { text: 'Trash', icon: <DeleteIcon />, path: '/trash' }
+    { text: 'Trash', icon: <DeleteIcon />, path: '/trash' },
   ];
 
   const handleNavigation = (path: string) => {
@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       sx={{
         width: 240,
         height: 700,
-        outline: "3px solid black",
+        outline: '3px solid black',
         position: 'absolute',
         left: '10px',
         top: '10px',
@@ -51,7 +51,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           right: '10px',
           zIndex: 1300, // Higher z-index than the sidebar to ensure it is clickable
           color: 'red',
-          
         }}
       >
         <CloseIcon />
@@ -66,12 +65,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               padding: '8px 16px',
               '&:hover': {
                 backgroundColor: 'action.hover',
-              }
+              },
             }}
           >
-            <ListItemIcon>
-              {item.icon}
-            </ListItemIcon>
+            <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItemButton>
         ))}
