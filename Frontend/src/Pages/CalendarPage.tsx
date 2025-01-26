@@ -48,12 +48,12 @@ const CalendarPage = () => {
   const notesForSelectedDate = notes.filter(
     (note) =>
       selectedDate &&
-      note.timestamp.split('T')[0] === selectedDate.toISOString().split('T')[0]
+      note.timestamp.split('T')[0] === selectedDate.toLocaleDateString('en-CA') // käytetään ISO 8601 -muotoa
   );
 
   // Tarkistaa, onko päivällä muistiinpanoja
   const hasNotes = (date: Date) => {
-    const dateString = date.toISOString().split('T')[0];
+    const dateString = date.toLocaleDateString('en-CA'); // Käytetään paikallista päivämäärämuotoa
     return notes.some((note) => note.timestamp.split('T')[0] === dateString);
   };
 
