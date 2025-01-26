@@ -37,8 +37,8 @@ const AllNotesPage = () => {
 
   const handleDeleteNote = async (id: number) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/notes/${id}`);
-      fetchNotes();
+      await axios.put(`${process.env.REACT_APP_API_URL}/notes/delete/${id}`);
+      fetchNotes(); // Update the notes list
     } catch (error) {
       console.error("Error deleting note", error);
     }
