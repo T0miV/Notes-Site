@@ -1,10 +1,10 @@
 /* Dashboard container styles */
 .dashboard-container {
   font-family: 'Arial', sans-serif;
-  height: 72vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: #f4f4f4;
   padding: 20px;
 }
@@ -12,8 +12,7 @@
 /* Form container with responsive design */
 .dashboard-form {
   width: 100%;
-  max-width: 1000px; /* Limit max-width */
-  height: 650px;
+  max-width: 1200px; /* Limit max-width */
   padding: 20px;
   border: 2px solid #ccc;
   background-color: white;
@@ -27,4 +26,46 @@
   font-size: 2rem;
   margin-bottom: 20px;
   color: #333;
+}
+
+/* All Notes and Deleted Notes section styles */
+.dashboard-section {
+  margin: 20px 0;
+  text-align: left;
+}
+
+/* Notes grid layout */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Individual note card styling */
+.note-card {
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+small {
+  font-size: 0.8rem;
+  color: grey;
 }
