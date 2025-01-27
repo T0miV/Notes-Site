@@ -66,6 +66,7 @@
 }
 
 .react-calendar__navigation {
+  
   display: flex;
   flex-wrap: wrap;
   height: auto;
@@ -94,7 +95,7 @@
 }
 
 .react-calendar__tile {
-  
+  outline: black solid 2px;
   max-width: 100%;
   padding: 10px 5px;
   font-size: 3em;
