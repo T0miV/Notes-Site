@@ -1,5 +1,6 @@
 /* Dashboard container styles */
 .dashboard-container {
+  font-family: 'Arial', sans-serif;
   height: 72vh;
   display: flex;
   justify-content: center;

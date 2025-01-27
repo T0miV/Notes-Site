@@ -1,5 +1,6 @@
 /* Calendar.css */
 .calendar-container {
+  font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
