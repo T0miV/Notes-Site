@@ -1,26 +1,30 @@
 /* Dashboard container styles */
 .dashboard-container {
+  width: 100%;
+  max-width: 1080px;
   font-family: 'Arial', sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 10px;
   flex-wrap: wrap;
   position: relative; /* Allow positioning inside */
+  box-sizing: border-box;
 }
 
 /* Form container with responsive design */
 .dashboard-form {
+  margin-top: 10px;
   width: 100%;
-  max-width: 800px; /* Adjusted to a smaller width */
   padding: 10px;
   border: 2px solid #ccc;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-align: center;
+  max-width: 1020px;
 }
 
 /* Dashboard title style */
@@ -90,7 +94,7 @@
 }
 
 .dashboard-note-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -107,5 +111,52 @@
 
 .dashboard-note-card small {
   font-size: 0.65rem; /* Smaller date */
-  color: grey;
+  color: black;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  /* For smaller devices (tablets and mobile) */
+  .dashboard-sections {
+    grid-template-columns: 1fr; /* Stack sections vertically */
+  }
+
+  .dashboard-recent-notes-section {
+    max-width: 100%;
+    position: relative;
+    bottom: auto;
+    right: auto;
+  }
+
+  .dashboard-note-card h3 {
+    font-size: 1rem; /* Increase font size for readability */
+  }
+
+  .dashboard-note-card p {
+    font-size: 0.85rem;
+  }
+
+  .dashboard-note-card small {
+    font-size: 0.75rem;
+  }
+}
+
+/* For very small devices like phones in portrait mode */
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 1.25rem; /* Adjust title size */
+  }
+
+  .dashboard-recent-notes-section {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .dashboard-note-card {
+    height: 60px; /* Slightly bigger height for smaller cards */
+  }
+
+  .dashboard-small-box {
+    font-size: 0.75rem;
+  }
 }
