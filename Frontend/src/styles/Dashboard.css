@@ -7,13 +7,15 @@
   align-items: flex-start;
   background-color: #f4f4f4;
   padding: 20px;
+  flex-wrap: wrap;
+  position: relative; /* Allow positioning inside */
 }
 
 /* Form container with responsive design */
 .dashboard-form {
   width: 100%;
-  max-width: 1200px; /* Limit max-width */
-  padding: 20px;
+  max-width: 800px; /* Adjusted to a smaller width */
+  padding: 10px;
   border: 2px solid #ccc;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -23,49 +25,87 @@
 
 /* Dashboard title style */
 .dashboard-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 1.5rem; /* Slightly smaller */
+  margin-bottom: 10px;
   color: #333;
 }
 
-/* All Notes and Deleted Notes section styles */
-.dashboard-section {
-  margin: 20px 0;
-  text-align: left;
-}
-
-/* Notes grid layout */
-.notes-grid {
+/* Grid layout for sections (2x2) */
+.dashboard-sections {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-gap: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
-/* Individual note card styling */
-.note-card {
+/* Individual section styling (small-box) */
+.dashboard-section {
   padding: 10px;
   border-radius: 8px;
+  background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for small boxes */
+.dashboard-small-box {
+  font-size: 0.85rem;
+}
+
+/* Recent Notes section (smaller and positioned in the bottom right) */
+.dashboard-recent-notes-section {
+  background-color: #f9fbe7; /* Light green background */
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-width: 250px; /* Smaller width */
+  position: absolute;
+  bottom: 10px;
+  right: 10px; /* Right alignment */
+}
+
+/* Notes grid layout inside the Recent Notes section */
+.dashboard-notes-grid {
+  display: flex;
+  flex-direction: column; /* Stack notes vertically */
+  gap: 5px; /* Smaller gap */
+  width: 100%;
+  padding: 5px;
+}
+
+/* Individual note card styling for Recent Notes */
+.dashboard-note-card {
+  width: 100%;
+  height: 50px; /* Smaller height for the note cards */
   background-color: white;
+  padding: 5px; /* Smaller padding */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.note-card:hover {
+.dashboard-note-card:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-h3 {
-  font-size: 1.2rem;
+/* Note card content styles */
+.dashboard-note-card h3 {
+  font-size: 0.9rem; /* Smaller title */
   margin: 0;
 }
 
-p {
-  font-size: 1rem;
+.dashboard-note-card p {
+  font-size: 0.75rem; /* Smaller text */
   margin: 0;
 }
 
-small {
-  font-size: 0.8rem;
+.dashboard-note-card small {
+  font-size: 0.65rem; /* Smaller date */
   color: grey;
 }
