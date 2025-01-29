@@ -1,5 +1,6 @@
 /* Dashboard container styles */
 .dashboard-container {
+  margin-top: 2px;
   width: 100%;
   max-width: 1080px;
   font-family: 'Arial', sans-serif;
