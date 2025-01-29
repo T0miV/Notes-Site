@@ -5,28 +5,30 @@
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background-color: #e3e7ed;
+  background-color: #f0f0f0;
   box-sizing: border-box;
   padding: 20px;
 }
 
 .calendar-wrapper {
-  background-color: #f9fbfd;
+  background-color: white;
   border-radius: 8px;
   padding: 20px;
   width: 100%;
   max-width: 1200px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures everything inside is centered */
 }
 
 .calendar-header h1 {
   margin: 0 0 20px 0;
   padding: 10px;
-  background-color: #f9fbfd;
+  background-color: white;
   border-radius: 5px;
   text-align: center;
   font-size: 2rem;
-  color: #333;
 }
 
 .calendar-section {
@@ -40,13 +42,26 @@
   width: 100%;
   max-width: 900px;
   background: white;
-  border: 2px solid #ccc;
-  font-family: "Roboto", sans-serif;
+  border: 2px solid black;
+  font-family: "roboto", sans-serif;
   line-height: 1.5em;
   margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
-  border-radius: 8px;
+}
+
+.react-calendar--doubleView {
+  flex-wrap: wrap;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer {
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .react-calendar__navigation {
@@ -60,76 +75,79 @@
   flex: 1 1 auto;
   min-width: 44px;
   padding: 0.5rem;
-  border-radius: 4px;
-  background-color: #0078ff;
-  color: white;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-.react-calendar__navigation button:hover {
-  background-color: #0055b3;
 }
 
 .react-calendar__month-view__weekdays {
+  outline: blue solid 1px;
   text-align: center;
   text-transform: uppercase;
   font: inherit;
   font-size: 0.9em;
   font-weight: bold;
-  color: #444;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
 }
 
 .react-calendar__tile {
+  outline: black solid 2px;
   max-width: 100%;
   padding: 10px 5px;
-  font-size: 1.2em;
+  font-size: 3em;
   text-align: center;
   transition: background-color 0.3s ease;
-  position: relative;
-  border-radius: 6px;
+  position: relative;  /* Lisätty position: relative tileille */
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: #d4dbe6;
+  background-color: #e6e6e6;
 }
 
 .react-calendar__tile--now {
-  background: #ffeb99;
-  color: #333;
+  background: #ffff76;
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  background: #ffd966;
+  background: #ffffa9;
 }
 
 .react-calendar__tile--active {
-  background: #0055b3;
+  background: #006edc;
   color: white;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: #0078ff;
+  background: #1087ff;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
 }
 
 .tile-with-note {
-  background-color: #9bcf53;
+  background-color: #7a9b02;
   color: white;
-  margin: 5px;
-  border-radius: 4px;
+  margin: 5px;  /* Lisätty marginaali muistiinpanojen välille */
+  border-radius: 4px;  /* Pyöristetyt kulmat */
   outline: black solid 2px;
 }
 
-.selected-date-section,
-.notes-section {
+.selected-date-section {
   background-color: white;
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notes-section {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
 .notes-section ul {
@@ -146,10 +164,8 @@
 .note-item {
   border-radius: 4px;
   padding: 10px;
-  margin: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  background-color: #f9fbfd;
-  border: 1px solid #ccc;
+  margin: 5px;  /* Lisätty marginaali muistiinpanojen välille */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);  /* Lisätty pieni varjostus */
 }
 
 .note-item strong {
@@ -158,10 +174,19 @@
 }
 
 @media (min-width: 768px) {
+  .react-calendar--doubleView .react-calendar__viewContainer > * {
+    width: 50%;
+    margin: 0.5em;
+  }
+  
+  .calendar-header h1 {
+    font-size: 2rem;
+  }
+  
   .react-calendar__month-view__weekdays {
     font-size: 1em;
   }
-
+  
   .react-calendar__tile {
     padding: 20px 10px;
     font-size: 1.2em;

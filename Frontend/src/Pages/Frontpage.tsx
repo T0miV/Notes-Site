@@ -68,6 +68,7 @@ const Frontpage = () => {
   );
 
   return (
+    
     <div className="frontpage-container">
       <h1 className="frontpage-title">Write Notes</h1>
       <NoteInput onAddNote={handleAddNote} />
