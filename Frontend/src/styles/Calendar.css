@@ -1,24 +1,22 @@
 /* Calendar.css */
 .calendar-container {
-  width: 100%; /* Tämä varmistaa, että säilö vie kaiken käytettävissä olevan tilan */
-  max-width: 1200px; /* Voit säätää max-leveyttä tarpeen mukaan */
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  justify-content: center; /* Sisältö keskelle */
-  align-items: flex-start;
-  min-height: 100vh;
-  background-color: #f0f0f0;
-  box-sizing: border-box;
-  margin: 0 auto; /* Tämä varmistaa, että elementti on keskitetty */
-  padding: 20px; /* Lisää tilaa sivujen ympärille, jos tarpeen */
-}
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9fb;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh; /* Varmistaa, että sivu täyttää koko näkymän korkeuden */
+    box-sizing: border-box;
+  }
 
 .calendar-wrapper {
   background-color: white;
-  border-radius: 8px;
-  padding: 20px;
+ 
+  padding: 10px;
   width: 100%;
-  max-width: 1200px; /* Tämän voi säilyttää tai muuttaa, jos haluat suuremman leveysrajan */
+  max-width: 1000px; /* Tämän voi säilyttää tai muuttaa, jos haluat suuremman leveysrajan */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;

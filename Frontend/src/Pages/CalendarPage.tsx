@@ -3,7 +3,6 @@ import Calendar, { CalendarProps } from 'react-calendar';
 import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
-import { Container, Typography } from '@mui/material';
 
 interface Note {
   id: number;
@@ -55,48 +54,38 @@ const CalendarPage = () => {
   };
 
   return (
-    <Container>
-      <div className="calendar-container">
-        <div className="calendar-wrapper">
-          <Typography variant="h3" className="calendar-header" gutterBottom>
-            Calendar
-          </Typography>
+    <div className="calendar-container">
+      <div className="calendar-wrapper">
+        <h1 className="calendar-header">Calendar</h1>
 
-          <Calendar
-            onChange={handleDateChange}
-            value={selectedDate}
-            tileClassName={({ date }) => (hasNotes(date) ? 'tile-with-note' : '')}
-          />
+        <Calendar
+          onChange={handleDateChange}
+          value={selectedDate}
+          tileClassName={({ date }) => (hasNotes(date) ? 'tile-with-note' : '')}
+        />
 
-          {selectedDate && (
-            <div className="selected-date-section">
-              <Typography variant="h4">{selectedDate.toLocaleDateString()}</Typography>
-              <div className="notes-section">
-                <Typography variant="h5">Notes:</Typography>
-                {notesForSelectedDate.length > 0 ? (
-                  <ul>
-                    {notesForSelectedDate.map((note) => (
-                      <li
-                        key={note.id}
-                        className="note-item"
-                        style={{ backgroundColor: note.color }}
-                      >
-                        <Typography variant="h6">
-                          <strong>{note.title}</strong>
-                        </Typography>
-                        <Typography variant="body1">{note.text}</Typography>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <Typography variant="body1">No notes on this day</Typography>
-                )}
-              </div>
+        {selectedDate && (
+          <div className="selected-date-section">
+            <h2>{selectedDate.toLocaleDateString()}</h2>
+            <div className="notes-section">
+              <h3>Notes:</h3>
+              {notesForSelectedDate.length > 0 ? (
+                <ul>
+                  {notesForSelectedDate.map((note) => (
+                    <li key={note.id} className="note-item" style={{ backgroundColor: note.color }}>
+                      <strong>{note.title}</strong>
+                      <p>{note.text}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No notes on this day</p>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </Container>
+    </div>
   );
 };
 
