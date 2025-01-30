@@ -114,6 +114,10 @@ export const permanentDeleteNote = async (req: Request, res: Response) => {
   }
   res.status(204).send();
 };
+
+/* // Old code with sqlite */
+
+
 // import { Request, Response } from 'express';
 // import sqlite3 from 'sqlite3';
 // import { Note } from '../models/note';
