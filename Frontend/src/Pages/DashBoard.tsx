@@ -35,7 +35,7 @@ const Dashboard = () => {
   const fetchNotes = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
-      const activeNotes = response.data.filter((note: Note) => note.isDeleted === 0);
+      const activeNotes = response.data.filter((note: Note) => !note.isDeleted);
       setNotes(activeNotes.reverse().slice(0, 3)); // Get the 3 most recent notes
 
       // Calculate statistics
