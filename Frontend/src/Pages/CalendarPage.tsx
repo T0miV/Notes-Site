@@ -8,7 +8,7 @@ interface Note {
   id: number;
   title: string;
   text: string;
-  timestamp: string;
+  timestamp: string; // Muoto: "2025-01-31T13:03:20.927Z"
   color: string;
   user_id: number;
   isDeleted: number;
@@ -22,8 +22,10 @@ const CalendarPage = () => {
     const fetchNotes = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
-        const activeNotes = response.data.filter((note: Note) => note.isDeleted === 0);
+        const activeNotes = response.data.filter((note: Note) => !note.isDeleted);
+
         setNotes(activeNotes.reverse());
+        console.log('Fetched notes:', activeNotes); // Debuggausta varten
       } catch (error) {
         console.error('Error fetching notes', error);
       }
@@ -40,16 +42,19 @@ const CalendarPage = () => {
     } else {
       setSelectedDate(null);
     }
+    console.log('Selected date:', selectedDate); // Debuggausta varten
   };
 
+  // Suodatetaan muistiinpanot valitulle päivämäärälle
   const notesForSelectedDate = notes.filter(
     (note) =>
       selectedDate &&
-      note.timestamp.split('T')[0] === selectedDate.toLocaleDateString('en-CA')
+      note.timestamp.split('T')[0] === selectedDate.toISOString().split('T')[0]
   );
 
+  // Tarkistetaan, onko tietyllä päivämäärällä muistiinpanoja
   const hasNotes = (date: Date) => {
-    const dateString = date.toLocaleDateString('en-CA');
+    const dateString = date.toISOString().split('T')[0];
     return notes.some((note) => note.timestamp.split('T')[0] === dateString);
   };
 

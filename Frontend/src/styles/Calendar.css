@@ -1,28 +1,31 @@
 /* Calendar.css */
-.calendar-container {
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9fb;
-    font-family: 'Arial', sans-serif;
-    min-height: 100vh; /* Varmistaa, että sivu täyttää koko näkymän korkeuden */
-    box-sizing: border-box;
-  }
 
+/* Pääkontainer kalenterisivulle */
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9fb;
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh; /* Varmistaa, että sivu täyttää koko näkymän korkeuden */
+  box-sizing: border-box;
+}
+
+/* Kalenterin sisältöä sisältävä wrapper */
 .calendar-wrapper {
   background-color: white;
- 
-  padding: 10px;
+  padding: 20px;
   width: 100%;
-  max-width: 1000px; /* Tämän voi säilyttää tai muuttaa, jos haluat suuremman leveysrajan */
+  max-width: 1000px; /* Leveysraja kalenterille */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Pyöristetyt kulmat */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Kalenterin otsikko */
 .calendar-header h1 {
   margin: 0 0 20px 0;
   padding: 10px;
@@ -30,124 +33,120 @@
   border-radius: 5px;
   text-align: center;
   font-size: 2rem;
+  color: #333; /* Tummempi väri paremman lukettavuuden vuoksi */
 }
 
-.calendar-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
+/* React-Calendar -komponentin tyylit */
 .react-calendar {
   width: 100%;
   max-width: 900px;
   background: white;
-  border: 2px solid black;
-  font-family: "roboto", sans-serif;
+  border: 2px solid #ddd; /* Vaaleampi reunus */
+  font-family: 'Roboto', sans-serif;
   line-height: 1.5em;
   margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
+  border-radius: 8px; /* Pyöristetyt kulmat */
 }
 
-.react-calendar--doubleView {
-  flex-wrap: wrap;
-}
-
-.react-calendar--doubleView .react-calendar__viewContainer {
-  flex-wrap: wrap;
-  margin: 0;
-}
-
-.react-calendar--doubleView .react-calendar__viewContainer > * {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
+/* Navigaatiopainikkeet */
 .react-calendar__navigation {
   display: flex;
-  flex-wrap: wrap;
-  height: auto;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1em;
 }
 
 .react-calendar__navigation button {
-  flex: 1 1 auto;
-  min-width: 44px;
-  padding: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #006edc; /* Sininen väri */
+  transition: color 0.3s ease;
 }
 
+.react-calendar__navigation button:hover {
+  color: #1087ff; /* Vaaleampi sininen hover-tilassa */
+}
+
+/* Viikonpäivien otsikot */
 .react-calendar__month-view__weekdays {
-  outline: blue solid 1px;
   text-align: center;
   text-transform: uppercase;
-  font: inherit;
   font-size: 0.9em;
   font-weight: bold;
+  color: #555; /* Tummempi väri paremman näkyvyyden vuoksi */
+  margin-bottom: 10px;
 }
 
 .react-calendar__month-view__weekdays__weekday {
   padding: 0.5em;
 }
 
+/* Päiväruudut */
 .react-calendar__tile {
-  outline: black solid 2px;
   max-width: 100%;
   padding: 10px 5px;
-  font-size: 3em;
+  font-size: 1em; /* Pienempi fonttikoko */
   text-align: center;
   transition: background-color 0.3s ease;
-  position: relative;  /* Lisätty position: relative tileille */
+  position: relative;
+  border-radius: 4px; /* Pyöristetyt kulmat */
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: #e6e6e6;
+  background-color: #e6e6e6; /* Hover-efekti */
 }
 
+/* Nykyinen päivä */
 .react-calendar__tile--now {
-  background: #ffff76;
+  background: #ffff76; /* Keltainen tausta */
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  background: #ffffa9;
+  background: #ffffa9; /* Vaaleampi keltainen hover-tilassa */
 }
 
+/* Valittu päivä */
 .react-calendar__tile--active {
-  background: #006edc;
+  background: #006edc; /* Sininen tausta */
   color: white;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: #1087ff;
+  background: #1087ff; /* Vaaleampi sininen hover-tilassa */
 }
 
-.react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #e6e6e6;
-}
-
+/* Muistiinpanojen merkinnät päiväruuduissa */
 .tile-with-note {
-  background-color: #7a9b02;
+  background-color: #7a9b02; /* Vihreä tausta */
   color: white;
-  margin: 5px;  /* Lisätty marginaali muistiinpanojen välille */
-  border-radius: 4px;  /* Pyöristetyt kulmat */
-  outline: black solid 2px;
+  margin: 2px; /* Pienempi marginaali */
+  border-radius: 4px; /* Pyöristetyt kulmat */
 }
 
+/* Valitun päivän osio */
 .selected-date-section {
   background-color: white;
   padding: 20px;
   margin-top: 20px;
-  border-radius: 5px;
+  border-radius: 8px; /* Pyöristetyt kulmat */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Varjostus */
+  width: 100%;
+  max-width: 900px;
 }
 
+/* Muistiinpanojen lista */
 .notes-section {
   background-color: white;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 8px; /* Pyöristetyt kulmat */
   margin-top: 20px;
 }
 
@@ -160,36 +159,35 @@
   margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
+  background-color: #f9f9fb; /* Vaalea tausta */
 }
 
+/* Yksittäinen muistiinpano */
 .note-item {
   border-radius: 4px;
   padding: 10px;
-  margin: 5px;  /* Lisätty marginaali muistiinpanojen välille */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);  /* Lisätty pieni varjostus */
+  margin: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Pieni varjostus */
 }
 
 .note-item strong {
   display: block;
   margin-bottom: 5px;
+  color: #333; /* Tummempi väri */
 }
 
+/* Mobiiliystävälliset tyylit */
 @media (min-width: 768px) {
-  .react-calendar--doubleView .react-calendar__viewContainer > * {
-    width: 50%;
-    margin: 0.5em;
-  }
-  
-  .calendar-header h1 {
-    font-size: 2rem;
-  }
-  
-  .react-calendar__month-view__weekdays {
-    font-size: 1em;
-  }
-  
   .react-calendar__tile {
     padding: 20px 10px;
-    font-size: 1.2em;
+    font-size: 1.2em; /* Suurempi fonttikoko */
+  }
+
+  .calendar-header h1 {
+    font-size: 2.5rem; /* Suurempi otsikko */
+  }
+
+  .react-calendar__month-view__weekdays {
+    font-size: 1em; /* Suurempi fonttikoko viikonpäiville */
   }
 }
