@@ -3,6 +3,7 @@ import axios from "axios";
 import Calendar from "react-calendar";
 import { Container, Typography } from "@mui/material";
 import "../styles/Dashboard.css";
+import WelcomeBox from "../components/DashBoardComponents/WelcomeBox"; // Tuo WelcomeBox-komponentti
 
 type Note = {
   id: number;
@@ -25,7 +26,12 @@ const MetricBox = ({ title, data }: MetricBoxProps) => (
   </div>
 );
 
-const Dashboard = () => {
+interface DashboardProps {
+  currentUser: { username: string; role: number } | null;
+  handleLogout: () => void;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [statistics, setStatistics] = useState({
     totalNotes: 0,
@@ -62,6 +68,9 @@ const Dashboard = () => {
       <Typography variant="h4" className="dashboard-title" gutterBottom>
         Notes Dashboard
       </Typography>
+
+      {/* Lisää WelcomeBox-komponentti */}
+      {currentUser && <WelcomeBox username={currentUser.username} />}
 
       <div className="dashboard-sections">
         {/* Statistics Section */}

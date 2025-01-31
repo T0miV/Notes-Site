@@ -1,0 +1,33 @@
+/* WelcomeBox.css */
+.welcome-box {
+    
+    margin-top: -50px;
+    width: 1000px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #b9b6b6fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .welcome-message {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .profile-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-transform: none;
+  }
+  
+  .profile-button:hover {
+    background-color: #115293;
+  }

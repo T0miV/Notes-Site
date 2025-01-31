@@ -70,7 +70,10 @@ const App = () => {
           <Route path="/login" element={<LoginScreen setUser={setUser} />} />
           <Route path="/information" element={<InformationScreen />} />
           <Route path="/createprofile" element={<CreateAccountScreen />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={<Dashboard currentUser={currentUser} handleLogout={handleLogout} />} // Välitä currentUser ja handleLogout
+          />
           <Route path="/all-notes" element={<AllNotesPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/trash" element={<DeletedNotesPage />} />
