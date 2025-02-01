@@ -35,7 +35,7 @@ interface DashboardProps {
   handleLogout: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
+const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [statistics, setStatistics] = useState({ totalNotes: 0, notesThisMonth: 0 });
   const [chartData, setChartData] = useState<{ labels: string[]; datasets: any[] }>({ labels: [], datasets: [] });
@@ -105,7 +105,18 @@ const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
         {/* Chart Section */}
         <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6" className="dashboard-chartTitle">Note Activity</Typography>
-          <Bar data={chartData} />
+          <Bar 
+            data={chartData} 
+            options={{
+              scales: {
+                y: {
+                  ticks: {
+                    precision: 0 // Poistaa desimaalit pystyakselilta
+                  }
+                }
+              }
+            }}
+          />
         </div>
 
         {/* Calendar Section */}
