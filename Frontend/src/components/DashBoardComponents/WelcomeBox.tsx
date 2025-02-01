@@ -21,7 +21,7 @@ const WelcomeBox: React.FC<WelcomeBoxProps> = ({ username }) => {
         className="profile-button"
         onClick={() => navigate("/profile")} // Ohjaa profiilisivulle
       >
-        Profile
+        Edit profile
       </Button>
     </div>
   );

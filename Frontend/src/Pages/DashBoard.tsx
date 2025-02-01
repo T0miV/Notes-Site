@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Calendar from "react-calendar";
 import { Container, Typography } from "@mui/material";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import "../styles/Dashboard.css";
-import WelcomeBox from "../components/DashBoardComponents/WelcomeBox"; // Tuo WelcomeBox-komponentti
+import WelcomeBox from "../components/DashBoardComponents/WelcomeBox";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 type Note = {
   id: number;
@@ -33,16 +37,14 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
   const [notes, setNotes] = useState<Note[]>([]);
-  const [statistics, setStatistics] = useState({
-    totalNotes: 0,
-    notesThisMonth: 0,
-  });
+  const [statistics, setStatistics] = useState({ totalNotes: 0, notesThisMonth: 0 });
+  const [chartData, setChartData] = useState<{ labels: string[]; datasets: any[] }>({ labels: [], datasets: [] });
 
   const fetchNotes = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
       const activeNotes = response.data.filter((note: Note) => !note.isDeleted);
-      setNotes(activeNotes.reverse().slice(0, 3)); // Get the 3 most recent notes
+      setNotes(activeNotes.reverse().slice(0, 3));
 
       // Calculate statistics
       const currentMonth = new Date().getMonth();
@@ -50,9 +52,26 @@ const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
         (note: Note) => new Date(note.timestamp).getMonth() === currentMonth
       ).length;
 
-      setStatistics({
-        totalNotes: response.data.length,
-        notesThisMonth,
+      setStatistics({ totalNotes: response.data.length, notesThisMonth });
+
+      // Process data for the chart
+      const notesByDay: Record<string, number> = {};
+      activeNotes.forEach((note: Note) => {
+        const date = new Date(note.timestamp).toLocaleDateString();
+        notesByDay[date] = (notesByDay[date] || 0) + 1;
+      });
+
+      setChartData({
+        labels: Object.keys(notesByDay),
+        datasets: [
+          {
+            label: "Notes Created",
+            data: Object.values(notesByDay),
+            backgroundColor: "rgba(75, 192, 192, 0.6)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
       });
     } catch (error) {
       console.error("Error fetching notes", error);
@@ -69,16 +88,12 @@ const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
         Notes Dashboard
       </Typography>
 
-      {/* Lisää WelcomeBox-komponentti */}
       {currentUser && <WelcomeBox username={currentUser.username} />}
 
       <div className="dashboard-sections">
         {/* Statistics Section */}
         <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6" className="dashboard-heading">Statistics</Typography>
-          <Typography variant="body2" className="dashboard-description">
-            Quick insights into your notes activity
-          </Typography>
           <div className="dashboard-statsList">
             <div className="dashboard-statsRow">
               <MetricBox title="Total Notes" data={statistics.totalNotes.toString()} />
@@ -90,19 +105,14 @@ const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
         {/* Chart Section */}
         <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6" className="dashboard-chartTitle">Note Activity</Typography>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/016d696dcf2ad9f0d1db59e1c66efbb776c5b18075a2d07ed58fb537fcd72dce"
-            className="dashboard-chartImage"
-            alt="Notes activity chart"
-          />
+          <Bar data={chartData} />
         </div>
 
         {/* Calendar Section */}
         <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6">Calendar</Typography>
           <div className="dashboard-calendar-container">
-            <Calendar onChange={() => {}} value={new Date()} tileClassName={({ date }) => ""} />
+            <Calendar onChange={() => {}} value={new Date()} tileClassName={({ date }: { date: Date }) => ""} />
           </div>
         </div>
 
@@ -111,16 +121,10 @@ const Dashboard: React.FC<DashboardProps> = ({ currentUser, handleLogout }) => {
           <Typography variant="h6">Recent Notes</Typography>
           <div className="dashboard-notes-grid">
             {notes.map((note: Note) => (
-              <div
-                key={note.id}
-                className="dashboard-note-card"
-                style={{ backgroundColor: note.color }}
-              >
+              <div key={note.id} className="dashboard-note-card" style={{ backgroundColor: note.color }}>
                 <Typography variant="h6">{note.title}</Typography>
                 <Typography variant="body2">{note.text}</Typography>
-                <Typography variant="caption">
-                  {new Date(note.timestamp).toLocaleString()}
-                </Typography>
+                <Typography variant="caption">{new Date(note.timestamp).toLocaleString()}</Typography>
               </div>
             ))}
           </div>
