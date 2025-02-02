@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Calendar from "react-calendar";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../styles/Dashboard.css";
 import WelcomeBox from "../components/DashBoardComponents/WelcomeBox";
 
@@ -39,6 +40,7 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [statistics, setStatistics] = useState({ totalNotes: 0, notesThisMonth: 0 });
   const [chartData, setChartData] = useState<{ labels: string[]; datasets: any[] }>({ labels: [], datasets: [] });
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const fetchNotes = async () => {
     try {
@@ -92,7 +94,7 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
 
       <div className="dashboard-sections">
         {/* Statistics Section */}
-        <div className="dashboard-section dashboard-small-box">
+        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
           <Typography variant="h6" className="dashboard-heading">Statistics</Typography>
           <div className="dashboard-statsList">
             <div className="dashboard-statsRow">
@@ -100,10 +102,18 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
               <MetricBox title="This Month" data={statistics.notesThisMonth.toString()} />
             </div>
           </div>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={() => navigate("/information")}
+            style={{ position: "absolute", top: 10, right: 10 }}
+          >
+            Go to Information
+          </Button>
         </div>
 
         {/* Chart Section */}
-        <div className="dashboard-section dashboard-small-box">
+        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
           <Typography variant="h6" className="dashboard-chartTitle">Note Activity</Typography>
           <Bar 
             data={chartData} 
@@ -117,18 +127,34 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
               }
             }}
           />
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={() => navigate("/information")}
+            style={{ position: "absolute", top: 10, right: 10 }}
+          >
+            Go to Information
+          </Button>
         </div>
 
         {/* Calendar Section */}
-        <div className="dashboard-section dashboard-small-box">
+        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
           <Typography variant="h6">Calendar</Typography>
           <div className="dashboard-calendar-container">
             <Calendar onChange={() => {}} value={new Date()} tileClassName={({ date }: { date: Date }) => ""} />
           </div>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={() => navigate("/calendar")}
+            style={{ position: "absolute", top: 10, right: 10 }}
+          >
+            Go to Calendar
+          </Button>
         </div>
 
         {/* Recent Notes Section */}
-        <div className="dashboard-section dashboard-small-box">
+        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
           <Typography variant="h6">Recent Notes</Typography>
           <div className="dashboard-notes-grid">
             {notes.map((note: Note) => (
@@ -139,6 +165,14 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
               </div>
             ))}
           </div>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={() => navigate("/all-notes")}
+            style={{ position: "absolute", top: 10, right: 10 }}
+          >
+            Go to All Notes
+          </Button>
         </div>
       </div>
     </Container>
