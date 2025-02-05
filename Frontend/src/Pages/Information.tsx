@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AppBar, Box, Stack, Typography, Button, Paper, FormControl, Select, MenuItem } from "@mui/material";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 import axios from "axios";
+import "../styles/Information.css"; // Tuodaan CSS-tiedosto
 
 const Information = () => {
   const [stats, setStats] = useState<{
@@ -16,7 +17,7 @@ const Information = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/stats"); // Assuming your backend has an endpoint for stats
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes/stats`); 
       setStats(response.data);
     } catch (error) {
       console.error("Error fetching stats:", error);
@@ -39,7 +40,7 @@ const Information = () => {
 
       <Paper elevation={3} sx={{ padding: 3, maxWidth: 800, margin: "0 auto", backgroundColor: "#ffffff" }}>
         <Stack spacing={4} alignItems="center">
-          {/* Dropdown to Select Statistics */}
+          {/* Pudotusvalikko tilastojen valitsemiseen */}
           <FormControl fullWidth>
             <Select
               value={selectedStat}
@@ -51,14 +52,14 @@ const Information = () => {
             </Select>
           </FormControl>
 
-          {/* Display Total Notes */}
+          {/* Näytä kokonaismäärä muistiinpanoja */}
           {selectedStat === "totalNotes" && (
             <Typography variant="h6" sx={{ color: "#555" }}>
               Total Notes: <strong>{stats.totalNotes}</strong>
             </Typography>
           )}
 
-          {/* Display Color Statistics */}
+          {/* Näytä värijakauma */}
           {selectedStat === "colorStats" && (
             stats.colorStats && stats.colorStats.length > 0 ? (
               <PieChart width={500} height={300}>
@@ -85,7 +86,7 @@ const Information = () => {
             )
           )}
 
-          {/* Refresh Button */}
+          {/* Päivitä tilastot -nappi */}
           <Button
             variant="contained"
             sx={{ backgroundColor: "#4caf50", ":hover": { backgroundColor: "#388e3c" } }}

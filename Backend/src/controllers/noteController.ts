@@ -115,6 +115,44 @@ export const permanentDeleteNote = async (req: Request, res: Response) => {
   res.status(204).send();
 };
 
+export const getStats = async (req: Request, res: Response) => {
+  try {
+    // Hae kaikki muistiinpanot
+    const { data: notes, error: notesError } = await supabase
+      .from('notes')
+      .select('*')
+      .eq('isDeleted', false);
+
+    if (notesError) {
+      return res.status(500).json({ error: notesError.message });
+    }
+
+    // Laske muistiinpanojen kokonaismäärä
+    const totalNotes = notes.length;
+
+    // Laske värien jakauma
+    const colorStats = notes.reduce((acc, note) => {
+      const color = note.color || '#1976d2'; // Oletusväri, jos väriä ei ole määritelty
+      acc[color] = (acc[color] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Muotoile väritilastot
+    const formattedColorStats = Object.keys(colorStats).map(color => ({
+      color,
+      colorCount: colorStats[color],
+    }));
+
+    res.json({
+      totalNotes,
+      colorStats: formattedColorStats,
+    });
+  } catch (error) {
+    console.error('Error fetching stats:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 /* // Old code with sqlite */
 
 
