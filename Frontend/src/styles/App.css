@@ -1,0 +1,34 @@
+/* Loader-overlay peittää koko näytön ja pitää taustan näkyvillä */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2); /* Läpinäkyvämpi tausta */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    pointer-events: none; /* Estää taustan elementtien klikkaamisen */
+}
+
+  
+  /* Pyörivä kuvake */
+  .loader-icon {
+    font-size: 4rem; /* Kuvakkeen koko */
+    color: #007bff; /* Kuvakkeen väri */
+    animation: spin 1s linear infinite; /* Pyörimisanimaatio 3 sekuntia */
+  }
+  
+  /* Pyörimisanimaatio */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
