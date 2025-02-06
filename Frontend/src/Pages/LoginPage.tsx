@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Snackbar, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginPageComponents/LoginForm";
 import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLink";
@@ -10,6 +10,8 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -28,12 +30,17 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
         navigate("/profile");
       }
     } catch (error: any) {
-      alert(error.response?.data?.error || "Invalid credentials");
+      setError(error.response?.data?.error || "Invalid credentials");
+      setOpenSnackbar(true);
     }
   };
 
   const navigateToCreateAccount = () => {
     navigate("/createprofile");
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -51,6 +58,18 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
         />
         <CreateAccountLink navigateToCreateAccount={navigateToCreateAccount} />
       </Box>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        className="custom-snackbar"
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Keskitetty Snackbar
+      >
+        <Alert onClose={handleCloseSnackbar} severity="error" className="custom-alert">
+          {error}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

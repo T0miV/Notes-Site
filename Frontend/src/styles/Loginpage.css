@@ -134,3 +134,47 @@
     font-size: 0.9rem;
   }
 }
+
+/* Snackbar styles */
+.custom-snackbar {
+  position: fixed;
+  top: 20px; /* Asetetaan kiinteästi yläreunaan */
+  left: 50%;
+  transform: translateX(-50%); /* Keskitetään vaakasuunnassa */
+  z-index: 2000;
+  width: 90%;
+  max-width: 400px;
+}
+
+
+
+
+.custom-snackbar .MuiSnackbarContent-root {
+  background-color: #ff4444; /* Taustaväri */
+  color: #fff; /* Tekstin väri */
+  border-radius: 8px; /* Pyöristetyt kulmat */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Varjostus */
+}
+
+.custom-snackbar .MuiSnackbarContent-message {
+  font-size: 16px; /* Tekstin koko */
+}
+
+.custom-snackbar .MuiSnackbarContent-action {
+  padding-left: 16px;
+}
+
+/* Alert styles */
+.custom-alert {
+  background-color: #ff4444; /* Taustaväri */
+  color: #fff; /* Tekstin väri */
+  border-radius: 8px; /* Pyöristetyt kulmat */
+}
+
+.custom-alert .MuiAlert-icon {
+  color: #fff; /* Kuvakkeen väri */
+}
+
+.custom-alert .MuiAlert-message {
+  font-size: 16px; /* Tekstin koko */
+}
