@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Typography, Box, Snackbar, Alert } from "@mui/material";
+import { Container, Typography, Box, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginPageComponents/LoginForm";
 import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLink";
@@ -10,7 +10,7 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Virheilmoitus
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleLogin = async () => {
@@ -30,7 +30,7 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
         navigate("/profile");
       }
     } catch (error: any) {
-      setError(error.response?.data?.error || "Invalid credentials");
+      setErrorMessage(error.response?.data?.error || "Invalid credentials");
       setOpenSnackbar(true);
     }
   };
@@ -59,17 +59,8 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
         <CreateAccountLink navigateToCreateAccount={navigateToCreateAccount} />
       </Box>
 
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={4000}
-        onClose={handleCloseSnackbar}
-        className="custom-snackbar"
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Keskitetty Snackbar
-      >
-        <Alert onClose={handleCloseSnackbar} severity="error" className="custom-alert">
-          {error}
-        </Alert>
-      </Snackbar>
+      {/* Error-ilmoitus */}
+      {errorMessage && <Alert severity="error" className="error-alert">{errorMessage}</Alert>}
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CreateAccountForm from '../components/CreateAccountComponents/AccountForm';
 import '../styles/CreateAccountPage.css';
@@ -9,16 +9,17 @@ const CreateAccountPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repassword, setRePassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const createAccount = async () => {
     try {
       // Validointi
       if (!username || !password || !repassword) {
-        alert('Username, password, and re-entered password cannot be empty');
+        setErrorMessage('Username, password, and re-entered password cannot be empty');
         return;
       }
       if (password !== repassword) {
-        alert('Passwords do not match');
+        setErrorMessage('Passwords do not match');
         return;
       }
 
@@ -35,10 +36,10 @@ const CreateAccountPage = () => {
         navigate('/login');
       } else {
         const errorMessage = (await response.json())?.message || 'Failed to create account';
-        throw new Error(errorMessage);
+        setErrorMessage(errorMessage);
       }
     } catch (error: any) {
-      alert(error.message || 'An error occurred');
+      setErrorMessage(error.message || 'An error occurred');
     }
   };
 
@@ -47,6 +48,10 @@ const CreateAccountPage = () => {
       <Typography variant="h4" className="create-account-title" gutterBottom>
         Create Account
       </Typography>
+
+      {/* Error-ilmoitus */}
+      {errorMessage && <Alert severity="error" className="error-alert">{errorMessage}</Alert>}
+
       <div className="create-account-form">
         <CreateAccountForm
           username={username}
