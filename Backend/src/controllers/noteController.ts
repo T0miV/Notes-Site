@@ -35,14 +35,17 @@ export const getDeletedNotes = async (req: Request, res: Response) => {
 };
 
 // Add a new note to database
+// Lisää uusi muistiinpano tietokantaan
 export const addNote = async (req: Request, res: Response) => {
   const userId = (req as any).user.id;
-  const { title, text, color = '#1976d2' } = req.body as Omit<Note, 'id' | 'timestamp'>;
+  const { title, text, color = '#1976d2', isBold, isItalic, isUnderline } = 
+    req.body as Omit<Note, 'id' | 'timestamp' | 'user_id'>;
+
   const timestamp = new Date().toISOString();
 
   const { data, error } = await supabase
     .from('notes')
-    .insert([{ title, text, timestamp, color, user_id: userId }])
+    .insert([{ title, text, timestamp, color, isBold, isItalic, isUnderline, user_id: userId }])
     .select();
 
   if (error) {
@@ -51,14 +54,16 @@ export const addNote = async (req: Request, res: Response) => {
   res.status(201).json(data[0]);
 };
 
-// Update a note in database
+// Päivittää olemassa olevan muistiinpanon
 export const updateNote = async (req: Request, res: Response) => {
-  const { title, text, color } = req.body as Omit<Note, 'id' | 'timestamp'>;
+  const { title, text, color, isBold, isItalic, isUnderline } = 
+    req.body as Omit<Note, 'id' | 'timestamp' | 'user_id'>;
+  
   const noteId = req.params.id;
 
   const { data, error } = await supabase
     .from('notes')
-    .update({ title, text, color })
+    .update({ title, text, color, isBold, isItalic, isUnderline })
     .eq('id', noteId)
     .select();
 
@@ -67,6 +72,7 @@ export const updateNote = async (req: Request, res: Response) => {
   }
   res.json(data[0]);
 };
+
 
 // Mark a note as deleted, by changing isDeleted to true
 export const deleteNote = async (req: Request, res: Response) => {

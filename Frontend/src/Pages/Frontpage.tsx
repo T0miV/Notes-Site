@@ -11,7 +11,9 @@ type Note = {
   text: string;
   timestamp: string;
   color: string;
-  isEditing: boolean;
+  isBold: boolean;
+  isItalic: boolean;
+  isUnderline: boolean;
 };
 
 const Frontpage = () => {
@@ -27,12 +29,11 @@ const Frontpage = () => {
       console.error("Error fetching notes", error);
     }
   };
-  
-  
-  const handleAddNote = async (title: string, text: string, color: string) => {
+
+  const handleAddNote = async (title: string, text: string, color: string, isBold: boolean, isItalic: boolean, isUnderline: boolean) => {
     if (title.trim() && text.trim()) {
       const timestamp = new Date().toISOString();
-      const newNote = { title, text, timestamp, color };
+      const newNote = { title, text, timestamp, color, isBold, isItalic, isUnderline };
 
       try {
         await axios.post(`${process.env.REACT_APP_API_URL}/notes`, newNote);
@@ -55,7 +56,7 @@ const Frontpage = () => {
   const handleDeleteNote = async (id: number) => {
     try {
       await axios.put(`${process.env.REACT_APP_API_URL}/notes/delete/${id}`);
-      fetchNotes(); // Update the notes list
+      fetchNotes();
     } catch (error) {
       console.error("Error deleting note", error);
     }
@@ -70,7 +71,6 @@ const Frontpage = () => {
   );
 
   return (
-    
     <div className="frontpage-container">
       <h1 className="frontpage-title">Write Notes</h1>
       <NoteInput onAddNote={handleAddNote} />

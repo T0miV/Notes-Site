@@ -4,4 +4,7 @@ export interface Note {
   text: string;
   color: string;
   timestamp: string;
+  isBold: boolean;
+  isItalic: boolean;
+  isUnderline: boolean;
 }

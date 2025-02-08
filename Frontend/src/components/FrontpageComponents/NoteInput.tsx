@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface NoteInputProps {
-  onAddNote: (title: string, text: string, color: string) => void;
+  onAddNote: (title: string, text: string, color: string, isBold: boolean, isItalic: boolean, isUnderline: boolean) => void;
 }
 
 const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
@@ -13,10 +13,13 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
   const [isUnderline, setIsUnderline] = useState(false);
 
   const handleAddNote = () => {
-    onAddNote(title, text, color);
+    onAddNote(title, text, color, isBold, isItalic, isUnderline);
     setTitle('');
     setText('');
     setColor('#1976d2');
+    setIsBold(false);
+    setIsItalic(false);
+    setIsUnderline(false);
   };
 
   return (
@@ -40,12 +43,10 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
         }}
       />
       <div className="text-toolbar">
-      <button onClick={() => setIsUnderline(!isUnderline)} className="toolbar-button">U</button>
-      <button onClick={() => setIsItalic(!isItalic)} className="toolbar-button">I</button>
-      <button onClick={() => setIsBold(!isBold)} className="toolbar-button">B</button>
+        <button onClick={() => setIsBold(!isBold)} className={`toolbar-button ${isBold ? 'active' : ''}`}>B</button>
+        <button onClick={() => setIsItalic(!isItalic)} className={`toolbar-button ${isItalic ? 'active' : ''}`}>I</button>
+        <button onClick={() => setIsUnderline(!isUnderline)} className={`toolbar-button ${isUnderline ? 'active' : ''}`}>U</button>
       </div>
-      
-      {/* Container for the color picker and save button */}
       <div className="button-container">
         <input
           type="color"
