@@ -16,10 +16,11 @@ const DeletedNotesPage = () => {
   // Fetch deleted notes
   const fetchDeletedNotes = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes/deleted`);
-      setDeletedNotes(response.data.reverse());
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
+      // Sort notes by newest first
+      setDeletedNotes(response.data.sort((a: DeletedNote, b: DeletedNote) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()));
     } catch (error) {
-      console.error("Error fetching deleted notes", error);
+      console.error("Error fetching notes", error);
     }
   };
 
