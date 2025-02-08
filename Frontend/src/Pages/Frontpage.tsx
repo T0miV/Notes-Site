@@ -21,12 +21,14 @@ const Frontpage = () => {
   const fetchNotes = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
-      setNotes(response.data.reverse());
+      // Sort notes by newest first
+      setNotes(response.data.sort((a: Note, b: Note) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()));
     } catch (error) {
       console.error("Error fetching notes", error);
     }
   };
-
+  
+  
   const handleAddNote = async (title: string, text: string, color: string) => {
     if (title.trim() && text.trim()) {
       const timestamp = new Date().toISOString();
