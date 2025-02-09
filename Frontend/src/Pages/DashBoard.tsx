@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import { Container, Typography, Button } from "@mui/material";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
 import WelcomeBox from "../components/DashBoardComponents/WelcomeBox";
 
@@ -38,25 +38,32 @@ interface DashboardProps {
 
 const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [allNotes, setAllNotes] = useState<Note[]>([]); // Kaikki aktiiviset muistiinpanot
   const [statistics, setStatistics] = useState({ totalNotes: 0, notesThisMonth: 0 });
   const [chartData, setChartData] = useState<{ labels: string[]; datasets: any[] }>({ labels: [], datasets: [] });
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const fetchNotes = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes`);
       const activeNotes = response.data.filter((note: Note) => !note.isDeleted);
-      setNotes(activeNotes.reverse().slice(0, 3));
+      
+      setAllNotes(activeNotes); // Tallennetaan kaikki aktiiviset muistiinpanot
+      
+      const sortedNotes = activeNotes.sort((a: Note, b: Note) => 
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      );
+      
+      setNotes(sortedNotes.slice(0, 3)); // Dashboardille vain 3 uusinta
 
-      // Calculate statistics
       const currentMonth = new Date().getMonth();
       const notesThisMonth = activeNotes.filter(
         (note: Note) => new Date(note.timestamp).getMonth() === currentMonth
       ).length;
+  
+      setStatistics({ totalNotes: activeNotes.length, notesThisMonth });
 
-      setStatistics({ totalNotes: response.data.length, notesThisMonth });
-
-      // Process data for the chart
+      // Muistiinpanot päivittäin
       const notesByDay: Record<string, number> = {};
       activeNotes.forEach((note: Note) => {
         const date = new Date(note.timestamp).toLocaleDateString();
@@ -86,15 +93,15 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
 
   return (
     <Container maxWidth="lg" className="dashboard-container">
+      
       <Typography variant="h4" className="dashboard-title" gutterBottom>
         Notes Dashboard
       </Typography>
-
       {currentUser && <WelcomeBox username={currentUser.username} />}
 
       <div className="dashboard-sections">
         {/* Statistics Section */}
-        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
+        <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6" className="dashboard-heading">Statistics</Typography>
           <div className="dashboard-statsList">
             <div className="dashboard-statsRow">
@@ -108,40 +115,36 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
             onClick={() => navigate("/information")}
             style={{ position: "absolute", top: 10, right: 10 }}
           >
-            Go to Information
+            More statistics
           </Button>
         </div>
 
         {/* Chart Section */}
-        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
+        <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6" className="dashboard-chartTitle">Note Activity</Typography>
           <Bar 
             data={chartData} 
             options={{
               scales: {
-                y: {
-                  ticks: {
-                    precision: 0 // Poistaa desimaalit pystyakselilta
-                  }
-                }
+                y: { ticks: { precision: 0 } }
               }
             }}
           />
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={() => navigate("/information")}
-            style={{ position: "absolute", top: 10, right: 10 }}
-          >
-            Go to Information
-          </Button>
         </div>
 
         {/* Calendar Section */}
-        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
+        <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6">Calendar</Typography>
           <div className="dashboard-calendar-container">
-            <Calendar onChange={() => {}} value={new Date()} tileClassName={({ date }: { date: Date }) => ""} />
+            <Calendar 
+              onChange={() => {}} 
+              value={new Date()} 
+              tileClassName={({ date }: { date: Date }) =>
+                allNotes.some((note) => new Date(note.timestamp).toDateString() === date.toDateString()) 
+                  ? "tile-with-note" 
+                  : ""
+              }
+            />
           </div>
           <Button 
             variant="contained" 
@@ -154,7 +157,7 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
         </div>
 
         {/* Recent Notes Section */}
-        <div className="dashboard-section dashboard-small-box" style={{ position: "relative" }}>
+        <div className="dashboard-section dashboard-small-box">
           <Typography variant="h6">Recent Notes</Typography>
           <div className="dashboard-notes-grid">
             {notes.map((note: Note) => (
@@ -171,7 +174,7 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
             onClick={() => navigate("/all-notes")}
             style={{ position: "absolute", top: 10, right: 10 }}
           >
-            Go to All Notes
+            View all notes
           </Button>
         </div>
       </div>

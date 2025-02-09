@@ -80,7 +80,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 //Pasword change function
 export const changePassword = async (req: Request, res: Response) => {
-  console.log('Request Body:', req.body); // Log the request body
+  
   const { oldPassword, newPassword } = req.body;
   const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT:stä
 
