@@ -68,7 +68,6 @@
 
 /* Recent Notes section (smaller and positioned in the bottom right) */
 .dashboard-recent-notes-section {
-  background-color: #f9fbe7; /* Light green background */
   padding: 8px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
