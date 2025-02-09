@@ -78,6 +78,49 @@ export const getAllUsers = async (req: Request, res: Response) => {
 };
 
 
+//Pasword change function
+export const changePassword = async (req: Request, res: Response) => {
+  console.log('Request Body:', req.body); // Log the request body
+  const { oldPassword, newPassword } = req.body;
+  const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT:stä
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ error: 'Old and new passwords are required' });
+  }
+
+  // Haetaan käyttäjä Supabasesta
+  const { data: user, error } = await supabase
+    .from('users')
+    .select('password')
+    .eq('id', userId)
+    .single();
+
+  if (error || !user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // Tarkistetaan, vastaako vanha salasana tietokannassa olevaa hashia
+  const isMatch = await bcrypt.compare(oldPassword, user.password);
+  if (!isMatch) {
+    return res.status(400).json({ error: 'Old password is incorrect' });
+  }
+
+  // Hashataan uusi salasana
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  // Päivitetään salasana tietokantaan
+  const { error: updateError } = await supabase
+    .from('users')
+    .update({ password: hashedPassword })
+    .eq('id', userId);
+
+  if (updateError) {
+    return res.status(500).json({ error: 'Failed to update password' });
+  }
+
+  res.status(200).json({ message: 'Password updated successfully' });
+};
+
 // import { Request, Response } from 'express';
 // import sqlite3 from 'sqlite3';
 // import bcrypt from 'bcryptjs';

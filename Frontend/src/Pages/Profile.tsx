@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../styles/Profile.css';
+import '../styles/Profile.css'; // Import the CSS file for styles
 
 interface ProfileProps {
   currentUser: { username: string; role: number } | null;
@@ -24,25 +24,41 @@ const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
     navigate("/login");
   };
 
+  // Password change handler
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage(null);
-    setError(null);
-
+    setMessage(null); // Reset messages
+    setError(null); // Reset errors
+  
     if (!oldPassword || !newPassword) {
       setError("Both old and new passwords are required.");
       return;
     }
-
+  
+    const token = localStorage.getItem("authToken"); // Retrieve token from local storage
+    if (!token) {
+      setError("You need to be logged in to change the password.");
+      return;
+    }
+  
     try {
-      const response = await axios.put(
-        "/api/user/update-password",
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/users/update-password`,
         { oldPassword, newPassword },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        { 
+          headers: { 
+            'Authorization': `Bearer ${token}`  // Send token in header
+          } 
+        }
       );
-      setMessage(response.data.message);
+      
+      setMessage(response.data.message); // Display success message
     } catch (err: any) {
-      setError(err.response?.data?.error || "Failed to update password");
+      if (err.response?.status === 401) {
+        setError("Your session has expired. Please login again."); // Handle expired session
+      } else {
+        setError(err.response?.data?.error || "Failed to update password"); // Handle other errors
+      }
     }
   };
 
@@ -54,7 +70,7 @@ const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
             <h1 className="profile-title">Welcome, {currentUser.username}!</h1>
             <p className="profile-role">Role: {currentUser.role === 1 ? "Admin" : "User"}</p>
 
-            {/* Password Change Form */}
+            {/* Password change form */}
             <form onSubmit={handlePasswordChange}>
               <div className="input-group">
                 <label htmlFor="oldPassword">Old Password</label>
