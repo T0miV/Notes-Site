@@ -98,7 +98,7 @@ const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
             {message && <p className="success-message">{message}</p>}
             {error && <p className="error-message">{error}</p>}
 
-            <button onClick={logout} className="logout-button">
+            <button onClick={logout} className="plogout-button">
               Logout
             </button>
           </>
