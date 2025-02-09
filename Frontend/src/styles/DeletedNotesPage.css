@@ -183,4 +183,21 @@
       font-size: 0.8rem; /* Vielä pienemmät napit */
     }
   }
+
+  .custom-alert {
+    outline: black solid 2px;
+    width: 80%;         /* Leveämpi ilmoitus */
+    max-width: 600px;   /* Maksimileveys */
+    padding: 20px;      /* Lisää tilaa ympärille */
+    font-size: 18px;    /* Suurempi teksti */
+    text-align: center; /* Teksti keskelle vaakasuunnassa */
+    margin: 10px auto;  /* Keskitetään sivulla */
+    border-radius: 8px; /* Pyöristetyt reunat */
+    
+    /* ✅ Tekstin keskitys myös pystysuunnassa */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   
