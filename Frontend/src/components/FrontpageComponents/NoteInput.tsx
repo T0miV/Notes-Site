@@ -12,6 +12,16 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
 
+  const commonColors = [
+    "#3388FF", // sininen
+    "#00FFFF", // cyan
+    "#33FF57", // vihreä
+    "#FFEA00", // keltainen
+    "#FF8833", // oranssi
+    "#FF2800", // punainen
+    "#808080"  // harmaa
+  ];
+
   const handleAddNote = () => {
     onAddNote(title, text, color, isBold, isItalic, isUnderline);
     setTitle('');
@@ -43,19 +53,31 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
         }}
       />
       <div className="text-toolbar">
-        <button onClick={() => setIsBold(!isBold)} className={`toolbar-button ${isBold ? 'active' : ''}`}>B</button>
-        <button onClick={() => setIsItalic(!isItalic)} className={`toolbar-button ${isItalic ? 'active' : ''}`}>I</button>
         <button onClick={() => setIsUnderline(!isUnderline)} className={`toolbar-button ${isUnderline ? 'active' : ''}`}>U</button>
+        <button onClick={() => setIsItalic(!isItalic)} className={`toolbar-button ${isItalic ? 'active' : ''}`}>I</button>
+        <button onClick={() => setIsBold(!isBold)} className={`toolbar-button ${isBold ? 'active' : ''}`}>B</button>
+        
       </div>
-      <div className="button-container">
+      
+      {/* Värivalitsin */}
+      <div className="color-picker-container">
+        {commonColors.map((col) => (
+          <button
+            key={col}
+            className={`color-option ${color === col ? "selected" : ""}`}
+            style={{ backgroundColor: col }}
+            onClick={() => setColor(col)}
+          />
+        ))}
         <input
           type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
           className="color-picker"
         />
-        <button onClick={handleAddNote} className="save-button">Save</button>
       </div>
+
+      <button onClick={handleAddNote} className="save-button">Save</button>
     </div>
   );
 };

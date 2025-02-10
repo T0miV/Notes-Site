@@ -5,7 +5,7 @@
   align-items: center;
   padding: 20px;
   background-color: #f7fafc;
-  font-family: 'Arial', sans-serif; /* Säilytetään aiempi fontti */
+  font-family: 'Arial', sans-serif;
 }
 
 .frontpage-title {
@@ -13,6 +13,7 @@
   font-weight: 600;
   margin-bottom: 20px;
   color: #333;
+  text-align: center;
 }
 
 /* Note Input */
@@ -21,7 +22,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  min-height: 250px; /* Korjattu korkeus */
+  min-height: 250px;
   margin-bottom: 20px;
   background-color: beige;
   outline: black solid 2px;
@@ -30,27 +31,23 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.note-input {
-  width: calc(100% - 20px); /* Muutettu suhteelliseksi */
+.note-input{
+  width: 880px;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 10px;
 }
-
-.note-input-edit
-{
-  width: 270px;
+.note-textarea {
+  width: 880px;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 10px;
-  min-height: 40px;
-  resize: vertical;
-
 }
+.note-input-edit,
 .note-textarea-edit {
   width: 270px;
   padding: 10px;
@@ -58,19 +55,21 @@
   border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 10px;
-  min-height: 150px;
-  resize: vertical;
 }
 
 .note-textarea {
-  width: calc(100% - 20px); /* Mukautettu leveys */
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  width: 880px;
   min-height: 200px;
   resize: vertical;
+}
+
+.note-input-edit .note-textarea-edit {
+  resize: vertical;
+ 
+}
+.note-textarea-edit {
+  resize: vertical;
+  min-height: 85px;
 }
 
 .text-toolbar {
@@ -93,22 +92,42 @@
   background-color: #cbd5e1;
 }
 
-.button-container {
+.color-picker-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.color-option {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s, border 0.2s;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.color-option.selected {
+  border: 2px solid black;
 }
 
 .color-picker {
-  border: none;
-  cursor: pointer;
   height: 30px;
   width: 30px;
   padding: 0;
+  border: none;
+  cursor: pointer;
 }
 
 .save-button {
-  outline: black solid 1px;
+  margin-left: 760px;
+  height: 50px;
+  width: 120px;
   background-color: #16a34a;
   color: white;
   padding: 10px 20px;
@@ -126,21 +145,20 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  margin-top: 10px;
   width: 100%;
   max-width: 1200px;
 }
 
 .note-card {
   outline: black solid 2px;
-  min-height: 280px; /* Parannettu minimikorkeus */
+  min-height: 280px;
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Jakaa sisällön */
+  justify-content: space-between;
   transition: transform 0.3s;
 }
 
@@ -167,7 +185,7 @@
 }
 
 .note-buttons {
-  margin-top: auto; /* Painikkeet siirtyvät alaosaan */
+  margin-top: 24px;
   display: flex;
   justify-content: space-between;
 }
@@ -208,8 +226,8 @@
 }
 
 .reset-button {
-  background-color: #f44336; /* Punainen väri */
-  color: white; /* Korjattu kontrasti */
+  background-color: #f44336;
+  color: white;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -218,4 +236,78 @@
 
 .reset-button:hover {
   background-color: #e11d48;
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+  .frontpage-container {
+    padding: 10px;
+  }
+
+  .frontpage-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .note-input-container {
+    padding: 15px;
+  }
+
+  .note-input,
+  .note-textarea {
+    font-size: 0.9rem;
+  }
+
+  .save-button {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .note-card {
+    min-height: 250px;
+    padding: 15px;
+  }
+
+  .search-box-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .reset-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Smaller Screens (e.g., mobile devices) */
+@media (max-width: 480px) {
+  .note-input,
+  .note-textarea {
+    font-size: 0.85rem;
+  }
+
+  .toolbar-button {
+    font-size: 1rem;
+    padding: 5px 8px;
+  }
+
+  .color-option {
+    width: 28px;
+    height: 28px;
+  }
+
+  .color-picker {
+    height: 28px;
+    width: 28px;
+  }
+
+  .save-button {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
 }
