@@ -31,14 +31,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.note-input{
-  width: 880px;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
+.note-input,
 .note-textarea {
   width: 880px;
   padding: 10px;
@@ -47,6 +40,12 @@
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
+.note-textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
 .note-input-edit,
 .note-textarea-edit {
   width: 270px;
@@ -57,19 +56,9 @@
   margin-bottom: 10px;
 }
 
-.note-textarea {
-  width: 880px;
-  min-height: 200px;
-  resize: vertical;
-}
-
-.note-input-edit .note-textarea-edit {
-  resize: vertical;
- 
-}
 .note-textarea-edit {
-  resize: vertical;
   min-height: 85px;
+  resize: vertical;
 }
 
 .text-toolbar {
@@ -246,49 +235,31 @@
 
   .frontpage-title {
     font-size: 1.5rem;
-    text-align: center;
   }
 
   .note-input-container {
+    max-width: 100%;
     padding: 15px;
   }
 
   .note-input,
   .note-textarea {
+    width: 100%;
     font-size: 0.9rem;
   }
 
-  .save-button {
-    width: 100%;
-    padding: 12px 0;
-  }
-
-  .notes-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .note-card {
-    min-height: 250px;
-    padding: 15px;
-  }
-
-  .search-box-container {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .reset-button {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
-/* Smaller Screens (e.g., mobile devices) */
-@media (max-width: 480px) {
-  .note-input,
   .note-textarea {
-    font-size: 0.85rem;
+    min-height: 150px;
+  }
+
+  .note-input-edit,
+  .note-textarea-edit {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .text-toolbar {
+    flex-wrap: wrap;
   }
 
   .toolbar-button {
@@ -307,7 +278,92 @@
   }
 
   .save-button {
-    padding: 10px 0;
+    width: 100%;
+    margin-left: 0;
+    height: 40px;
     font-size: 1rem;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .note-card {
+    min-height: 200px;
+    padding: 15px;
+  }
+
+  .note-title {
+    font-size: 1.1rem;
+  }
+
+  .note-text {
+    font-size: 0.9rem;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .search-box-container {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .reset-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .frontpage-title {
+    font-size: 1.25rem;
+  }
+
+  .note-input,
+  .note-textarea {
+    font-size: 0.85rem;
+  }
+
+  .toolbar-button {
+    font-size: 0.9rem;
+  }
+
+  .color-option {
+    width: 24px;
+    height: 24px;
+  }
+
+  .color-picker {
+    height: 24px;
+    width: 24px;
+  }
+
+  .save-button {
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .note-card {
+    min-height: 180px;
+    padding: 10px;
+  }
+
+  .note-title {
+    font-size: 1rem;
+  }
+
+  .note-text {
+    font-size: 0.85rem;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
   }
 }
