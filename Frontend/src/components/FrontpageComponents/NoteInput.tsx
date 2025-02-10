@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 interface NoteInputProps {
@@ -75,6 +76,7 @@ const NoteInput: React.FC<NoteInputProps> = ({ onAddNote }) => {
           onChange={(e) => setColor(e.target.value)}
           className="color-picker"
         />
+        <Typography>Custom color</Typography>
       </div>
 
       <button onClick={handleAddNote} className="save-button">Save</button>
