@@ -1,11 +1,12 @@
 import React from 'react';
-import { Paper, List, ListItemButton, ListItemIcon, ListItemText, IconButton } from '@mui/material';
+import { Paper, List, ListItemButton, ListItemIcon, ListItemText, IconButton, useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import NoteIcon from '@mui/icons-material/Note';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTheme } from '@mui/material/styles';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -14,6 +15,8 @@ interface SidebarProps {
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Alle 600px
 
   const menuItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
@@ -24,48 +27,52 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    onClose(); // Close the sidebar after navigating
+    onClose(); // Sulkee sivupalkin navigoinnin jälkeen
   };
 
-  if (!isOpen) return null; // If sidebar is not open, return null
+  if (!isOpen) return null; // Piilottaa sivupalkin, jos se ei ole auki
 
   return (
     <Paper
       elevation={3}
       sx={{
-        width: 240,
-        height: 700,
+        width: isMobile ? '100%' : 240, // Mobiilissa koko näytön leveys
+        height: isMobile ? '100%' : 540, // Mobiilissa koko näytön korkeus
         outline: '3px solid black',
-        position: 'absolute',
-        left: '10px',
-        top: '10px',
+        position: isMobile ? 'fixed' : 'absolute',
+        left: isMobile ? 0 : '10px',
+        top: isMobile ? 0 : '10px',
         backgroundColor: 'background.paper',
-        zIndex: 1200, // Ensures that the sidebar is on top of other elements
+        zIndex: 1300,
+        transition: 'transform 0.3s ease-in-out',
+        paddingTop: isMobile ? '50px' : '20px', // Lisää tilaa ylös työpöydällä
       }}
     >
+      {/* Sulkupainike */}
       <IconButton
-        onClick={onClose} // Close sidebar on click
+        onClick={onClose}
         sx={{
           position: 'absolute',
           top: '10px',
           right: '10px',
-          zIndex: 1300, // Higher z-index than the sidebar to ensure it is clickable
+          zIndex: 1400,
           color: 'red',
         }}
       >
         <CloseIcon />
       </IconButton>
+
+      {/* Lista navigointikohteista */}
       <List>
-        {menuItems.map((item) => (
+        {menuItems.map((item, index) => (
           <ListItemButton
             key={item.text}
             onClick={() => handleNavigation(item.path)}
             sx={{
-              marginTop: '60px',
-              padding: '8px 16px',
-              '&:hover': {
-                backgroundColor: 'action.hover',
-              },
+              marginTop: "24px",
+              padding: '20px 23px',
+              '&:hover': { backgroundColor: 'action.hover' },
+              marginBottom: isMobile ? '8px' : '20px', // Enemmän väliä työpöydälle
             }}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
