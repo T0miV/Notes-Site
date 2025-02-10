@@ -16,6 +16,9 @@ type Note = {
   text: string;
   timestamp: string;
   color: string;
+  isBold: boolean;
+  isItalic: boolean;
+  isUnderline: boolean;
   isDeleted?: number;
 };
 
@@ -162,9 +165,29 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
           <div className="dashboard-notes-grid">
             {notes.map((note: Note) => (
               <div key={note.id} className="dashboard-note-card" style={{ backgroundColor: note.color }}>
-                <Typography variant="h6">{note.title}</Typography>
-                <Typography variant="body2">{note.text}</Typography>
-                <Typography variant="caption">{new Date(note.timestamp).toLocaleString()}</Typography>
+                <Typography 
+                  variant="h6" 
+                  style={{ 
+                    fontWeight: note.isBold ? "bold" : "normal",
+                    fontStyle: note.isItalic ? "italic" : "normal",
+                    textDecoration: note.isUnderline ? "underline" : "none",
+                  }}
+                >
+                  {note.title}
+                </Typography>
+                <Typography 
+                  variant="body2" 
+                  style={{ 
+                    fontWeight: note.isBold ? "bold" : "normal",
+                    fontStyle: note.isItalic ? "italic" : "normal",
+                    textDecoration: note.isUnderline ? "underline" : "none",
+                  }}
+                >
+                  {note.text}
+                </Typography>
+                <Typography variant="caption">
+                  {new Date(note.timestamp).toLocaleString()}
+                </Typography>
               </div>
             ))}
           </div>
