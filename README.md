@@ -63,9 +63,9 @@ Development (frontend/.env.local):
 
 Install Dependencies & Start Frontend
 
--cd frontend
--npm install
--npm start
+    cd frontend
+    npm install
+    npm start
 
 The frontend will run on port 3000 by default.
 ### 🛠 Features
