@@ -63,6 +63,7 @@ npm start
 The frontend runs on port 3000 by default.
 🛠 Features
 
+
 ✅ User authentication (Register, Login, Logout)
 ✅ Password reset functionality
 ✅ Create, edit, delete, and restore notes
