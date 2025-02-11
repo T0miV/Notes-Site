@@ -7,7 +7,7 @@ import {
   getDeletedNotes,
   restoreNote,
   permanentDeleteNote,
-  getStats
+  
 } from '../controllers/noteController';
 import authenticate from '../middleware/authenticate';
 
@@ -21,6 +21,6 @@ router.put('/delete/:id', authenticate, deleteNote); // Move note to trash
 router.get('/deleted', authenticate, getDeletedNotes); // Get deleted notes on "deleted notes page"
 router.put('/restore/:id', authenticate, restoreNote); // Restore a deleted note back to the main list
 router.delete('/:id', authenticate, permanentDeleteNote); // Permanently delete a note from database
-router.get('/stats', authenticate, getStats); // Get statistics about notes
+
 
 export default router;
