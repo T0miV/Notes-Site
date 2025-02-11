@@ -35,23 +35,24 @@ NotesApp is a note-taking application that allows users to create, edit, delete,
 Create a `.env` file in the `backend` directory and add the following variables:
 
 
-JWT_SECRET=your_jwt_secret
-SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_key
+    JWT_SECRET=your_jwt_secret
+    SUPABASE_URL=your_supabase_url
+    SUPABASE_KEY=your_supabase_key
 
 Install Dependencies & Start Backend
 
-cd backend
-npm install
-npm start
+    cd backend
+    npm install
+    npm start
 
 The backend will run on port 5000 by default.
+
 ### 2️⃣ Frontend
-Environment Variables (frontend/.env and frontend/.env.local)
+- **Environment Variables (frontend/.env and frontend/.env.local)
 
-Create the following environment variable files in the frontend directory:
+- **Create the following environment variable files in the frontend directory:
 
-Production (frontend/.env):
+- **Production (frontend/.env):
 
 -REACT_APP_API_URL=https://yourdomain.onrender.com
 
