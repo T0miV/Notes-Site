@@ -1,7 +1,7 @@
 # 📒 NotesApp
 
--NotesApp is a note-taking application that allows users to create, edit, delete, and restore notes.
--It supports user authentication, password reset, and includes a Dashboard page with various statistics and visualizations of user notes.
+#NotesApp is a note-taking application that allows users to create, edit, delete, and restore notes.
+#It supports user authentication, password reset, and includes a Dashboard page with various statistics and visualizations of user notes.
 
 ---
 
