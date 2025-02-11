@@ -41,11 +41,9 @@ SUPABASE_KEY=your_supabase_key
 
 Install Dependencies & Start Backend
 
-Copy
-
 cd backend
 npm install
-npm run dev
+npm start
 
 The backend will run on port 5000 by default.
 ### 2️⃣ Frontend
@@ -53,25 +51,19 @@ Environment Variables (frontend/.env and frontend/.env.local)
 
 Create the following environment variable files in the frontend directory:
 
-    Production (frontend/.env):
-    plaintext
-    Copy
+Production (frontend/.env):
 
-    REACT_APP_API_URL=https://yourdomain.onrender.com
+-REACT_APP_API_URL=https://yourdomain.onrender.com
 
-    Development (frontend/.env.local):
-    plaintext
-    Copy
-
-    REACT_APP_API_URL=http://localhost:5000
+Development (frontend/.env.local):
+    
+-REACT_APP_API_URL=http://localhost:5000
 
 Install Dependencies & Start Frontend
-bash
-Copy
 
-cd frontend
-npm install
-npm start
+-cd frontend
+-npm install
+-npm start
 
 The frontend will run on port 3000 by default.
 ### 🛠 Features
