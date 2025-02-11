@@ -1,30 +1,32 @@
 📒 NotesApp
 
 NotesApp is a note-taking application that allows users to create, edit, delete, and restore notes. It supports user authentication, password reset, and includes a Dashboard Page with various statistics and visualizations of user notes.
+
 🚀 Technologies
-Frontend
+Frontend:
 
-    TypeScript
-    React
-    Material-UI
-    Axios
-    Chart.js
+-TypeScript
+-React
+-Material-UI
+-Axios
+-Chart.js
 
-Backend
+Backend:
 
-    TypeScript
-    Node.js
-    Express
-    Supabase (database)
-    JSON Web Token (JWT) authentication
+-TypeScript
+-Node.js
+-Express
+-Supabase (database)
+-JSON Web Token (JWT) authentication
 
-Hosting
+Hosting:
 
-    Frontend: Vercel
-    Backend: Render
-    Database: Supabase
+-Frontend: Vercel
+-Backend: Render
+-Database: Supabase
 
 🔧 Installation & Setup
+
 1️⃣ Backend
 Environment Variables (backend/.env)
 
@@ -41,18 +43,19 @@ npm install
 npm run dev  
 
 The backend runs on port 5000 by default.
+
 2️⃣ Frontend
 Environment Variables (frontend/.env & frontend/.env.local)
 
 Create the following environment variable files inside the frontend directory:
 
-    Production (frontend/.env)
+-Production (frontend/.env)
 
 REACT_APP_API_URL=https://yourdomain.onrender.com
 
 Development (frontend/.env.local)
 
-    REACT_APP_API_URL=http://localhost:5000
+-REACT_APP_API_URL=http://localhost:5000
 
 Install dependencies & start frontend
 
