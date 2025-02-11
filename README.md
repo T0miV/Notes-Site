@@ -61,6 +61,7 @@ npm install
 npm start  
 
 The frontend runs on port 3000 by default.
+
 🛠 Features
 
 ✅ User authentication (Register, Login, Logout)
