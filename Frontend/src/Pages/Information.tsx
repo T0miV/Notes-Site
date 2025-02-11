@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Box, Typography, Button, Grid, Card, CardContent } from "@mui/material";
-import { PieChart, Pie, Tooltip, Cell, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import axios from "axios";
+import { Pie, Bar } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import "../styles/Information.css"; // Tuodaan CSS-tiedosto
+
+// Rekisteröi Chart.js komponentit
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const Information = () => {
   const [stats, setStats] = useState<{
@@ -45,6 +49,48 @@ const Information = () => {
 
   const COLORS = ["#FF8042", "#00C49F", "#FFBB28", "#0088FE", "#D0ED57", "#A28BE3"];
 
+  // Värijakauman data
+  const colorData = {
+    labels: stats.colorStats.map((stat) => stat.color),
+    datasets: [
+      {
+        label: 'Color Distribution',
+        data: stats.colorStats.map((stat) => stat.colorCount),
+        backgroundColor: COLORS,
+        borderColor: COLORS,
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  // Muistiinpanojen määrä viimeisen 7 päivän aikana
+  const notesLast7DaysData = {
+    labels: stats.notesLast7Days.map((stat) => stat.date),
+    datasets: [
+      {
+        label: 'Notes Last 7 Days',
+        data: stats.notesLast7Days.map((stat) => stat.count),
+        backgroundColor: '#4caf50',
+        borderColor: '#4caf50',
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  // Muistiinpanojen määrä käyttäjäkohtaisesti
+  const notesPerUserData = {
+    labels: stats.notesPerUser.map((stat) => stat.username),
+    datasets: [
+      {
+        label: 'Notes Per User',
+        data: stats.notesPerUser.map((stat) => stat.count),
+        backgroundColor: '#A28BE3',
+        borderColor: '#A28BE3',
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <Box sx={{ padding: 4, backgroundColor: "#f5f5f5", minHeight: "100vh" }}>
       <AppBar position="static" sx={{ marginBottom: 4, backgroundColor: "#4caf50", padding: 2 }}>
@@ -75,23 +121,7 @@ const Information = () => {
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Color Distribution
               </Typography>
-              <PieChart width={300} height={200}>
-                <Pie
-                  data={stats.colorStats}
-                  dataKey="colorCount"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  fill="#8884d8"
-                  label
-                >
-                  {stats.colorStats.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-              </PieChart>
+              <Pie data={colorData} />
             </CardContent>
           </Card>
         </Grid>
@@ -103,13 +133,7 @@ const Information = () => {
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Notes Last 7 Days
               </Typography>
-              <BarChart width={300} height={200} data={stats.notesLast7Days}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="count" fill="#4caf50" />
-              </BarChart>
+              <Bar data={notesLast7DaysData} />
             </CardContent>
           </Card>
         </Grid>
@@ -228,13 +252,7 @@ const Information = () => {
                 Notes Per User
               </Typography>
               {stats.notesPerUser && stats.notesPerUser.length > 0 ? (
-                <BarChart width={300} height={200} data={stats.notesPerUser}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="username" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#A28BE3" />
-                </BarChart>
+                <Bar data={notesPerUserData} />
               ) : (
                 <Typography variant="body1" sx={{ color: "#888", textAlign: "center" }}>
                   No user data available.
