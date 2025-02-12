@@ -1,7 +1,8 @@
-# 📒 NotesApp
+# 📒 Notes-Site
 
-## NotesApp is a note-taking application that allows users to create, edit, delete, and restore notes.
+## Notes-Site is a note-taking application that allows users to create, edit, delete, and restore notes.
 ## It supports user authentication, password reset, and includes a Dashboard page with various statistics and visualizations of user notes.
+## Additionally, it features a calendar view that displays the dates on which notes were created.
 
 ---
 
