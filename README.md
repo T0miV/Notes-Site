@@ -57,7 +57,7 @@ Production (frontend/.env):
 
     REACT_APP_API_URL=https://yourdomain.onrender.com
 
-Development (frontend/.env.local):
+Development locally (frontend/.env.local):
     
     REACT_APP_API_URL=http://localhost:5000
 
