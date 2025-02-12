@@ -49,9 +49,7 @@ Install Dependencies & Start Backend
 The backend will run on port 5000 by default.
 
 ### 2️⃣ Frontend
--Environment Variables
-- **(frontend/.env** 
-- **frontend/.env.local)**
+#### Environment Variables (`frontend/.env`) and (`frontend/.env.local`)
 
 -Create the following environment variable files in the frontend directory:
 
