@@ -56,12 +56,13 @@ const Information = () => {
       {
         label: 'Color Distribution',
         data: stats.colorStats.map((stat) => stat.colorCount),
-        backgroundColor: COLORS,
-        borderColor: COLORS,
+        backgroundColor: stats.colorStats.map((stat) => stat.color), // Käytä oikeita värejä
+        borderColor: stats.colorStats.map((stat) => stat.color), // Käytä oikeita värejä
         borderWidth: 1,
       },
     ],
   };
+  
 
   // Muistiinpanojen määrä viimeisen 7 päivän aikana
   const notesLast7DaysData = {
