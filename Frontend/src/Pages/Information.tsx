@@ -3,23 +3,51 @@ import { AppBar, Box, Typography, Button, Grid, Card, CardContent } from "@mui/m
 import axios from "axios";
 import { Pie, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
-import "../styles/Information.css"; // Tuodaan CSS-tiedosto
+import "../styles/Information.css";
 
-// Rekisteröi Chart.js komponentit
+// Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
+// Define types for the stats state
+interface ColorStat {
+  color: string;
+  colorCount: number;
+}
+
+interface NoteStat {
+  date: string;
+  count: number;
+}
+
+interface LatestNote {
+  title: string;
+  timestamp: string;
+}
+
+interface TopColor {
+  color: string;
+  count: number;
+}
+
+interface NotesPerUser {
+  username: string;
+  count: number;
+}
+
+interface Stats {
+  totalNotes: number;
+  colorStats: ColorStat[];
+  notesLast7Days: NoteStat[];
+  latestNotes: LatestNote[];
+  boldNotesCount: number;
+  italicNotesCount: number;
+  underlinedNotesCount: number;
+  topColors: TopColor[];
+  notesPerUser: NotesPerUser[];
+}
+
 const Information = () => {
-  const [stats, setStats] = useState<{
-    totalNotes: number;
-    colorStats: { color: string; colorCount: number }[];
-    notesLast7Days: { date: string; count: number }[];
-    latestNotes: { title: string; timestamp: string }[];
-    boldNotesCount: number;
-    italicNotesCount: number;
-    underlinedNotesCount: number;
-    topColors: { color: string; count: number }[];
-    notesPerUser: { username: string; count: number }[];
-  }>({
+  const [stats, setStats] = useState<Stats>({
     totalNotes: 0,
     colorStats: [],
     notesLast7Days: [],
@@ -31,12 +59,10 @@ const Information = () => {
     notesPerUser: [],
   });
 
+  // Fetch stats from the API
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('token'); // Oletetaan, että token on tallennettu localStorageen
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/stats`, {
-        
-      });
+      const response = await axios.get<Stats>(`${process.env.REACT_APP_API_URL}/stats`);
       setStats(response.data);
     } catch (error) {
       console.error("Error fetching stats:", error);
@@ -47,24 +73,20 @@ const Information = () => {
     fetchStats();
   }, []);
 
-  const COLORS = ["#FF8042", "#00C49F", "#FFBB28", "#0088FE", "#D0ED57", "#A28BE3"];
-
-  // Värijakauman data
+  // Chart data for color distribution
   const colorData = {
     labels: stats.colorStats.map((stat) => stat.color),
     datasets: [
       {
         label: 'Color Distribution',
         data: stats.colorStats.map((stat) => stat.colorCount),
-        backgroundColor: stats.colorStats.map((stat) => stat.color), // Käytä oikeita värejä
-        borderColor: stats.colorStats.map((stat) => stat.color), // Käytä oikeita värejä
+        backgroundColor: stats.colorStats.map((stat) => stat.color),
         borderWidth: 1,
       },
     ],
   };
-  
 
-  // Muistiinpanojen määrä viimeisen 7 päivän aikana
+  // Chart data for notes in the last 7 days
   const notesLast7DaysData = {
     labels: stats.notesLast7Days.map((stat) => stat.date),
     datasets: [
@@ -72,13 +94,12 @@ const Information = () => {
         label: 'Notes Last 7 Days',
         data: stats.notesLast7Days.map((stat) => stat.count),
         backgroundColor: '#4caf50',
-        borderColor: '#4caf50',
         borderWidth: 1,
       },
     ],
   };
 
-  // Muistiinpanojen määrä käyttäjäkohtaisesti
+  // Chart data for notes per user
   const notesPerUserData = {
     labels: stats.notesPerUser.map((stat) => stat.username),
     datasets: [
@@ -86,85 +107,84 @@ const Information = () => {
         label: 'Notes Per User',
         data: stats.notesPerUser.map((stat) => stat.count),
         backgroundColor: '#A28BE3',
-        borderColor: '#A28BE3',
         borderWidth: 1,
       },
     ],
   };
 
   return (
-    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5", minHeight: "100vh" }}>
-      <AppBar position="static" sx={{ marginBottom: 4, backgroundColor: "#4caf50", padding: 2 }}>
-        <Typography variant="h4" align="center" sx={{ fontWeight: "bold", color: "#fff" }}>
+    <Box className="dashboard-container">
+      <AppBar position="static" className="app-bar">
+        <Typography variant="h4" align="center" className="app-bar-title">
           Notes Dashboard
         </Typography>
       </AppBar>
 
-      <Grid container spacing={3}>
-        {/* Ruutu 1: Kokonaismäärä muistiinpanoja */}
+      <Grid container spacing={3} className="grid-container">
+        {/* Card 1: Total Notes */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Total Notes
               </Typography>
-              <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold", color: "#4caf50" }}>
+              <Typography variant="h4" className="card-value">
                 {stats.totalNotes}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Ruutu 2: Värijakauma */}
+        {/* Card 2: Color Distribution */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Color Distribution
               </Typography>
-              <Box sx={{ height: "300px" }}>
+              <Box className="chart-container">
                 <Pie data={colorData} />
               </Box>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Ruutu 3: Muistiinpanojen määrä viimeisen 7 päivän aikana */}
+        {/* Card 3: Notes Last 7 Days */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Notes Last 7 Days
               </Typography>
-              <Box sx={{ height: "300px" }}>
+              <Box className="chart-container">
                 <Bar data={notesLast7DaysData} />
               </Box>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Ruutu 4: Viimeisimmät muistiinpanot */}
+        {/* Card 4: Latest Notes */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Latest Notes
               </Typography>
-              {stats.latestNotes && stats.latestNotes.length > 0 ? (
-                <Box sx={{ maxHeight: "200px", overflowY: "auto" }}>
+              {stats.latestNotes.length > 0 ? (
+                <Box className="latest-notes-container">
                   {stats.latestNotes.map((note, index) => (
-                    <Box key={index} sx={{ marginBottom: 1 }}>
-                      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                    <Box key={index} className="latest-note-item">
+                      <Typography variant="body1" className="note-title">
                         {note.title}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: "#888" }}>
+                      <Typography variant="body2" className="note-timestamp">
                         {new Date(note.timestamp).toLocaleString()}
                       </Typography>
                     </Box>
                   ))}
                 </Box>
               ) : (
-                <Typography variant="body1" sx={{ color: "#888", textAlign: "center" }}>
+                <Typography variant="body1" className="no-data-text">
                   No latest notes available.
                 </Typography>
               )}
@@ -172,68 +192,60 @@ const Information = () => {
           </Card>
         </Grid>
 
-        {/* Ruutu 5: Lihavoidut muistiinpanot */}
+        {/* Card 5: Bold Notes */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Bold Notes
               </Typography>
-              <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold", color: "#FF8042" }}>
+              <Typography variant="h4" className="card-value bold">
                 {stats.boldNotesCount}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Ruutu 6: Kursivoidut muistiinpanot */}
+        {/* Card 6: Italic Notes */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Italic Notes
               </Typography>
-              <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold", color: "#00C49F" }}>
+              <Typography variant="h4" className="card-value italic">
                 {stats.italicNotesCount}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Ruutu 7: Alleviivatut muistiinpanot */}
+        {/* Card 7: Underlined Notes */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Underlined Notes
               </Typography>
-              <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold", color: "#0088FE" }}>
+              <Typography variant="h4" className="card-value underlined">
                 {stats.underlinedNotesCount}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Ruutu 8: Suosituimmat värit */}
+        {/* Card 8: Top Colors */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Top Colors
               </Typography>
-              {stats.topColors && stats.topColors.length > 0 ? (
-                <Box sx={{ maxHeight: "200px", overflowY: "auto" }}>
+              {stats.topColors.length > 0 ? (
+                <Box className="top-colors-container">
                   {stats.topColors.map((color, index) => (
-                    <Box key={index} sx={{ display: "flex", alignItems: "center", marginBottom: 1 }}>
-                      <Box
-                        sx={{
-                          width: 20,
-                          height: 20,
-                          backgroundColor: color.color,
-                          marginRight: 2,
-                          borderRadius: "50%",
-                        }}
-                      />
+                    <Box key={index} className="color-item">
+                      <Box className="color-circle" style={{ backgroundColor: color.color }} />
                       <Typography variant="body1">
                         {color.color}: {color.count}
                       </Typography>
@@ -241,7 +253,7 @@ const Information = () => {
                   ))}
                 </Box>
               ) : (
-                <Typography variant="body1" sx={{ color: "#888", textAlign: "center" }}>
+                <Typography variant="body1" className="no-data-text">
                   No color data available.
                 </Typography>
               )}
@@ -249,18 +261,18 @@ const Information = () => {
           </Card>
         </Grid>
 
-        {/* Ruutu 9: Muistiinpanojen määrä käyttäjäkohtaisesti */}
+        {/* Card 9: Notes Per User */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3} sx={{ height: "100%" }}>
+          <Card className="card">
             <CardContent>
-              <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
+              <Typography variant="h6" className="card-title">
                 Notes Per User
               </Typography>
-              <Box sx={{ height: "300px" }}>
-                {stats.notesPerUser && stats.notesPerUser.length > 0 ? (
+              <Box className="chart-container">
+                {stats.notesPerUser.length > 0 ? (
                   <Bar data={notesPerUserData} />
                 ) : (
-                  <Typography variant="body1" sx={{ color: "#888", textAlign: "center" }}>
+                  <Typography variant="body1" className="no-data-text">
                     No user data available.
                   </Typography>
                 )}
@@ -270,13 +282,9 @@ const Information = () => {
         </Grid>
       </Grid>
 
-      {/* Päivitä tilastot -nappi */}
-      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "#4caf50", ":hover": { backgroundColor: "#388e3c" } }}
-          onClick={fetchStats}
-        >
+      {/* Refresh Button */}
+      <Box className="refresh-button-container">
+        <Button variant="contained" className="refresh-button" onClick={fetchStats}>
           Refresh Stats
         </Button>
       </Box>

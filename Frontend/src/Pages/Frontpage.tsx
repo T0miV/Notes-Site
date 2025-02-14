@@ -70,7 +70,7 @@ const Frontpage = () => {
     try {
       await axios.put(`${process.env.REACT_APP_API_URL}/notes/delete/${id}`);
       fetchNotes();
-      setSuccessMessage("Note deleted successfully!"); // Näytä onnistumisilmoitus
+      setSuccessMessage("Note moved to the trash!"); // Näytä onnistumisilmoitus
       setErrorMessage(null); // Tyhjennä virheilmoitus
     } catch (error) {
       console.error("Error deleting note", error);
