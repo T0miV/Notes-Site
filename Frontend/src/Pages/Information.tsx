@@ -35,7 +35,7 @@ const Information = () => {
     try {
       const token = localStorage.getItem('token'); // Oletetaan, että token on tallennettu localStorageen
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/stats`, {
-       
+        
       });
       setStats(response.data);
     } catch (error) {
@@ -102,7 +102,7 @@ const Information = () => {
       <Grid container spacing={3}>
         {/* Ruutu 1: Kokonaismäärä muistiinpanoja */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Total Notes
@@ -116,37 +116,41 @@ const Information = () => {
 
         {/* Ruutu 2: Värijakauma */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Color Distribution
               </Typography>
-              <Pie data={colorData} />
+              <Box sx={{ height: "300px" }}>
+                <Pie data={colorData} />
+              </Box>
             </CardContent>
           </Card>
         </Grid>
 
         {/* Ruutu 3: Muistiinpanojen määrä viimeisen 7 päivän aikana */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Notes Last 7 Days
               </Typography>
-              <Bar data={notesLast7DaysData} />
+              <Box sx={{ height: "300px" }}>
+                <Bar data={notesLast7DaysData} />
+              </Box>
             </CardContent>
           </Card>
         </Grid>
 
         {/* Ruutu 4: Viimeisimmät muistiinpanot */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Latest Notes
               </Typography>
               {stats.latestNotes && stats.latestNotes.length > 0 ? (
-                <Box sx={{ maxHeight: 200, overflowY: "auto" }}>
+                <Box sx={{ maxHeight: "200px", overflowY: "auto" }}>
                   {stats.latestNotes.map((note, index) => (
                     <Box key={index} sx={{ marginBottom: 1 }}>
                       <Typography variant="body1" sx={{ fontWeight: "bold" }}>
@@ -169,7 +173,7 @@ const Information = () => {
 
         {/* Ruutu 5: Lihavoidut muistiinpanot */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Bold Notes
@@ -183,7 +187,7 @@ const Information = () => {
 
         {/* Ruutu 6: Kursivoidut muistiinpanot */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Italic Notes
@@ -197,7 +201,7 @@ const Information = () => {
 
         {/* Ruutu 7: Alleviivatut muistiinpanot */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Underlined Notes
@@ -211,13 +215,13 @@ const Information = () => {
 
         {/* Ruutu 8: Suosituimmat värit */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Top Colors
               </Typography>
               {stats.topColors && stats.topColors.length > 0 ? (
-                <Box sx={{ maxHeight: 200, overflowY: "auto" }}>
+                <Box sx={{ maxHeight: "200px", overflowY: "auto" }}>
                   {stats.topColors.map((color, index) => (
                     <Box key={index} sx={{ display: "flex", alignItems: "center", marginBottom: 1 }}>
                       <Box
@@ -246,18 +250,20 @@ const Information = () => {
 
         {/* Ruutu 9: Muistiinpanojen määrä käyttäjäkohtaisesti */}
         <Grid item xs={12} md={4}>
-          <Card elevation={3}>
+          <Card elevation={3} sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h6" sx={{ color: "#555", textAlign: "center" }}>
                 Notes Per User
               </Typography>
-              {stats.notesPerUser && stats.notesPerUser.length > 0 ? (
-                <Bar data={notesPerUserData} />
-              ) : (
-                <Typography variant="body1" sx={{ color: "#888", textAlign: "center" }}>
-                  No user data available.
-                </Typography>
-              )}
+              <Box sx={{ height: "300px" }}>
+                {stats.notesPerUser && stats.notesPerUser.length > 0 ? (
+                  <Bar data={notesPerUserData} />
+                ) : (
+                  <Typography variant="body1" sx={{ color: "#888", textAlign: "center" }}>
+                    No user data available.
+                  </Typography>
+                )}
+              </Box>
             </CardContent>
           </Card>
         </Grid>
