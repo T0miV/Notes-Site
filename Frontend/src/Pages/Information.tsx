@@ -163,34 +163,20 @@ const Information = () => {
           </Card>
         </Grid>
 
-        {/* Card 4: Latest Notes */}
+        {/* Card 4: Underlined Notes */}
         <Grid item xs={12} md={4}>
           <Card className="card">
             <CardContent>
               <Typography variant="h6" className="card-title">
-                Latest Notes
+                Underlined Notes
               </Typography>
-              {stats.latestNotes.length > 0 ? (
-                <Box className="latest-notes-container">
-                  {stats.latestNotes.map((note, index) => (
-                    <Box key={index} className="latest-note-item">
-                      <Typography variant="body1" className="note-title">
-                        {note.title}
-                      </Typography>
-                      <Typography variant="body2" className="note-timestamp">
-                        {new Date(note.timestamp).toLocaleString()}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-              ) : (
-                <Typography variant="body1" className="no-data-text">
-                  No latest notes available.
-                </Typography>
-              )}
+              <Typography variant="h4" className="card-value underlined">
+                {stats.underlinedNotesCount}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
+        
 
         {/* Card 5: Bold Notes */}
         <Grid item xs={12} md={4}>
@@ -220,21 +206,9 @@ const Information = () => {
           </Card>
         </Grid>
 
-        {/* Card 7: Underlined Notes */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Underlined Notes
-              </Typography>
-              <Typography variant="h4" className="card-value underlined">
-                {stats.underlinedNotesCount}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        
 
-        {/* Card 8: Top Colors */}
+        {/* Card 7: Top Colors */}
         <Grid item xs={12} md={4}>
           <Card className="card">
             <CardContent>
@@ -261,6 +235,35 @@ const Information = () => {
           </Card>
         </Grid>
 
+        {/* Card 8: Latest Notes */}
+        <Grid item xs={12} md={4}>
+          <Card className="card">
+            <CardContent>
+              <Typography variant="h6" className="card-title">
+                Latest Notes
+              </Typography>
+              {stats.latestNotes.length > 0 ? (
+                <Box className="latest-notes-container">
+                  {stats.latestNotes.map((note, index) => (
+                    <Box key={index} className="latest-note-item">
+                      <Typography variant="body1" className="note-title">
+                        {note.title}
+                      </Typography>
+                      <Typography variant="body2" className="note-timestamp">
+                        {new Date(note.timestamp).toLocaleString()}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              ) : (
+                <Typography variant="body1" className="no-data-text">
+                  No latest notes available.
+                </Typography>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+        
         {/* Card 9: Notes Per User */}
         <Grid item xs={12} md={4}>
           <Card className="card">
@@ -281,6 +284,8 @@ const Information = () => {
           </Card>
         </Grid>
       </Grid>
+
+      
 
       {/* Refresh Button */}
       <Box className="refresh-button-container">
