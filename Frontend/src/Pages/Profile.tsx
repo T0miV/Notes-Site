@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../styles/Profile.css'; // Import the CSS file for styles
+import '../styles/Profile.css';
 
 interface ProfileProps {
   currentUser: { username: string; role: number } | null;
@@ -24,18 +24,18 @@ const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
     navigate("/login");
   };
 
-  // Password change handler
+  //Password change handler
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage(null); // Reset messages
-    setError(null); // Reset errors
+    setMessage(null); //Reset messages
+    setError(null); //Reset errors
   
     if (!oldPassword || !newPassword) {
       setError("Both old and new passwords are required.");
       return;
     }
   
-    const token = localStorage.getItem("authToken"); // Retrieve token from local storage
+    const token = localStorage.getItem("authToken"); //Retrieve token from local storage
     if (!token) {
       setError("You need to be logged in to change the password.");
       return;
@@ -47,17 +47,17 @@ const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
         { oldPassword, newPassword },
         { 
           headers: { 
-            'Authorization': `Bearer ${token}`  // Send token in header
+            'Authorization': `Bearer ${token}`  //Send token in header
           } 
         }
       );
       
-      setMessage(response.data.message); // Display success message
+      setMessage(response.data.message); //Display success message
     } catch (err: any) {
       if (err.response?.status === 401) {
-        setError("Your session has expired. Please login again."); // Handle expired session
+        setError("Your session has expired. Please login again."); //Handle expired session
       } else {
-        setError(err.response?.data?.error || "Failed to update password"); // Handle other errors
+        setError(err.response?.data?.error || "Failed to update password"); //Handle other errors
       }
     }
   };

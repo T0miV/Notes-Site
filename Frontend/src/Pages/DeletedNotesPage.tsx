@@ -3,7 +3,7 @@ import axios from "axios";
 import Alert from "@mui/material/Alert";
 import "../styles/DeletedNotesPage.css"; 
 
-// Define the Note type
+//Define the Note type
 type DeletedNote = {
   id: number;
   title: string;
@@ -20,7 +20,7 @@ const DeletedNotesPage = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Fetch deleted notes from the database
+  //Fetch deleted notes from the database
   const fetchDeletedNotes = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/notes/deleted`);
@@ -32,7 +32,7 @@ const DeletedNotesPage = () => {
     }
   };
 
-  // Restore a note back to the main list
+  //Restore a note back to the main list
   const handleRestoreNote = async (id: number) => {
     try {
       await axios.put(`${process.env.REACT_APP_API_URL}/notes/restore/${id}`, { isDeleted: false });
@@ -43,7 +43,7 @@ const DeletedNotesPage = () => {
     }
   };
 
-  // Permanently delete a note from the database
+  //Permanently delete a note from the database
   const handlePermanentDelete = async (id: number) => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/notes/${id}`);
@@ -54,7 +54,7 @@ const DeletedNotesPage = () => {
     }
   };
 
-  // Piilota ilmoitus automaattisesti 3 sekunnin kuluttua
+  //Hide or show success and error messages after 3 seconds
   useEffect(() => {
     if (successMessage || errorMessage) {
       const timer = setTimeout(() => {
@@ -74,7 +74,7 @@ const DeletedNotesPage = () => {
       <h1 className="allnotes-title">Deleted Notes</h1>
 
 
-          {/* ✅ Ilmoitukset onnistumiselle ja virheille */}
+          {/* Display success and error messages */}
           {successMessage && (
             <Alert severity="success" className="custom-alert">{successMessage}</Alert>
           )}

@@ -10,15 +10,17 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Virheilmoitus
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); //Error message
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  //Function to handle login
   const handleLogin = async () => {
     try {
       if (!username || !password) {
         throw new Error("Username and password cannot be empty");
       }
 
+      //Send login request to backend
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, {
         username,
         password,
@@ -59,7 +61,7 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
         <CreateAccountLink navigateToCreateAccount={navigateToCreateAccount} />
       </Box>
 
-      {/* Error-ilmoitus */}
+      {/* Error message */}
       {errorMessage && <Alert severity="error" className="error-alert">{errorMessage}</Alert>}
     </Container>
   );
