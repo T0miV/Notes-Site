@@ -143,6 +143,24 @@
   background-color: #2980b9;
 }
 
+/* Custom Alert Styling */
+.custom-alert {
+  outline: black solid 2px;
+  width: 80%;         /* Wider alert */
+  max-width: 600px;   /* Maximum width */
+  padding: 20px;      /* Adds spacing around */
+  font-size: 18px;    /* Larger text */
+  text-align: center; /* Centers text horizontally */
+  margin: 10px auto;  /* Centers alert on the page */
+  border-radius: 8px; /* Rounded corners */
+  
+  /* Centers text vertically as well */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 /* Responsiivisuus */
 @media (max-width: 768px) {
   .allnotes-title {

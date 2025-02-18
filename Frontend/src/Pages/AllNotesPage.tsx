@@ -69,14 +69,14 @@ const AllNotesPage = () => {
 
       {/* Virheilmoitus */}
       {errorMessage && (
-        <Alert severity="error" className="error-alert" onClose={() => setErrorMessage(null)}>
+        <Alert severity="error" className="custom-alert" onClose={() => setErrorMessage(null)}>
           {errorMessage}
         </Alert>
       )}
 
       {/* Onnistumisilmoitus */}
       {successMessage && (
-        <Alert severity="success" className="success-alert" onClose={() => setSuccessMessage(null)}>
+        <Alert severity="success" className="custom-alert" onClose={() => setSuccessMessage(null)}>
           {successMessage}
         </Alert>
       )}

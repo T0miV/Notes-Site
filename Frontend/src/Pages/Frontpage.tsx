@@ -42,7 +42,7 @@ const Frontpage = () => {
 
   //Function to handle adding a new note
   const handleAddNote = async (title: string, text: string, color: string, isBold: boolean, isItalic: boolean, isUnderline: boolean) => {
-    // Check if title and text are not empty
+    //Check if title and text are not empty
     if (!title.trim() || !text.trim()) {
       setErrorMessage("Both title and text must be filled to save the note.");
       return;
@@ -53,9 +53,9 @@ const Frontpage = () => {
     const newNote = { title, text, timestamp, color, isBold, isItalic, isUnderline };
 
     try {
-      // Send a POST request to add the new note to the backend
+      //Send a POST request to add the new note to the backend
       await axios.post(`${process.env.REACT_APP_API_URL}/notes`, newNote);
-      // Fetch the updated list of notes
+      //Fetch the updated list of notes
       fetchNotes();
 
       setSuccessMessage("Note saved successfully!"); 
@@ -69,7 +69,7 @@ const Frontpage = () => {
   //Function to handle updating an existing note
   const handleUpdateNote = async (id: number, updatedNote: Partial<Note>) => {
     try {
-      // Send a PUT request to update the note
+      //Send a PUT request to update the note
       await axios.put(`${process.env.REACT_APP_API_URL}/notes/${id}`, updatedNote);
       fetchNotes();
       setSuccessMessage("Note updated successfully!");
@@ -95,7 +95,7 @@ const Frontpage = () => {
     }
   };
 
-  // Fetch notes when the component mounts
+  //Fetch notes when the component mounts
   useEffect(() => {
     fetchNotes();
   }, []);
