@@ -5,22 +5,24 @@ import LoginForm from "../components/LoginPageComponents/LoginForm";
 import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLink";
 import "../styles/Loginpage.css";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext"; // Import useAuth hook
 
-const LoginPage = ({ setUser }: { setUser: (username: string, role: number, token: string) => void }) => {
+const LoginPage = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuth(); // Use setUser from AuthContext
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); //Error message
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Error message
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  //Function to handle login
+  // Function to handle login
   const handleLogin = async () => {
     try {
       if (!username || !password) {
         throw new Error("Username and password cannot be empty");
       }
 
-      //Send login request to backend
+      // Send login request to backend
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, {
         username,
         password,
@@ -28,7 +30,7 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
 
       if (response.status === 200) {
         const { username, role, token } = response.data;
-        setUser(username, role, token);
+        setUser(username, role, token); // Use setUser from AuthContext
         navigate("/profile");
       }
     } catch (error: any) {
@@ -62,7 +64,11 @@ const LoginPage = ({ setUser }: { setUser: (username: string, role: number, toke
       </Box>
 
       {/* Error message */}
-      {errorMessage && <Alert severity="error" className="error-alert">{errorMessage}</Alert>}
+      {errorMessage && (
+        <Alert severity="error" className="error-alert">
+          {errorMessage}
+        </Alert>
+      )}
     </Container>
   );
 };
