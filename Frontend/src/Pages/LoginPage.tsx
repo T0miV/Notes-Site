@@ -13,7 +13,6 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // Error message
-  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   // Function to handle login
   const handleLogin = async () => {
@@ -35,16 +34,12 @@ const LoginPage = () => {
       }
     } catch (error: any) {
       setErrorMessage(error.response?.data?.error || "Invalid credentials");
-      setOpenSnackbar(true);
+      
     }
   };
-
+  // Function to navigate to the create account page
   const navigateToCreateAccount = () => {
     navigate("/createprofile");
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
   };
 
   return (
