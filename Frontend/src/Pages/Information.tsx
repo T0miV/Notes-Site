@@ -116,7 +116,7 @@ const Information = () => {
     <Box className="dashboard-container">
       <AppBar position="static" className="app-bar">
         <Typography variant="h4" align="center" className="app-bar-title">
-          Notes Dashboard
+          Statistics
         </Typography>
       </AppBar>
 
