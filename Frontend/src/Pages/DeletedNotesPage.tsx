@@ -115,7 +115,7 @@ const DeletedNotesPage = () => {
           </div>
         ))}
       </div>
-      <Footer /> {/* Add the Footer component */}
+      <Footer /> 
     </div>
   );
 };

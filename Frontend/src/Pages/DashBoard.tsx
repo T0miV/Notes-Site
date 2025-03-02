@@ -11,6 +11,7 @@ import RecentNotes from "../components/DashBoardComponents/RecentNotes";
 import CalendarSection from "../components/DashBoardComponents/CalendarSection";
 import ChartSection from "../components/DashBoardComponents/ChartSection";
 import { Note } from "../types/types";
+import Footer from "./Footer";
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -111,6 +112,8 @@ const Dashboard = ({ currentUser, handleLogout }: DashboardProps) => {
         {/* Recent Notes Section */}
         <RecentNotes notes={notes} navigate={navigate} />
       </div>
+
+      <Footer /> 
     </Container>
   );
 };
