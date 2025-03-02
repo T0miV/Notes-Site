@@ -1,7 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { FaSpinner } from "react-icons/fa";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import FrontPage from "./Pages/Frontpage";
 import Header from "./Pages/Header";
@@ -15,8 +13,8 @@ import AllNotesPage from "./Pages/AllNotesPage";
 import CalendarPage from "./Pages/CalendarPage";
 import DeletedNotesPage from "./Pages/DeletedNotesPage";
 
-import "../src/styles/App.css";
-import { AuthProvider, useAuth } from "../src/context/AuthContext"; // Import AuthProvider and useAuth
+import "../src/styles/App.css"; // Varmista, että CSS-tiedosto on tuotu
+import { AuthProvider, useAuth } from "../src/context/AuthContext";
 
 const App = () => {
   return (
@@ -30,48 +28,43 @@ const App = () => {
 
 const AppContent = () => {
   const { currentUser, handleLogout, loading } = useAuth();
-  const location = useLocation();
 
   return (
     <div>
       <Header currentUser={currentUser} handleLogout={handleLogout} />
       <Navigointi />
 
-      {/* Display a loading spinner animation if the loading state is true */}
+      {/* Näytä latausanimaatio, jos lataus on käynnissä */}
       {loading && (
         <div className="loader-overlay">
-          <FaSpinner className="loader-icon" />
+          <div className="loader-circle"></div> {/* Pyörivä ympyrä */}
         </div>
       )}
 
-      {/* Render the AnimatedRoutes component */}
-      <TransitionGroup>
-        <CSSTransition key={location.key} classNames="fade" timeout={300}>
-          <Routes location={location}>
-            <Route path="/" element={<FrontPage />} />
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path="/information" element={<InformationScreen />} />
-            <Route path="/createprofile" element={<CreateAccountScreen />} />
-            <Route
-              path="/dashboard"
-              element={<Dashboard currentUser={currentUser} handleLogout={handleLogout} />}
-            />
-            <Route path="/all-notes" element={<AllNotesPage />} />
-            <Route path="/calendar" element={<CalendarPage />} />
-            <Route path="/trash" element={<DeletedNotesPage />} />
-            <Route
-              path="/profile"
-              element={
-                currentUser ? (
-                  <Profile currentUser={currentUser} handleLogout={handleLogout} />
-                ) : (
-                  <LoginScreen />
-                )
-              }
-            />
-          </Routes>
-        </CSSTransition>
-      </TransitionGroup>
+      {/* Reitit ilman animaatiota */}
+      <Routes>
+        <Route path="/" element={<FrontPage />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/information" element={<InformationScreen />} />
+        <Route path="/createprofile" element={<CreateAccountScreen />} />
+        <Route
+          path="/dashboard"
+          element={<Dashboard currentUser={currentUser} handleLogout={handleLogout} />}
+        />
+        <Route path="/all-notes" element={<AllNotesPage />} />
+        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/trash" element={<DeletedNotesPage />} />
+        <Route
+          path="/profile"
+          element={
+            currentUser ? (
+              <Profile currentUser={currentUser} handleLogout={handleLogout} />
+            ) : (
+              <LoginScreen />
+            )
+          }
+        />
+      </Routes>
     </div>
   );
 };

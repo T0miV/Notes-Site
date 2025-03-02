@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Box, Typography, Button, Grid, Card, CardContent } from "@mui/material";
+import { AppBar, Box, Button, Grid, Typography } from "@mui/material"; // Tuodaan Typography
 import axios from "axios";
-import { Pie, Bar } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import "../styles/Information.css";
-
-// Register Chart.js components
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
+import TotalNotesCard from "../components/InformationComponents/TotalNotesCard";
+import ColorDistributionCard from "../components/InformationComponents/ColorDistributionCard";
+import NotesLast7DaysCard from "../components/InformationComponents/NotesLast7DaysCard";
+import UnderlinedNotesCard from "../components/InformationComponents/UnderlinedNotesCard";
+import BoldNotesCard from "../components/InformationComponents/BoldNotesCard";
+import ItalicNotesCard from "../components/InformationComponents/ItalicNotesCard";
+import TopColorsCard from "../components/InformationComponents/TopColorsCard";
+import LatestNotesCard from "../components/InformationComponents/LatestNotesCard";
+import NotesPerUserCard from "../components/InformationComponents/NotesPerUserCard";
 
 // Define types for the stats state
 interface ColorStat {
@@ -73,45 +77,6 @@ const Information = () => {
     fetchStats();
   }, []);
 
-  // Chart data for color distribution
-  const colorData = {
-    labels: stats.colorStats.map((stat) => stat.color),
-    datasets: [
-      {
-        label: 'Color Distribution',
-        data: stats.colorStats.map((stat) => stat.colorCount),
-        backgroundColor: stats.colorStats.map((stat) => stat.color),
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  // Chart data for notes in the last 7 days
-  const notesLast7DaysData = {
-    labels: stats.notesLast7Days.map((stat) => stat.date),
-    datasets: [
-      {
-        label: 'Notes Last 7 Days',
-        data: stats.notesLast7Days.map((stat) => stat.count),
-        backgroundColor: '#4caf50',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  // Chart data for notes per user
-  const notesPerUserData = {
-    labels: stats.notesPerUser.map((stat) => stat.username),
-    datasets: [
-      {
-        label: 'Notes Per User',
-        data: stats.notesPerUser.map((stat) => stat.count),
-        backgroundColor: '#A28BE3',
-        borderWidth: 1,
-      },
-    ],
-  };
-
   return (
     <Box className="dashboard-container">
       <AppBar position="static" className="app-bar">
@@ -122,170 +87,32 @@ const Information = () => {
 
       <Grid container spacing={3} className="grid-container">
         {/* Card 1: Total Notes */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Total Notes
-              </Typography>
-              <Typography variant="h4" className="card-value">
-                {stats.totalNotes}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        <TotalNotesCard totalNotes={stats.totalNotes} />
 
         {/* Card 2: Color Distribution */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Color Distribution
-              </Typography>
-              <Box className="chart-container">
-                <Pie data={colorData} />
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
+        <ColorDistributionCard colorStats={stats.colorStats} />
 
         {/* Card 3: Notes Last 7 Days */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Notes Last 7 Days
-              </Typography>
-              <Box className="chart-container">
-                <Bar data={notesLast7DaysData} />
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
+        <NotesLast7DaysCard notesLast7Days={stats.notesLast7Days} /> {/* Korjattu propsi */}
 
         {/* Card 4: Underlined Notes */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Underlined Notes
-              </Typography>
-              <Typography variant="h4" className="card-value underlined">
-                {stats.underlinedNotesCount}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        
+        <UnderlinedNotesCard underlinedNotesCount={stats.underlinedNotesCount} />
 
         {/* Card 5: Bold Notes */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Bold Notes
-              </Typography>
-              <Typography variant="h4" className="card-value bold">
-                {stats.boldNotesCount}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        <BoldNotesCard boldNotesCount={stats.boldNotesCount} />
 
         {/* Card 6: Italic Notes */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Italic Notes
-              </Typography>
-              <Typography variant="h4" className="card-value italic">
-                {stats.italicNotesCount}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        
+        <ItalicNotesCard italicNotesCount={stats.italicNotesCount} />
 
         {/* Card 7: Top Colors */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Top Colors
-              </Typography>
-              {stats.topColors.length > 0 ? (
-                <Box className="top-colors-container">
-                  {stats.topColors.map((color, index) => (
-                    <Box key={index} className="color-item">
-                      <Box className="color-circle" style={{ backgroundColor: color.color }} />
-                      <Typography variant="body1">
-                        {color.color}: {color.count}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-              ) : (
-                <Typography variant="body1" className="no-data-text">
-                  No color data available.
-                </Typography>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
+        <TopColorsCard topColors={stats.topColors} />
 
         {/* Card 8: Latest Notes */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Latest Notes
-              </Typography>
-              {stats.latestNotes.length > 0 ? (
-                <Box className="latest-notes-container">
-                  {stats.latestNotes.map((note, index) => (
-                    <Box key={index} className="latest-note-item">
-                      <Typography variant="body1" className="note-title">
-                        {note.title}
-                      </Typography>
-                      <Typography variant="body2" className="note-timestamp">
-                        {new Date(note.timestamp).toLocaleString()}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-              ) : (
-                <Typography variant="body1" className="no-data-text">
-                  No latest notes available.
-                </Typography>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-        
-        {/* Card 9: Notes Per User */}
-        <Grid item xs={12} md={4}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h6" className="card-title">
-                Notes Per User
-              </Typography>
-              <Box className="chart-container">
-                {stats.notesPerUser.length > 0 ? (
-                  <Bar data={notesPerUserData} />
-                ) : (
-                  <Typography variant="body1" className="no-data-text">
-                    No user data available.
-                  </Typography>
-                )}
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+        <LatestNotesCard latestNotes={stats.latestNotes} />
 
-      
+        {/* Card 9: Notes Per User */}
+        <NotesPerUserCard notesPerUser={stats.notesPerUser} />
+      </Grid>
 
       {/* Refresh Button */}
       <Box className="refresh-button-container">
