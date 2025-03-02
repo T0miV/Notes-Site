@@ -12,6 +12,8 @@ import TopColorsCard from "../components/InformationComponents/TopColorsCard";
 import LatestNotesCard from "../components/InformationComponents/LatestNotesCard";
 import NotesPerUserCard from "../components/InformationComponents/NotesPerUserCard";
 
+import Footer from "./Footer";
+
 // Define types for the stats state
 interface ColorStat {
   color: string;
@@ -119,8 +121,12 @@ const Information = () => {
         <Button variant="contained" className="refresh-button" onClick={fetchStats}>
           Refresh Stats
         </Button>
+        
       </Box>
+      <Footer /> {/* Add the Footer component */}
     </Box>
+
+    
   );
 };
 

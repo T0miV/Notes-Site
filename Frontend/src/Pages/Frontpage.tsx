@@ -131,7 +131,7 @@ const Frontpage = () => {
       {/* Render the NotesGrid component with filtered notes */}
       <NotesGrid notes={filteredNotes} onDeleteNote={handleDeleteNote} onUpdateNote={handleUpdateNote} />
 
-      <Footer /> {/* 🔹 Lisätty Footer-komponentti */}
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 };
