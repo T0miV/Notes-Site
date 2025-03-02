@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/Profile.css';
+import Footer from "./Footer";
 
 interface ProfileProps {
   currentUser: { username: string; role: number } | null;
@@ -111,7 +112,9 @@ const Profile = ({ currentUser, handleLogout }: ProfileProps) => {
           </>
         )}
       </div>
+      <Footer /> {/* Add the Footer component */}
     </div>
+    
   );
 };
 
