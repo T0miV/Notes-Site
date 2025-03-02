@@ -48,6 +48,7 @@
   padding: 1rem;
   box-sizing: border-box;
   border-radius: 8px; /* Pyöristetyt kulmat */
+  margin-bottom: 110px;
 }
 
 /* Navigaatiopainikkeet */

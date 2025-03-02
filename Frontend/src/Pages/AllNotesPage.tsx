@@ -3,6 +3,7 @@ import axios from "axios";
 import SearchBar from "../components/FrontpageComponents/SearchBar";
 import NotesGrid from "../components/FrontpageComponents/NotesGrid";
 import Alert from "@mui/material/Alert";
+import Footer from "./Footer";
 import "../styles/AllNotesPage.css";
 
 type Note = {
@@ -84,6 +85,7 @@ const AllNotesPage = () => {
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <NotesGrid notes={filteredNotes} onDeleteNote={handleDeleteNote} onUpdateNote={handleUpdateNote} />
       
+      <Footer /> {/* Add the Footer component */}
     </div>
     
   );

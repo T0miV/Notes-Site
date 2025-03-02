@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Calendar, { CalendarProps } from 'react-calendar';
 import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
+import Footer from './Footer';
 import '../styles/Calendar.css';
 
 interface Note {
@@ -90,7 +91,9 @@ const CalendarPage = () => {
           </div>
         )}
       </div>
+      <Footer /> {/* Add the Footer component */}
     </div>
+    
   );
 };
 
