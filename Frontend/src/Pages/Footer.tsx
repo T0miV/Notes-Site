@@ -1,18 +1,10 @@
 import { Stack, Typography } from "@mui/material";
-import React from "react";
+import "../styles/Footer.css"; // 🔹 Tuodaan CSS-tiedosto
 
 const Footer = () => {
   return (
-    <Stack
-      sx={{
-        backgroundColor: "lightblue",
-        border: "4px solid black",
-        fontFamily: "Roboto",
-      }}
-      alignItems="center"
-      padding={2}
-    >
-      <Typography variant="subtitle1" fontSize={"35px"}>
+    <Stack className="footer-container">
+      <Typography  className="footer-text">
         ©Tomi V
       </Typography>
     </Stack>

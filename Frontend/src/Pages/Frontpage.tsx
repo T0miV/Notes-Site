@@ -5,6 +5,7 @@ import SearchBar from "../components/FrontpageComponents/SearchBar";
 import NotesGrid from "../components/FrontpageComponents/NotesGrid";
 import Alert from "@mui/material/Alert";
 import "../styles/Frontpage.css";
+import Footer from "./Footer";
 
 // Define the structure of a Note object
 type Note = {
@@ -129,6 +130,8 @@ const Frontpage = () => {
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {/* Render the NotesGrid component with filtered notes */}
       <NotesGrid notes={filteredNotes} onDeleteNote={handleDeleteNote} onUpdateNote={handleUpdateNote} />
+
+      <Footer /> {/* 🔹 Lisätty Footer-komponentti */}
     </div>
   );
 };

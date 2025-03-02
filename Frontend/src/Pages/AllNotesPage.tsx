@@ -83,7 +83,9 @@ const AllNotesPage = () => {
 
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <NotesGrid notes={filteredNotes} onDeleteNote={handleDeleteNote} onUpdateNote={handleUpdateNote} />
+      
     </div>
+    
   );
 };
 
