@@ -6,6 +6,7 @@ import CreateAccountLink from "../components/LoginPageComponents/CreateAccountLi
 import "../styles/Loginpage.css";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext"; // Import useAuth hook
+import Footer from "./Footer";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -64,7 +65,9 @@ const LoginPage = () => {
           {errorMessage}
         </Alert>
       )}
+       <Footer /> {/* Add the Footer component */}
     </Container>
+    
   );
 };
 

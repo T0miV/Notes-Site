@@ -6,7 +6,7 @@
     padding: 20px 0;
     position: relative;
     bottom: 0;
-    height: 100px; /* Oletuskorkeus */
+    height: 80px; /* Oletuskorkeus */
     display: flex;
     align-items: center;
     justify-content: center;

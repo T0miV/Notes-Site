@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50vh; /* Increased height to give more space for content */
+  height: 70vh; /* Increased height to give more space for content */
   background-color: #f4f4f4;
   padding: 0 20px;
 }
@@ -31,6 +31,7 @@
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Subtle box shadow */
   border-radius: 8px;
   margin: 0 auto;
+  margin-bottom: 90px;
 }
 
 /* TextField styles */
