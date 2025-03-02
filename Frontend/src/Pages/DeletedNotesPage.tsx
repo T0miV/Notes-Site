@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
+import Footer from "./Footer";
 import "../styles/DeletedNotesPage.css"; 
 
 //Define the Note type
@@ -114,6 +115,7 @@ const DeletedNotesPage = () => {
           </div>
         ))}
       </div>
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 };
