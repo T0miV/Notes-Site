@@ -10,6 +10,7 @@ const CreateAccountPage = () => {
   const [password, setPassword] = useState('');
   const [repassword, setRePassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); // Uusi tila onnistumisviestille
   const [isLoading, setIsLoading] = useState(false);
 
   const validateInputs = () => {
@@ -29,6 +30,7 @@ const CreateAccountPage = () => {
 
     setIsLoading(true);
     setErrorMessage(null);
+    setSuccessMessage(null); // Nollataan mahdollinen aiempi onnistumisviesti
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
@@ -40,8 +42,10 @@ const CreateAccountPage = () => {
       });
 
       if (response.ok) {
-        alert('Account created successfully');
-        navigate('/login');
+        setSuccessMessage('Account created successfully'); // Asetetaan onnistumisviesti
+        setTimeout(() => {
+          navigate('/login'); // Ohjataan käyttäjä kirjautumissivulle lyhyen viiveen jälkeen
+        }, 2000); // 2 sekunnin viive
       } else {
         const data = await response.json();
         setErrorMessage(data.message || 'Failed to create account');
@@ -63,6 +67,13 @@ const CreateAccountPage = () => {
       {errorMessage && (
         <Alert severity="error" className="error-alert">
           {errorMessage}
+        </Alert>
+      )}
+
+      {/* Onnistumisilmoitus */}
+      {successMessage && (
+        <Alert severity="success" className="success-alert">
+          {successMessage}
         </Alert>
       )}
 
