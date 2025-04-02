@@ -110,9 +110,7 @@ The Dashboard page provides an overview of user notes with real-time statistics,
 
     POST /auth/login → Login
 
-    POST /auth/reset-password → Request password reset
-
-    POST /auth/change-password → Change password
+    POST /auth/update-password → Change password
 
 📝 Notes
 
