@@ -30,10 +30,10 @@ const CreateAccountPage = () => {
 
     setIsLoading(true);
     setErrorMessage(null);
-    setSuccessMessage(null); // Nollataan mahdollinen aiempi onnistumisviesti
+    setSuccessMessage(null); 
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, { //Fetch the API
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,10 +42,10 @@ const CreateAccountPage = () => {
       });
 
       if (response.ok) {
-        setSuccessMessage('Account created successfully'); // Asetetaan onnistumisviesti
+        setSuccessMessage('Account created successfully'); 
         setTimeout(() => {
-          navigate('/login'); // Ohjataan käyttäjä kirjautumissivulle lyhyen viiveen jälkeen
-        }, 2000); // 2 sekunnin viive
+          navigate('/login'); //Naviagte user to login page after 2 seconds delay
+        }, 2000); 
       } else {
         const data = await response.json();
         setErrorMessage(data.message || 'Failed to create account');
