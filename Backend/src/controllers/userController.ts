@@ -82,13 +82,13 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const changePassword = async (req: Request, res: Response) => {
   
   const { oldPassword, newPassword } = req.body;
-  const userId = (req as any).user.id; // Haetaan käyttäjän ID JWT:stä
+  const userId = (req as any).user.id; //Get user ID from JWT
 
   if (!oldPassword || !newPassword) {
     return res.status(400).json({ error: 'Old and new passwords are required' });
   }
 
-  // Haetaan käyttäjä Supabasesta
+  //Search user from Supabase
   const { data: user, error } = await supabase
     .from('users')
     .select('password')
@@ -99,16 +99,16 @@ export const changePassword = async (req: Request, res: Response) => {
     return res.status(404).json({ error: 'User not found' });
   }
 
-  // Tarkistetaan, vastaako vanha salasana tietokannassa olevaa hashia
+  //Checking whether the old password matches the hash in the database
   const isMatch = await bcrypt.compare(oldPassword, user.password);
   if (!isMatch) {
     return res.status(400).json({ error: 'Old password is incorrect' });
   }
 
-  // Hashataan uusi salasana
+  //Hash new password
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-  // Päivitetään salasana tietokantaan
+  //Update password to Supabase
   const { error: updateError } = await supabase
     .from('users')
     .update({ password: hashedPassword })
