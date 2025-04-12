@@ -26,7 +26,7 @@ const CalendarPage = () => {
         const activeNotes = response.data.filter((note: Note) => !note.isDeleted);
 
         setNotes(activeNotes.reverse());
-        console.log('Fetched notes:', activeNotes); // Debuggausta varten
+        console.log('Fetched notes:', activeNotes);
       } catch (error) {
         console.error('Error fetching notes', error);
       }
@@ -43,21 +43,24 @@ const CalendarPage = () => {
     } else {
       setSelectedDate(null);
     }
-    console.log('Selected date:', selectedDate); // Debuggausta varten
+    console.log('Selected date:', selectedDate);
   };
+
+  // Apufunktio vertaamaan päivämääriä ilman kellonaikaa
+  const isSameDay = (d1: Date, d2: Date) =>
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
 
   // Suodatetaan muistiinpanot valitulle päivämäärälle
   const notesForSelectedDate = notes.filter(
     (note) =>
-      selectedDate &&
-      note.timestamp.split('T')[0] === selectedDate.toISOString().split('T')[0]
+      selectedDate && isSameDay(new Date(note.timestamp), selectedDate)
   );
 
   // Tarkistetaan, onko tietyllä päivämäärällä muistiinpanoja
-  const hasNotes = (date: Date) => {
-    const dateString = date.toISOString().split('T')[0];
-    return notes.some((note) => note.timestamp.split('T')[0] === dateString);
-  };
+  const hasNotes = (date: Date) =>
+    notes.some((note) => isSameDay(new Date(note.timestamp), date));
 
   return (
     <div className="calendar-container">
@@ -91,9 +94,8 @@ const CalendarPage = () => {
           </div>
         )}
       </div>
-      <Footer /> {/* Add the Footer component */}
+      <Footer />
     </div>
-    
   );
 };
 
