@@ -68,14 +68,14 @@ const AllNotesPage = () => {
     <div className="allnotes-container">
       <h1 className="allnotes-title">All Notes</h1>
 
-      {/* Virheilmoitus */}
+      {/* Error message */}
       {errorMessage && (
         <Alert severity="error" className="custom-alert" onClose={() => setErrorMessage(null)}>
           {errorMessage}
         </Alert>
       )}
 
-      {/* Onnistumisilmoitus */}
+      {/* Success message */}
       {successMessage && (
         <Alert severity="success" className="custom-alert" onClose={() => setSuccessMessage(null)}>
           {successMessage}
