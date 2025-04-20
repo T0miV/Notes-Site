@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Note } from '../models/note';
 import { supabase } from '../db';
 
-// Get all notes from database, excluding deleted ones
+//Get all notes from database, excluding deleted ones
 export const getNotes = async (req: Request, res: Response) => {
   const userId = (req as any).user.id;
 
@@ -18,7 +18,7 @@ export const getNotes = async (req: Request, res: Response) => {
   res.json(data);
 };
 
-// Get all deleted notes from database
+//Get all deleted notes from database
 export const getDeletedNotes = async (req: Request, res: Response) => {
   const userId = (req as any).user.id;
 
@@ -34,8 +34,7 @@ export const getDeletedNotes = async (req: Request, res: Response) => {
   res.json(data);
 };
 
-// Add a new note to database
-// Lisää uusi muistiinpano tietokantaan
+//Add a new note to database
 export const addNote = async (req: Request, res: Response) => {
   const userId = (req as any).user.id;
   const { title, text, color = '#1976d2', isBold, isItalic, isUnderline } = 
@@ -54,7 +53,7 @@ export const addNote = async (req: Request, res: Response) => {
   res.status(201).json(data[0]);
 };
 
-// Päivittää olemassa olevan muistiinpanon
+//Update already existing note
 export const updateNote = async (req: Request, res: Response) => {
   const { title, text, color, isBold, isItalic, isUnderline } = 
     req.body as Omit<Note, 'id' | 'timestamp' | 'user_id'>;
@@ -74,7 +73,7 @@ export const updateNote = async (req: Request, res: Response) => {
 };
 
 
-// Mark a note as deleted, by changing isDeleted to true
+//Mark a note as deleted, by changing isDeleted to true
 export const deleteNote = async (req: Request, res: Response) => {
   const noteId = req.params.id;
 
@@ -90,7 +89,7 @@ export const deleteNote = async (req: Request, res: Response) => {
   res.status(200).json({ message: 'Note moved to trash' });
 };
 
-// Restore a deleted note, by changing isDeleted to false
+//Restore a deleted note, by changing isDeleted to false
 export const restoreNote = async (req: Request, res: Response) => {
   const noteId = req.params.id;
 
@@ -106,7 +105,7 @@ export const restoreNote = async (req: Request, res: Response) => {
   res.status(200).json({ message: 'Note restored' });
 };
 
-// Permanently delete a note from database
+//Permanently delete a note from database
 export const permanentDeleteNote = async (req: Request, res: Response) => {
   const noteId = req.params.id;
 

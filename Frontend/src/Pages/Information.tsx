@@ -95,7 +95,7 @@ const Information = () => {
         <ColorDistributionCard colorStats={stats.colorStats} />
 
         {/* Card 3: Notes Last 7 Days */}
-        <NotesLast7DaysCard notesLast7Days={stats.notesLast7Days} /> {/* Korjattu propsi */}
+        <NotesLast7DaysCard notesLast7Days={stats.notesLast7Days} /> 
 
         {/* Card 4: Underlined Notes */}
         <UnderlinedNotesCard underlinedNotesCount={stats.underlinedNotesCount} />
