@@ -11,7 +11,7 @@ interface ColorDistributionCardProps {
 
 const ColorDistributionCard: React.FC<ColorDistributionCardProps> = ({ colorStats }) => {
   const colorData = {
-    labels: colorStats.map((stat) => stat.color),
+    labels: colorStats.map((stat) => stat.colorCount),
     datasets: [
       {
         label: "Color Distribution",
