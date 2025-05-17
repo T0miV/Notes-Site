@@ -47,7 +47,8 @@
   cursor: pointer;
 }
 
-.submit-button:hover, .logout-button:hover {
+.submit-button:hover,
+.logout-button:hover {
   background-color: #45a049;
 }
 
@@ -57,4 +58,16 @@
 
 .error-message {
   color: red;
+}
+
+/* Mobiililaitteiden tyylit */
+@media (max-width: 768px) {
+  .profile-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .profile-form {
+    max-width: 100%;
+  }
 }
